@@ -8,16 +8,16 @@ namespace BackYard
 {
     public interface IStageTreeNode
     {
-        List<IStageTreeNode> Children { get; }
+        List<IStageTreeNode> Parents { get; }
         IStage thisStage { get; }
-        void AddChild(IStageTreeNode node);
+        void AddParent(IStageTreeNode node);
     }
 
     //所有数据都放在静态类GameManager中，酌情使用。尽管理论上讲有访问权限限制，但可能写错，
     //所以无论如何不要试图更改从其中读来的数据（除非它属于你管理）
     public interface IFloorManager
     {
-        List<IStage> Dictionary { get; }
+        List<IStageTreeNode> Dictionary { get; }
         //在这里获得可用关卡
         abstract static IFloorManager CreateFloor(List<IStage> input);
         //构造新地图。输入是一系列关卡，需要把他们用完。参考stage的tag，以一定的随机方法构造。参见IStage

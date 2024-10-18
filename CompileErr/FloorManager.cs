@@ -3,15 +3,15 @@ namespace BackYard
 {
     public class StageTreeNode :IStageTreeNode
     {
-        public List<IStageTreeNode> Children { get; private set; } = new List<IStageTreeNode>();
+        public List<IStageTreeNode> Parents { get; private set; } = new List<IStageTreeNode>();
         public IStage thisStage { get; private set; }
         public StageTreeNode(IStage stage)
         {
             thisStage = stage;
         }
-        public void AddChild(IStageTreeNode child)
+        public void AddParent(IStageTreeNode child)
         {
-            Children.Add(child);
+            Parents.Add(child);
         }
     }
     //一棵前向树

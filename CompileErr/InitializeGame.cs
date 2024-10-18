@@ -2,6 +2,7 @@ using Effects;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
+using System.Xml.Serialization;
 namespace BackYard
 {
     static public class GameManager
@@ -19,18 +20,15 @@ namespace BackYard
         {
             ModManager.LoadMods();
         }
-        static public IFloorManager? floorManager;
-        static public IBattleManager? battleManager;
+        static public IFloorManager? floorManager {  get; private set; }
+        static public IBattleManager? battleManager {  get; private set; }
         static public IHumanPlayer humanPlayer;
         //玩家信息存在这里
-        static public List<ICardPack> DisableCardPacks { get; set; }
+        static public List<ICardPack> DisableCardPacks { get; set; } = new List<ICardPack>();
         //未启用的卡包（存启用的卡包没用，除非我们想做被动效果
         //loadxml时就已经放入，无需再次初始化
-        static public List<ICard> EnableCards { get; set; }
+        static public List<ICard> EnableCards { get; set; } = new List<ICard>();
         //可用的卡。生成奖励时从这里生成
-
-        static public Dictionary<string,IAction> ActionDict = new Dictionary<string,IAction>();
-        static public Dictionary<string,IEffect> EffectDict = new Dictionary<string,IEffect>();
         static public void EnterNextFloor(ICardPack? newCardPack)
         {
             //刚刚newgame也要调用
@@ -95,11 +93,11 @@ namespace BackYard
         }
         static internal void LoadAction()
         {
-            GameManager.ActionDict["Attack"] = new Actions.Attack();
+            AEEFactory.ActionDict["Attack"] = new Actions.Attack();
         }
         static internal void LoadEffect()
         {
-            GameManager.EffectDict["Bleeding"] = new Effects.Bleeding();
+            AEEFactory.EffectDict["Bleeding"] = new Effects.Bleeding();
         }
         static private void LoadCards()
         {
@@ -144,8 +142,22 @@ namespace BackYard
                 GameManager.DisableCardPacks.Add(newCardPack);
             }
         }
+        static private void LoadEnemys()
+        {
+            XmlDocument EnemysXml = new XmlDocument();
+            EnemysXml.Load(ModPath+"Enemys.xml");
+            XmlNode root = EnemysXml.LastChild!;
+            foreach(XmlNode aEnemyXml in root.ChildNodes)
+            {
+                Enemy enemy = new Enemy();
+                enemy.Name = aEnemyXml["Name"]!.InnerText;
+                enemy.ID = aEnemyXml["ID"]!.InnerText;
+                enemy.HP = int.Parse(aEnemyXml["HP"]!.InnerText);
+            }
+        }
+
     }
-    static internal class FloorFactoy
+    static public class FloorFactoy
     {
         public static List<List<IStage>> Lay1Group = new List<List<IStage>>();
         public static List<List<IStage>> Lay2Group = new List<List<IStage>>();
@@ -156,6 +168,11 @@ namespace BackYard
         public static List<ICardPack> CardPackList = new List<ICardPack>();
         public static Dictionary<string, ICard> CardDict = new Dictionary<string, ICard>();
     }
-
+    static public class AEEFactory
+    {
+        static public Dictionary<string, IAction> ActionDict { get; internal set; } = new Dictionary<string, IAction>();
+        static public Dictionary<string, IEffect> EffectDict { get; internal set; } = new Dictionary<string, IEffect>();
+        static public Dictionary<string, IEnemy> EnemyDict { get; internal set;} = new Dictionary<string, IEnemy>();
+    }
 
 }

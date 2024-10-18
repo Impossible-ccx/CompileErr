@@ -18,8 +18,8 @@ namespace BackYard
     }
     public abstract class Player : IPlayer
     {
-        public virtual string Name { get; protected set; } = new string(string.Empty);
-        public virtual string ID { get; private set; } = new string(string.Empty);
+        public virtual string Name { get; set; } = new string(string.Empty);
+        public virtual string ID { get; set; } = new string(string.Empty);
         public int HP { get; set; }
         public List<IEffect> EffectBox { get; set; } = new List<IEffect>();
         public void OnAction(IAction action)
@@ -106,7 +106,7 @@ namespace BackYard
                 IAction newAction;
                 try
                 {
-                     newAction = GameManager.ActionDict[aAction].Copy();
+                     newAction = AEEFactory.ActionDict[aAction].Copy();
                 }
                 catch (KeyNotFoundException)
                 {
