@@ -1,0 +1,19 @@
+﻿<root>
+	<Basic>BasicPack
+		<Card>
+			<Name>迅速测试</Name>
+			<ID>Core_card_a0</ID>
+			<Description>test for fast ex</Description>
+			<Delay>0</Delay>
+			<Cost>1</Cost>
+			<Tags>
+				<tag>testCard</tag>
+			</Tags>
+			<Action>
+				<act>attack
+					<val>5</val>
+				</act>
+			</Action>
+		</Card>
+	</Basic>
+</root>

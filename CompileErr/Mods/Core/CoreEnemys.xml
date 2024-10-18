@@ -1,0 +1,12 @@
+﻿<root>
+	<enemy>
+		<Name>testEnemy</Name>
+		<ID>Core_enemy_a0</ID>
+		<HP>10</HP>
+		<Effects>
+			<effect>testReattack
+				<Level>-1</Level>
+			</effect>
+		</Effects>
+	</enemy>
+</root>
