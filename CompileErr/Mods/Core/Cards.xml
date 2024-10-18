@@ -1,5 +1,6 @@
 ﻿<root>
-	<Basic>BasicPack
+	<Basic>
+		<Name>BasicCardPack</Name>
 		<Card>
 			<Name>迅速测试</Name>
 			<ID>Core_card_a0</ID>
@@ -10,10 +11,12 @@
 				<tag>testCard</tag>
 			</Tags>
 			<Action>
-				<act>attack
+				<act>
+					<NameID>Attack</NameID>
 					<val>5</val>
 				</act>
 			</Action>
 		</Card>
+		<DefaultCard>Core_card_a0</DefaultCard>
 	</Basic>
 </root>

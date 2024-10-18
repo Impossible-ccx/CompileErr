@@ -51,7 +51,7 @@ namespace BackYard
     public interface ICardPack
     {
         string NameID { get; }
-        List<ICard> cards { get; }
+        List<ICard> Cards { get; }
         List<ICard> DefaultCards { get; }
         //获取卡包时就包含的卡
     }
@@ -68,7 +68,7 @@ namespace BackYard
         //0瞬间出手，1消耗pace，2进入等待区
         ICard CopyCard();
         //返回一个新的icard实例,从当前卡深拷贝!
-        bool Excute(IPlayer sender, IPlayer target, double value);
+        bool Excute(IPlayer sender, IPlayer target);
         //使用这张卡，输入为发起者与目标。返回值为操作是否合法
         //void AttachAction(IUpgrate target);
         //为这张卡添加升级

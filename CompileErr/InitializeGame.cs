@@ -18,8 +18,6 @@ namespace BackYard
         static GameManager()
         {
             ModManager.LoadMods();
-            ModManager.LoadAction();
-            ModManager.LoadEffect();
         }
         static public IFloorManager? floorManager;
         static public IBattleManager? battleManager;
@@ -27,6 +25,7 @@ namespace BackYard
         //玩家信息存在这里
         static public List<ICardPack> DisableCardPacks { get; set; }
         //未启用的卡包（存启用的卡包没用，除非我们想做被动效果
+        //loadxml时就已经放入，无需再次初始化
         static public List<ICard> EnableCards { get; set; }
         //可用的卡。生成奖励时从这里生成
 
@@ -81,9 +80,6 @@ namespace BackYard
         static internal readonly string ModFolderPath = WorkPath + "Mods/";
         static private string? ModPath;
         static private XmlDocument ModManagerXml = new XmlDocument();
-        static private XmlDocument CardsXml = new XmlDocument();
-        static private XmlDocument EnemysXml = new XmlDocument();
-        static private XmlDocument FloorsXml = new XmlDocument();
         static internal void LoadMods()
         {
             //载入card，enemy，floor
@@ -93,6 +89,9 @@ namespace BackYard
             {
                 ModPath = ModFolderPath + aMod.InnerText;
             }
+            LoadCards();
+            LoadAction();
+            LoadEffect();
         }
         static internal void LoadAction()
         {
@@ -102,6 +101,49 @@ namespace BackYard
         {
             GameManager.EffectDict["Bleeding"] = new Effects.Bleeding();
         }
+        static private void LoadCards()
+        {
+            XmlDocument CardsXml = new XmlDocument();
+            CardsXml.Load(ModPath + "Cards.xml");
+            XmlNode root = CardsXml.LastChild!;
+            foreach (XmlNode aCardPack in root.ChildNodes)
+            {
+                CardPack newCardPack = new CardPack();
+                newCardPack.NameID = aCardPack["Name"]!.InnerText;
+                XmlNodeList CardsList = aCardPack.SelectNodes("./Card")!;
+                XmlNodeList DefaultCardsList = aCardPack.SelectNodes("./DefaultCard")!;
+                foreach(XmlElement aCard in CardsList)
+                {
+                    Card newCard = new Card();
+                    newCard.Name = aCard["Name"]!.InnerText;
+                    newCard.Description = aCard["Description"]!.InnerText;
+                    newCard.ID = aCard["ID"]!.InnerText;
+                    newCard.Cost = int.Parse(aCard["Cost"]!.InnerText);
+                    foreach(XmlNode xmlNode in aCard["ID"]!.ChildNodes)
+                    {
+                        newCard.Tags.Add(xmlNode.InnerText);
+                    }
+                    newCard.Delay = int.Parse(aCard["Delay"]!.InnerText);
+                    foreach(XmlNode aActionXml in aCard["Action"]!.ChildNodes)
+                    {
+                        newCard.activeAcions.Add(aActionXml["NameID"]!.InnerText);
+                        newCard.actionValue[aActionXml["NameID"]!.InnerText] = double.Parse(aActionXml["Value"]!.InnerText);
+                    }
+                    CardPacksFactory.CardDict[newCard.Name] = newCard;
+                    newCardPack.Cards.Add(newCard);
+                }
+                foreach(XmlElement aDefaultCardXml in DefaultCardsList)
+                {
+                    ICard aCard = CardPacksFactory.CardDict[aDefaultCardXml.InnerText].CopyCard();
+                    if(aCard != null)
+                    {
+                        newCardPack.DefaultCards.Add(aCard);
+                    }
+                }
+                CardPacksFactory.CardPackList.Add(newCardPack);
+                GameManager.DisableCardPacks.Add(newCardPack);
+            }
+        }
     }
     static internal class FloorFactoy
     {
@@ -109,9 +151,10 @@ namespace BackYard
         public static List<List<IStage>> Lay2Group = new List<List<IStage>>();
         //public static List<List<IStage>> Lay3Group = new List<List<IStage>>();
     }
-    static internal class CardPacks
+    static public class CardPacksFactory
     {
         public static List<ICardPack> CardPackList = new List<ICardPack>();
+        public static Dictionary<string, ICard> CardDict = new Dictionary<string, ICard>();
     }
 
 

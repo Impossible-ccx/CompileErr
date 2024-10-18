@@ -92,10 +92,14 @@ namespace BackYard
             }
             card.Delay = Delay;
             card.Wherethis = Wherethis;
+            foreach(string activeAcion in activeAcions)
+            {
+                card.activeAcions.Add(new string(activeAcion));
+            }
             return card;
         }
         //返回一个新的icard实例,从当前卡深拷贝!
-        public bool Excute(IPlayer sender, IPlayer target, double value)
+        public bool Excute(IPlayer sender, IPlayer target)
         {
             foreach (string aAction in activeAcions)
             {
@@ -108,7 +112,7 @@ namespace BackYard
                 {
                     throw new Exception("E003 不存在的action");
                 }
-                if(newAction.Excute(sender, target, value))
+                if(newAction.Excute(sender, target, actionValue[aAction]))
                 {
                     target.OnAction(newAction);
                 }
@@ -126,6 +130,7 @@ namespace BackYard
         //检测这个值指示牌应当放置于哪里。0抽牌堆，1手牌，2弃牌堆，3放逐，4销毁  在使用牌后进行检测
 
         public List<string> activeAcions { get; set; } = new List<string>();
+        public Dictionary<string, double> actionValue { get; set; } = new Dictionary<string, double>();
         
     }
     public class BattleStage : IBattle
@@ -138,5 +143,11 @@ namespace BackYard
         public int Reward { get; set; }
         //这是金币
         public List<IEnemy> EnemyList { get; set; } = new List<IEnemy>();
+    }
+    public class CardPack : ICardPack
+    {
+        public string NameID { get; set; } = new string(String.Empty);
+        public List<ICard> Cards { get; set; } = new List<ICard>();
+        public List<ICard> DefaultCards { get; set; } = new List<ICard> { };
     }
 }
