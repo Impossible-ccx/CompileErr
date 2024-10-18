@@ -1,6 +1,7 @@
 using Effects;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 namespace BackYard
 {
     static public class GameManager
@@ -16,7 +17,7 @@ namespace BackYard
         static public int init = 0;
         static GameManager()
         {
-            ModManager.LoadMod();
+            ModManager.LoadMods();
             ModManager.LoadAction();
             ModManager.LoadEffect();
         }
@@ -76,9 +77,22 @@ namespace BackYard
     }
     static internal class ModManager
     {
-        static internal void LoadMod()
+        static internal readonly string WorkPath = System.IO.Directory.GetCurrentDirectory();
+        static internal readonly string ModFolderPath = WorkPath + "Mods/";
+        static private string? ModPath;
+        static private XmlDocument ModManagerXml = new XmlDocument();
+        static private XmlDocument CardsXml = new XmlDocument();
+        static private XmlDocument EnemysXml = new XmlDocument();
+        static private XmlDocument FloorsXml = new XmlDocument();
+        static internal void LoadMods()
         {
             //‘ÿ»Îcard£¨enemy£¨floor
+            ModManagerXml.Load(ModFolderPath + "ModManager.xml");
+            XmlNode ModManagerXmlRoot = ModManagerXml.LastChild!;
+            foreach(XmlNode aMod in ModManagerXmlRoot.ChildNodes)
+            {
+                ModPath = ModFolderPath + aMod.InnerText;
+            }
         }
         static internal void LoadAction()
         {

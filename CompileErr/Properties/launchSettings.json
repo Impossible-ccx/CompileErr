@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CompileErr": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\workshop\\CompileErr\\CompileErr"
+    }
+  }
+}
