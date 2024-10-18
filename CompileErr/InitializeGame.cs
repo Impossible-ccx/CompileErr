@@ -153,6 +153,12 @@ namespace BackYard
                 enemy.Name = aEnemyXml["Name"]!.InnerText;
                 enemy.ID = aEnemyXml["ID"]!.InnerText;
                 enemy.HP = int.Parse(aEnemyXml["HP"]!.InnerText);
+                foreach(XmlNode aEffectXml in aEnemyXml["Effects"]!)
+                {
+                    IEffect newEffect = AEEFactory.EffectDict[aEffectXml["IDName"]!.InnerText].Copy();
+                    newEffect.Level = int.Parse(aEffectXml["Level"]!.InnerText);
+                    enemy.EffectBox.Add(newEffect);
+                }
             }
         }
 
