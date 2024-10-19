@@ -90,6 +90,7 @@ namespace BackYard
             LoadCards();
             LoadAction();
             LoadEffect();
+            LoadEnemys();
         }
         static internal void LoadAction()
         {
@@ -159,6 +160,15 @@ namespace BackYard
                     newEffect.Level = int.Parse(aEffectXml["Level"]!.InnerText);
                     enemy.EffectBox.Add(newEffect);
                 }
+            }
+        }
+        static private void LoadFloors()
+        {
+            XmlDocument FloorsXml = new XmlDocument();
+            XmlNode root = FloorsXml.LastChild!;
+            foreach(XmlNode aFloorXml in root.ChildNodes)
+            {
+                List<List<IStage>> targetGroup = FloorFactoy.Lay1Group
             }
         }
 
