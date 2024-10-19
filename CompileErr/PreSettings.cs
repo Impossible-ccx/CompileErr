@@ -136,7 +136,7 @@ namespace BackYard
     }
     public class BattleStage : IBattle
     {
-        public int type { get; } = 1;
+        public int type { get; set; } = 1;
         //假定战斗为1，事件为2。准备好生成方法就行，具体逻辑还要策划决定
         public string Tag { get; set; } = new string(string.Empty);
         //现在暂时考虑两种tag，normal和final，后者一定放在最后
