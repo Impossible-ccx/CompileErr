@@ -133,7 +133,7 @@ namespace BackYard
                     Card newCard = new Card();
                     newCard.Name = aCard["Name"]!.InnerText;
                     newCard.Description = aCard["Description"]!.InnerText;
-                    newCard.ImagePath = aCard["ImagePath"]!.InnerText;
+                    newCard.ImagePath = ModPath + "Images/" + aCard["ImagePath"]!.InnerText;
                     newCard.ID = aCard["ID"]!.InnerText;
                     newCard.Cost = int.Parse(aCard["Cost"]!.InnerText);
                     foreach (XmlNode xmlNode in aCard["ID"]!.ChildNodes)
