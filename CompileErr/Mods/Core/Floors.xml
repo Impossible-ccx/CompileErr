@@ -12,5 +12,10 @@
 				<enemy>Core_enemy_a0</enemy>
 			</EnemyList>
 		</Stage>
+		<Stage>
+			<Type>2</Type>
+			<Tag>Event</Tag>
+			<Description>testEvent</Description>
+		</Stage>
 	</floor>
 </root>

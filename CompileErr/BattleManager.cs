@@ -176,6 +176,7 @@ namespace BackYard
                 }
 
             }
+            Pace--;
         }
         //用于“时间倒流”，主程的想法。具体处理可先搁置
         private static IHumanPlayer Player = GameManager.PresentPlayer!;

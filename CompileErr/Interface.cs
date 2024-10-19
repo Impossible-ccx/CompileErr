@@ -133,4 +133,10 @@ namespace BackYard
         //ÕâÊÇ½ð±Ò
         List<IEnemy> EnemyList { get; }
     }
+    public interface IEvent : IStage
+    {
+        List<string> Choices { get; }
+        string Description { get; }
+        void Choose(string choice);
+    }
 }

@@ -193,4 +193,23 @@ namespace BackYard
         public List<ICard> Cards { get; set; } = new List<ICard>();
         public List<ICard> DefaultCards { get; set; } = new List<ICard> { };
     }
+    public class Event : IEvent
+    {
+        public int type { get; set; } = 2;
+        //假定战斗为1，事件为2。准备好生成方法就行，具体逻辑还要策划决定
+        public string Tag { get; set; } = string.Empty;
+        //现在暂时考虑两种tag，normal和final，后者一定放在最后
+        public IStage Copy()
+        {
+            Event newEvent = new Event();
+            newEvent.type = type;
+            newEvent.Tag += Tag;
+            newEvent.Description += Description;
+        }
+        public List<string> Choices { get; set; } = new List<string>();
+        public string Description { get; set; } = string.Empty;
+        public List<string> DescForChoice { get; set; } = new List<string>();
+        //按照顺序排列
+        public void Choose(string choice);
+    }
 }
