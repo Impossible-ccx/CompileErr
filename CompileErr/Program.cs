@@ -6,9 +6,8 @@ namespace Program
     {
         static void Main(string[] args)
         {
-            GameManager.init = 1;
-            Console.WriteLine("test");
-
+            GameManager.IniNewGame("BasicCardPack");
+            Console.WriteLine();
         }
     }
 }

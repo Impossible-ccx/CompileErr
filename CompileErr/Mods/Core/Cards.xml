@@ -14,7 +14,7 @@
 			<Action>
 				<act>
 					<NameID>Attack</NameID>
-					<val>5</val>
+					<Value>5</Value>
 				</act>
 			</Action>
 		</Card>

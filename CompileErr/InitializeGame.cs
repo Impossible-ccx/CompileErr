@@ -41,7 +41,7 @@ namespace BackYard
 
         }
         //启动对局
-        static private void IniNewGame(string IniCardPileName)
+        static public void IniNewGame(string IniCardPileName)
         {
             //载入Mod
             ModManager.LoadMods();
@@ -66,7 +66,7 @@ namespace BackYard
     static internal class ModManager
     {
         static internal readonly string WorkPath = System.IO.Directory.GetCurrentDirectory();
-        static internal readonly string ModFolderPath = WorkPath + "Mods/";
+        static internal readonly string ModFolderPath = WorkPath + "/Mods/";
         static private string? ModPath;
         static private XmlDocument ModManagerXml = new XmlDocument();
         static internal void LoadMods()
@@ -121,7 +121,7 @@ namespace BackYard
                         newCard.activeAcions.Add(aActionXml["NameID"]!.InnerText);
                         newCard.actionValue[aActionXml["NameID"]!.InnerText] = double.Parse(aActionXml["Value"]!.InnerText);
                     }
-                    CardPacksFactory.CardDict[newCard.Name] = newCard;
+                    CardPacksFactory.CardDict[newCard.ID] = newCard;
                     newCardPack.Cards.Add(newCard);
                 }
                 foreach (XmlElement aDefaultCardXml in DefaultCardsList)
@@ -162,11 +162,13 @@ namespace BackYard
                     aLogic.action = AEEFactory.ActionDict[aLogicXml["Action"]!.InnerText];
                     enemy.Logic.Add(aLogic);
                 }
+                AEEFactory.EnemyDict[enemy.ID] = enemy;
             }
         }
         static private void LoadFloors()
         {
             XmlDocument FloorsXml = new XmlDocument();
+            FloorsXml.Load(ModPath + "Floors.xml");
             XmlNode root = FloorsXml.LastChild!;
             foreach (XmlNode aFloorXml in root.ChildNodes)
             {
