@@ -99,9 +99,20 @@ namespace BackYard
                 newCardPile.CardList.Add(p);
             }
             WatingPile.CardList.Clear();
+            Random random = new Random();
             foreach(ICard p in thisBattle.RewardCard)
             {
-                newCardPile.CardList.Add(p.CopyCard());
+                foreach (ICard q in GameManager.EnableCards)
+                {
+                    if (p == q)
+                    {
+                        if (random.Next(100) < 40)
+                        {
+                            newCardPile.CardList.Add(p.CopyCard());
+                        }
+                    }
+                }
+
             }
             Player.Money += thisBattle.Reward;
         }
