@@ -33,7 +33,7 @@ namespace BackYard
     }
     public class HumanPlayer : Player, IHumanPlayer
     {
-        public HumanPlayer(string name, ICardPile IniPackPile)
+        public HumanPlayer(string? name, ICardPile IniPackPile)
         {
             if (name == null)
             {

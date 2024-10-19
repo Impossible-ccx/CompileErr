@@ -10,19 +10,15 @@ namespace BackYard
         //通讯类
         //全游戏流程的管理类
         //还有海量的方法需要写，时不时会加入新方法。这是堆史山行为，但不想改了。最多几十个成员忍一忍吧
-        //调用一下这个init的值就会开始初始化了：）
+        //调用一下这个iniNewGame开始整体初始化
         //最好提供一个用于结束游戏的方法。下面是个临时标注游戏结束的字段
         static bool IsGameEnd = false;
         static public int FloorDepth { get; private set; }
         //检测这个值，不同层或许有不同背景
         static public int init = 0;
-        static GameManager()
-        {
-            ModManager.LoadMods();
-        }
-        static public IFloorManager? floorManager {  get; private set; }
-        static public IBattleManager? battleManager {  get; private set; }
-        static public IHumanPlayer humanPlayer;
+        static public IFloorManager? FloorManager {  get; private set; }
+        static public IBattleManager? BattleManager {  get; private set; }
+        static public IHumanPlayer? HumanPlayer {  get; private set; }
         //玩家信息存在这里
         static public List<ICardPack> DisableCardPacks { get; set; } = new List<ICardPack>();
         //未启用的卡包（存启用的卡包没用，除非我们想做被动效果
@@ -31,7 +27,6 @@ namespace BackYard
         //可用的卡。生成奖励时从这里生成
         static public void EnterNextFloor(ICardPack? newCardPack)
         {
-            //刚刚newgame也要调用
             //将会按照一定的方法读取文件中的地图定义
             //对于最后一层，调用endgame
             int t = new Random().Next();
@@ -40,16 +35,16 @@ namespace BackYard
                 case 0:
                     t = t % FloorFactoy.Lay1Group.Count;
                     FloorDepth++;
-                    floorManager = FloorManager.CreateFloor(FloorFactoy.Lay1Group[t]);     
+                    FloorManager = BackYard.FloorManager.CreateFloor(FloorFactoy.Lay1Group[t]);
                     break;
                 case 1:
                     t = t % FloorFactoy.Lay2Group.Count;
                     FloorDepth++;
-                    floorManager = FloorManager.CreateFloor(FloorFactoy.Lay2Group[t]);
+                    FloorManager = BackYard.FloorManager.CreateFloor(FloorFactoy.Lay2Group[t]);
                     break;
                 case 2:
                     IsGameEnd = true;
-                    floorManager = null;
+                    FloorManager = null;
                     break;
             }
         }
@@ -60,8 +55,8 @@ namespace BackYard
                 if (target!.type == 1)
                 {
                     IBattle Target = (target as IBattle)!;
-                    floorManager!.IniBattle(ref Target);
-                    battleManager!.StartBattle(Target);
+                    FloorManager!.IniBattle(ref Target);
+                    BattleManager!.StartBattle(Target);
                 }
             }
             catch
@@ -71,6 +66,27 @@ namespace BackYard
 
         }
         //启动对局
+        static private void IniNewGame(string IniCardPileName)
+        {
+            //载入Mod
+            ModManager.LoadMods();
+            //生成玩家
+            List<ICardPack> CardPackDictList = CardPacksFactory.CardPackList;
+            ICardPile IniCardPile = new CardPile();
+            foreach (ICardPack CardPack in CardPackDictList)
+            {
+                if (CardPack.NameID == IniCardPileName)
+                {
+                    foreach (ICard IniCard in CardPack.DefaultCards)
+                    {
+                        IniCardPile.CardList.Add(IniCard.CopyCard());
+                    }
+                    break;
+                }
+            }
+            HumanPlayer = new HumanPlayer(null, IniCardPile);
+        }
+        //开启新游戏并初始化玩家
     }
     static internal class ModManager
     {
