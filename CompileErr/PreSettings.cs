@@ -15,6 +15,8 @@ namespace BackYard
         static public IPlayer? RandomEnemy;
         static public IPlayer? AllEnemy;
         static public IPlayer? Self;
+        //回合开始的调用者
+        static public IPlayer? ExcStart = new AbsPlayer("ExcStart");
         static public IAction? Discard;//可用来实现出牌时触发效果
     }
     public abstract class Player : IPlayer
@@ -31,6 +33,23 @@ namespace BackYard
             }
         }
         public abstract IPlayer Copy();
+    }
+    public class AbsPlayer : IPlayer
+    {
+        public virtual string Name { get; set; } = new string(string.Empty);
+        public virtual string ID { get; set; } = new string(string.Empty);
+        public int HP { get; set; } = -1;
+        public List<IEffect> EffectBox { get; set; } = new List<IEffect>();
+        public void OnAction(IAction action)
+        {
+            ;
+        }
+        public IPlayer Copy() { throw new Exception("Abstract Player"); }
+        public AbsPlayer(string nameID)
+        {
+            Name = nameID;
+            ID = nameID;    
+        }
     }
     public class HumanPlayer : Player, IHumanPlayer
     {

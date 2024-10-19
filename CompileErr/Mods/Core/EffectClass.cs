@@ -9,9 +9,9 @@ namespace Effects
         public override string IDName { get; } = "Bleeding";
         public override string Description { get; } = "每回合失去等于层数的HP";
         public override int EnableTime { get; } = 2;
-        public override void Excute(IPlayer sender, IAction? triAction = null)
+        public override void Excute(IPlayer sender, IAction? triAction = null, IPlayer? trigger = null)
         {
-            if (triAction == null)
+            if (trigger == PreSetObj.ExcStart)
             {
                 sender.HP -= Level;
                 Level -= 1;

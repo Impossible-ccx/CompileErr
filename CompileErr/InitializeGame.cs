@@ -16,7 +16,6 @@ namespace BackYard
         static public int FloorDepth { get; private set; }
         //检测这个值，不同层或许有不同背景
         static public int init = 0;
-        static public IFloorManager? floorManager {  get; private set; }
         static public IBattleManager? battleManager {  get; private set; }
         static public IHumanPlayer? PresentPlayer {  get; private set; }
         //玩家信息存在这里
@@ -25,29 +24,6 @@ namespace BackYard
         //loadxml时就已经放入，无需再次初始化
         static public List<ICard> EnableCards { get; set; } = new List<ICard>();
         //可用的卡。生成奖励时从这里生成
-        static public void EnterNextFloor(ICardPack? newCardPack)
-        {
-            //将会按照一定的方法读取文件中的地图定义
-            //对于最后一层，调用endgame
-            int t = new Random().Next();
-            switch (FloorDepth)
-            {
-                case 0:
-                    t = t % FloorFactoy.Lay1Group.Count;
-                    FloorDepth++;
-                    floorManager = FloorManager.CreateFloor(FloorFactoy.Lay1Group[t]);
-                    break;
-                case 1:
-                    t = t % FloorFactoy.Lay2Group.Count;
-                    FloorDepth++;
-                    floorManager = FloorManager.CreateFloor(FloorFactoy.Lay2Group[t]);
-                    break;
-                case 2:
-                    IsGameEnd = true;
-                    floorManager = null;
-                    break;
-            }
-        }
         static public void EnterStage(IStage target)
         {
             try
@@ -55,7 +31,6 @@ namespace BackYard
                 if (target!.type == 1)
                 {
                     IBattle Target = (target as IBattle)!;
-                    floorManager!.IniBattle(ref Target);
                     battleManager!.StartBattle(Target);
                 }
             }

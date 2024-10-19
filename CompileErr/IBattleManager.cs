@@ -26,10 +26,10 @@ namespace BackYard
         //等待牌堆，暂时留空即可
         List<IEnemy> Enemis { get; }
         //在线的敌人
-        IPlayer HumanPlayer { get; }
-        //玩家对象
         int cost {  get; }
         //也许应该从哪里定义初始值？
+        int Pace {  get; }
+        //目前的回合数
         void Discard(int item,IPlayer sender, IPlayer target);
         //出牌，输入为第几张卡，发动者，目标。
         //调用对应卡的执行方法即可

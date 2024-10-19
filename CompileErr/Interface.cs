@@ -19,6 +19,7 @@ namespace BackYard
         public int delay;
         public bool IsSingle;
         public IAction? action;
+        public double value;
         public EnemyLogic Copy()
         {
             EnemyLogic logic = new EnemyLogic();
@@ -30,7 +31,7 @@ namespace BackYard
     }
     public interface IEnemy : IPlayer
     {
-        int NextDelay { get; }
+        int NextDelay { get; set; }
         //下一次行动的时间
         List<EnemyLogic> Logic { get; }
         //行动逻辑，对于每一个其中的逻辑，每经过delay的时间执行一次。issingle为真时，执行后去除此条逻辑
@@ -84,7 +85,7 @@ namespace BackYard
         //level为0效果结束，应销毁对象。持续时间也用level实现。负数为永续
         public int Level { get; set; }
         //effect的执行效果,与action相似管理
-        abstract public void Excute(IPlayer sender, IAction? triAction = null);
+        abstract public void Excute(IPlayer sender, IAction? triAction = null, IPlayer? trigger = null);
         //在什么时候触发效果。约定 0 OnAction时触发。1 回合开始触发（敌人行动开始）。2 回合结束触发（敌人行动结束）
         //3 任意牌出牌时触发（检测特定出牌也使用这个）
         abstract public int EnableTime { get; }
