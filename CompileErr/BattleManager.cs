@@ -27,10 +27,18 @@ namespace BackYard
             else if(card.Delay == 0)
             {
                 card.Excute(sender, target);
+                foreach(IEffect aEffect in Player.EffectBox)
+                {
+                    aEffect.Excute(sender, null, PreSetObj.DisCard);
+                }
             }
             else if (card.Delay == 1)
             {
                 card.Excute(sender, target);
+                foreach (IEffect aEffect in Player.EffectBox)
+                {
+                    aEffect.Excute(sender, null, PreSetObj.DisCard);
+                }
                 NextPace();
             }
             else

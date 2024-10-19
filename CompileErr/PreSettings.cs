@@ -17,7 +17,7 @@ namespace BackYard
         static public IPlayer? Self;
         //回合开始的调用者
         static public IPlayer? ExcStart = new AbsPlayer("ExcStart");
-        static public IAction? Discard;//可用来实现出牌时触发效果
+        static public IPlayer? DisCard = new AbsPlayer("DisCard");
     }
     public abstract class Player : IPlayer
     {
