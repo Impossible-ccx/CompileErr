@@ -91,6 +91,7 @@ namespace BackYard
             LoadAction();
             LoadEffect();
             LoadEnemys();
+            LoadFloors();
         }
         static internal void LoadAction()
         {
