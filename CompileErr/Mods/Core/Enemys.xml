@@ -9,5 +9,13 @@
 				<Level>6</Level>
 			</effect>
 		</Effects>
+		<Logic>
+			<logic>
+				<Delay>2</Delay>
+				<IsSingle>0</IsSingle>
+				<Action>Attack</Action>
+				<Value>4</Value>
+			</logic>
+		</Logic>
 	</enemy>
 </root>

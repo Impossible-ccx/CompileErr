@@ -153,6 +153,15 @@ namespace BackYard
                     newEffect.Level = int.Parse(aEffectXml["Level"]!.InnerText);
                     enemy.EffectBox.Add(newEffect);
                 }
+                foreach(XmlNode aLogicXml in aEnemyXml["Logic"]!.ChildNodes)
+                {
+                    EnemyLogic aLogic = new EnemyLogic();
+                    aLogic.value = int.Parse(aLogicXml["Value"]!.InnerText);
+                    aLogic.delay = int.Parse(aLogicXml["Delay"]!.InnerText);
+                    aLogic.IsSingle = aLogicXml["IsSingle"]!.InnerText == "true";
+                    aLogic.action = AEEFactory.ActionDict[aLogicXml["Action"]!.InnerText];
+                    enemy.Logic.Add(aLogic);
+                }
             }
         }
         static private void LoadFloors()
