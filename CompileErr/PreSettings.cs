@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -144,11 +145,28 @@ namespace BackYard
         public int Reward { get; set; }
         //这是金币
         public List<IEnemy> EnemyList { get; set; } = new List<IEnemy>();
+        public IStage Copy()
+        {
+            IBattle newBattle = new BattleStage();
+            newBattle.type = type;
+            newBattle.Tag += Tag;
+            newBattle.Reward = Reward;
+            foreach(ICard card in RewardCard)
+            {
+                newBattle.RewardCard.Add(card.CopyCard());
+            }
+            foreach(IEnemy enemy in EnemyList)
+            {
+                newBattle.EnemyList.Add((enemy.Copy() as IEnemy)!);
+            }
+            return newBattle;
+        }
     }
-    public class Stage : IStage
+    public abstract class Stage : IStage
     {
-        public int type { get; set; }
-        public string Tag { get; set; } = new string(String.Empty);
+        public virtual int type { get; set; }
+        public virtual string Tag { get; set; } = new string(String.Empty);
+        public abstract IStage Copy();
     }
     public class CardPack : ICardPack
     {

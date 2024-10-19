@@ -16,9 +16,9 @@ namespace BackYard
         static public int FloorDepth { get; private set; }
         //检测这个值，不同层或许有不同背景
         static public int init = 0;
-        static public IFloorManager? FloorManager {  get; private set; }
-        static public IBattleManager? BattleManager {  get; private set; }
-        static public IHumanPlayer? HumanPlayer {  get; private set; }
+        static public IFloorManager? floorManager {  get; private set; }
+        static public IBattleManager? battleManager {  get; private set; }
+        static public IHumanPlayer? PresentPlayer {  get; private set; }
         //玩家信息存在这里
         static public List<ICardPack> DisableCardPacks { get; set; } = new List<ICardPack>();
         //未启用的卡包（存启用的卡包没用，除非我们想做被动效果
@@ -35,16 +35,16 @@ namespace BackYard
                 case 0:
                     t = t % FloorFactoy.Lay1Group.Count;
                     FloorDepth++;
-                    FloorManager = BackYard.FloorManager.CreateFloor(FloorFactoy.Lay1Group[t]);
+                    floorManager = FloorManager.CreateFloor(FloorFactoy.Lay1Group[t]);
                     break;
                 case 1:
                     t = t % FloorFactoy.Lay2Group.Count;
                     FloorDepth++;
-                    FloorManager = BackYard.FloorManager.CreateFloor(FloorFactoy.Lay2Group[t]);
+                    floorManager = FloorManager.CreateFloor(FloorFactoy.Lay2Group[t]);
                     break;
                 case 2:
                     IsGameEnd = true;
-                    FloorManager = null;
+                    floorManager = null;
                     break;
             }
         }
@@ -55,8 +55,8 @@ namespace BackYard
                 if (target!.type == 1)
                 {
                     IBattle Target = (target as IBattle)!;
-                    FloorManager!.IniBattle(ref Target);
-                    BattleManager!.StartBattle(Target);
+                    floorManager!.IniBattle(ref Target);
+                    battleManager!.StartBattle(Target);
                 }
             }
             catch
@@ -84,7 +84,7 @@ namespace BackYard
                     break;
                 }
             }
-            HumanPlayer = new HumanPlayer(null, IniCardPile);
+            PresentPlayer = new HumanPlayer(null, IniCardPile);
         }
         //开启新游戏并初始化玩家
     }
