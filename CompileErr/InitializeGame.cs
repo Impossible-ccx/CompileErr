@@ -90,6 +90,7 @@ namespace BackYard
             LoadCards();
             LoadAction();
             LoadEffect();
+            LoadEnemys();
         }
         static internal void LoadAction()
         {
@@ -110,19 +111,20 @@ namespace BackYard
                 newCardPack.NameID = aCardPack["Name"]!.InnerText;
                 XmlNodeList CardsList = aCardPack.SelectNodes("./Card")!;
                 XmlNodeList DefaultCardsList = aCardPack.SelectNodes("./DefaultCard")!;
-                foreach(XmlElement aCard in CardsList)
+                foreach (XmlElement aCard in CardsList)
                 {
                     Card newCard = new Card();
                     newCard.Name = aCard["Name"]!.InnerText;
                     newCard.Description = aCard["Description"]!.InnerText;
+                    newCard.ImagePath = aCard["ImagePath"]!.InnerText;
                     newCard.ID = aCard["ID"]!.InnerText;
                     newCard.Cost = int.Parse(aCard["Cost"]!.InnerText);
-                    foreach(XmlNode xmlNode in aCard["ID"]!.ChildNodes)
+                    foreach (XmlNode xmlNode in aCard["ID"]!.ChildNodes)
                     {
                         newCard.Tags.Add(xmlNode.InnerText);
                     }
                     newCard.Delay = int.Parse(aCard["Delay"]!.InnerText);
-                    foreach(XmlNode aActionXml in aCard["Action"]!.ChildNodes)
+                    foreach (XmlNode aActionXml in aCard["Action"]!.ChildNodes)
                     {
                         newCard.activeAcions.Add(aActionXml["NameID"]!.InnerText);
                         newCard.actionValue[aActionXml["NameID"]!.InnerText] = double.Parse(aActionXml["Value"]!.InnerText);
@@ -130,10 +132,10 @@ namespace BackYard
                     CardPacksFactory.CardDict[newCard.Name] = newCard;
                     newCardPack.Cards.Add(newCard);
                 }
-                foreach(XmlElement aDefaultCardXml in DefaultCardsList)
+                foreach (XmlElement aDefaultCardXml in DefaultCardsList)
                 {
                     ICard aCard = CardPacksFactory.CardDict[aDefaultCardXml.InnerText].CopyCard();
-                    if(aCard != null)
+                    if (aCard != null)
                     {
                         newCardPack.DefaultCards.Add(aCard);
                     }
@@ -145,20 +147,75 @@ namespace BackYard
         static private void LoadEnemys()
         {
             XmlDocument EnemysXml = new XmlDocument();
-            EnemysXml.Load(ModPath+"Enemys.xml");
+            EnemysXml.Load(ModPath + "Enemys.xml");
             XmlNode root = EnemysXml.LastChild!;
-            foreach(XmlNode aEnemyXml in root.ChildNodes)
+            foreach (XmlNode aEnemyXml in root.ChildNodes)
             {
                 Enemy enemy = new Enemy();
                 enemy.Name = aEnemyXml["Name"]!.InnerText;
                 enemy.ID = aEnemyXml["ID"]!.InnerText;
                 enemy.HP = int.Parse(aEnemyXml["HP"]!.InnerText);
-                foreach(XmlNode aEffectXml in aEnemyXml["Effects"]!)
+                foreach (XmlNode aEffectXml in aEnemyXml["Effects"]!)
                 {
                     IEffect newEffect = AEEFactory.EffectDict[aEffectXml["IDName"]!.InnerText].Copy();
                     newEffect.Level = int.Parse(aEffectXml["Level"]!.InnerText);
                     enemy.EffectBox.Add(newEffect);
                 }
+            }
+        }
+        static private void LoadFloors()
+        {
+            XmlDocument FloorsXml = new XmlDocument();
+            XmlNode root = FloorsXml.LastChild!;
+            foreach (XmlNode aFloorXml in root.ChildNodes)
+            {
+                List<List<IStage>>? targetGroup;
+                List<IStage> newFloor = new List<IStage>();
+                if (aFloorXml["LayLevel"]!.InnerText == "1")
+                {
+                    targetGroup = FloorFactoy.Lay1Group;
+                }
+                else if (aFloorXml["LayLevel"]!.InnerText == "2"){
+                    targetGroup = FloorFactoy.Lay2Group;
+                }
+                else
+                {
+                    targetGroup = null;
+                    throw new Exception("???stageGroup");
+                }
+                XmlNodeList stages = aFloorXml.SelectNodes("./Stage")!;
+                foreach(XmlNode stage in stages)
+                {
+                    IStage? newStage;
+                    if (stage["Type"]!.InnerText == "1")
+                    {
+                        IBattle newBattle = new BattleStage();
+                        newStage = newBattle;
+                        newBattle.type = 1;
+                        newBattle.Tag = stage["Tag"]!.InnerText;
+                        newBattle.Reward = int.Parse(stage["Reward"]!.InnerText);
+                        foreach(XmlNode enemy in stage["EnemyList"]!.ChildNodes)
+                        {
+                            newBattle.EnemyList.Add((AEEFactory.EnemyDict[enemy.InnerText].Copy() as IEnemy)!);
+                        }
+                        foreach(XmlNode card in stage["RewardCard"]!.ChildNodes)
+                        {
+                            newBattle.RewardCard.Add((CardPacksFactory.CardDict[card.InnerText].CopyCard())!);
+                        }
+                    }
+                    else if (stage["Typr"]!.InnerText == "2")
+                    {
+                        newStage = null;
+                        throw new Exception("event stage!");
+                    }
+                    else
+                    {
+                        newStage = null;
+                        throw new Exception("???stage");
+                    }
+                    newFloor.Add(newStage);
+                }
+                targetGroup.Add(newFloor);
             }
         }
 

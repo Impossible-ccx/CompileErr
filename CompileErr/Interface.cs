@@ -60,6 +60,8 @@ namespace BackYard
         string Name { get; }
         string Description { get; }
         //卡面描述
+        string ImagePath {  get; }
+        //卡面路径
         string ID { get; }
         int Cost { get; set; }
         List<string> Tags { get; }
@@ -117,15 +119,15 @@ namespace BackYard
     }
     public interface IStage
     {
-        int type { get; }
+        int type { get; set; }
         //假定战斗为1，事件为2。准备好生成方法就行，具体逻辑还要策划决定
-        string Tag { get; }
+        string Tag { get; set; }
         //现在暂时考虑两种tag，normal和final，后者一定放在最后
     }
     public interface IBattle : IStage
     {
-        List<ICard> RewardCard { get; }
-        int Reward {  get; }
+        List<ICard> RewardCard { get; set; }
+        int Reward { get; set; }
         //这是金币
         List<IEnemy> EnemyList { get; }
     }

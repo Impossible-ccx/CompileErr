@@ -73,6 +73,7 @@ namespace BackYard
         public string Name { get; set; } = new string(string.Empty);
         public string Description { get; set; } = new string(string.Empty);
         //卡面描述
+        public string ImagePath { get; set; } = new string(string.Empty);
         public string ID { get; set; } = new string(string.Empty);
         public int Cost { get; set; }
         public List<string> Tags { get; } = new List<string>();
@@ -143,6 +144,11 @@ namespace BackYard
         public int Reward { get; set; }
         //这是金币
         public List<IEnemy> EnemyList { get; set; } = new List<IEnemy>();
+    }
+    public class Stage : IStage
+    {
+        public int type { get; set; }
+        public string Tag { get; set; } = new string(String.Empty);
     }
     public class CardPack : ICardPack
     {

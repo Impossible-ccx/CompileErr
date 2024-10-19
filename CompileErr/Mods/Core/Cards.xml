@@ -5,6 +5,7 @@
 			<Name>迅速测试</Name>
 			<ID>Core_card_a0</ID>
 			<Description>test for fast ex</Description>
+			<ImagePath>sasasas</ImagePath>
 			<Delay>0</Delay>
 			<Cost>1</Cost>
 			<Tags>

@@ -1,13 +1,16 @@
 ﻿<root>
-	<stage>
-		<Type>1</Type>
-		<Tag>normal</Tag>
-		<RewardCard>
-			<card>Core_card_a0</card>
-		</RewardCard>
-		<Reward>1</Reward>
-		<EnemyList>
-			<enemy>Core_enemy_a0</enemy>
-		</EnemyList>
-	</stage>
+	<floor>
+		<LayLevel>1</LayLevel>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard>
+				<card>Core_card_a0</card>
+			</RewardCard>
+			<Reward>1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_a0</enemy>
+			</EnemyList>
+		</Stage>
+	</floor>
 </root>
