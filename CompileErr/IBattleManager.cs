@@ -40,6 +40,8 @@ namespace BackYard
         void EndBattle();
         //结束战斗，将所有牌堆叠到一起并saveCardPile。计算奖励。
         //回调floormanager的结束战斗！
+        List<ICard> GetRewardCards();
+        void SelectReward(ICard card);
 
         //由于牌堆全是public的，弃牌，改变手牌cost等操作均可由action实现。不要再添加到这里了。
         void NextPace();

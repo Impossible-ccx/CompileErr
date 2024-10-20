@@ -64,6 +64,18 @@ namespace BackYard
             PresentPlayer = new HumanPlayer(null, IniCardPile);
         }
         //开启新游戏并初始化玩家
+        static public void SelectNewCardPack(ICardPack target)
+        {
+            foreach(ICard card in target.DefaultCards)
+            {
+                PresentPlayer!.PresentCardPile.CardList.Add(card.CopyCard());
+            }
+            DisableCardPacks.Remove(target);
+            foreach(ICard card in target.Cards)
+            {
+                EnableCards.Add(card.CopyCard());
+            }
+        }
     }
     static internal class ModManager
     {

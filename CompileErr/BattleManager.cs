@@ -145,22 +145,8 @@ namespace BackYard
                 newCardPile.CardList.Add(p);
             }
             WatingPile.CardList.Clear();
-            Random random = new Random();
-            foreach(ICard p in thisBattle.RewardCard)
-            {
-                foreach (ICard q in GameManager.EnableCards)
-                {
-                    if (p == q)
-                    {
-                        if (random.Next(100) < 40)
-                        {
-                            newCardPile.CardList.Add(p.CopyCard());
-                        }
-                    }
-                }
-
-            }
             Player.Money += thisBattle.Reward;
+            Player.PresentCardPile = newCardPile;
         }
         //结束战斗，将所有牌堆叠到一起并saveCardPile。计算奖励。
 
@@ -241,6 +227,26 @@ namespace BackYard
             Pace--;
         }
         //用于“时间倒流”，主程的想法。具体处理可先搁置
+        public List<ICard> GetRewardCards()
+        {
+            Random rand = new Random();
+            List<ICard> result = new List<ICard>();
+            PriorityQueue<ICard, int> ppp = new PriorityQueue<ICard, int>();
+            foreach(ICard aCard in GameManager.EnableCards)
+            {
+                ppp.Enqueue(aCard.CopyCard(), rand.Next(1000));
+                ppp.Enqueue(aCard.CopyCard(), rand.Next(1000));
+                ppp.Enqueue(aCard.CopyCard(), rand.Next(1000));
+            }
+            result.Add(ppp.Dequeue());
+            result.Add(ppp.Dequeue());
+            result.Add(ppp.Dequeue());
+            return result;
+        }
+        public void SelectReward(ICard card)
+        {
+            CardPile.CardList.Add(card);
+        }
         private static IHumanPlayer Player = GameManager.PresentPlayer!;
         private void RandomizePile(ref ICardPile pile)
         {
