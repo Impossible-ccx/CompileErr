@@ -11,7 +11,7 @@ namespace BackYard
         //在合适的时候执行对象具有的所有效果
         List<IEffect> EffectBox { get; }
         //接受action，此时也应该检测所有的effect是否应该执行。返回action是否有效，无效则放弃更新effect
-        void OnAction(IAction action);
+        bool OnAction(IAction action);
         IPlayer Copy();
     }
     public class EnemyLogic
@@ -88,7 +88,7 @@ namespace BackYard
         abstract public void Excute(IPlayer sender, IAction? triAction = null, IPlayer? trigger = null, ICard? trigCard = null);
         //在什么时候触发效果。约定 0 OnAction时触发。1 回合开始触发（敌人行动开始）。2 回合结束触发（敌人行动结束）
         //3 任意牌出牌时触发（检测特定出牌也使用这个）
-        abstract public int EnableTime { get; }
+        abstract public int EnableTime { get; }//已经废弃，不要使用
         public abstract IEffect Copy();
     }
     public abstract class IAction
@@ -103,19 +103,11 @@ namespace BackYard
             Sender = sender;
             Target = target;
             Value = value;
-            try
-            {
-                target.OnAction(this);
-            }
-            catch
-            {
-                return false;
-            }
-            return true;
+            return target.OnAction(this);
         }
         public abstract string IDName { get; }
         //action的逻辑。操作错误false
-        abstract public bool thisAction(IPlayer sender, IPlayer target);
+        abstract public bool thisAction(IPlayer? sender, IPlayer? target);
         public abstract IAction Copy();
     }
     public interface IStage

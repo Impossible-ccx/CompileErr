@@ -19,6 +19,7 @@ namespace BackYard
         static public IPlayer ExcStart = new AbsPlayer("ExcStart");
         static public IPlayer DisCard = new AbsPlayer("DisCard");
         static public IPlayer EventEng = new AbsPlayer("EventEng");
+        static public IPlayer OnActed = new AbsPlayer("OnActed");
     }
     public abstract class Player : IPlayer
     {
@@ -26,11 +27,19 @@ namespace BackYard
         public virtual string ID { get; set; } = new string(string.Empty);
         public int HP { get; set; }
         public List<IEffect> EffectBox { get; set; } = new List<IEffect>();
-        public void OnAction(IAction action)
+        public bool OnAction(IAction action)
         {
-            foreach (IEffect effect in EffectBox)
+            if (action.thisAction(action.Sender, action.Target))
             {
-                effect.Excute(this, action);
+                foreach (IEffect effect in EffectBox)
+                {
+                    effect.Excute(this, action);
+                }
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         public abstract IPlayer Copy();
@@ -41,15 +50,15 @@ namespace BackYard
         public virtual string ID { get; set; } = new string(string.Empty);
         public int HP { get; set; } = -1;
         public List<IEffect> EffectBox { get; set; } = new List<IEffect>();
-        public void OnAction(IAction action)
+        public bool OnAction(IAction action)
         {
-            ;
+            throw new Exception("抽象玩家不能作为动作目标");
         }
         public IPlayer Copy() { throw new Exception("Abstract Player"); }
         public AbsPlayer(string nameID)
         {
             Name = nameID;
-            ID = nameID;    
+            ID = nameID;
         }
     }
     public class HumanPlayer : Player, IHumanPlayer
