@@ -1,4 +1,4 @@
-﻿
+﻿using System.Collections.Generic;
 namespace BackYard
 {
     public class BattleManager : IBattleManager

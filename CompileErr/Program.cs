@@ -1,5 +1,6 @@
 ﻿//main，用于测试
 using BackYard;
+using System.Collections.Generic;
 namespace Program
 {
     static class Program
