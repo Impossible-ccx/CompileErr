@@ -17,9 +17,11 @@ namespace Effects
                 Level -= 1;
             }
         }
-        public override Bleeding Copy()
+        public override IEffect Copy()
         {
-            return new Bleeding();
+            IEffect effect = new Bleeding();
+            effect.Level = Level;
+            return effect;
         }
     }
 }

@@ -161,9 +161,15 @@ namespace BackYard
             cost += 2;
             foreach (IEnemy aEnemy in Enemis)
             {
-                foreach (IEffect aEffect in aEnemy.EffectBox)
+                for(int i = 0; i < aEnemy.EffectBox.Count; i++)
                 {
+                    IEffect aEffect = aEnemy.EffectBox[i];
                     aEffect.Excute(aEnemy, null, PreSetObj.ExcStart);
+                    if (aEffect.Level <= 0)
+                    {
+                        aEnemy.EffectBox.Remove(aEffect);
+                        i--;
+                    }
                 }
                 for (int i = 0; i < Enemis.Count; i++)
                 {

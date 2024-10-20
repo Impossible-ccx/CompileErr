@@ -26,6 +26,10 @@ namespace Program
             PrintBattle();
             GameManager.battleManager.NextPace();
             PrintBattle();
+            GameManager.battleManager.NextPace();
+            PrintBattle();
+            GameManager.battleManager.NextPace();
+            PrintBattle();
         }
         static void PrintBattle()
         {
@@ -40,6 +44,8 @@ namespace Program
                 Console.Write("Next Action " + enemy.NextDelay + "  ");
                 Console.WriteLine();
             }
+            Console.WriteLine();
+            Console.WriteLine("Player HP: " + GameManager.PresentPlayer.HP);
             Console.WriteLine("HandPile:");
             foreach (ICard aCard in GameManager.battleManager.HandPile.CardList)
             {

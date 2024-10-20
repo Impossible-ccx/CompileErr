@@ -6,7 +6,7 @@
 		<Effects>
 			<effect>
 				<IDName>Bleeding</IDName>
-				<Level>6</Level>
+				<Level>2</Level>
 			</effect>
 		</Effects>
 		<Logic>
