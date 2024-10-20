@@ -4,7 +4,7 @@
 		<Card>
 			<Name>迅速测试</Name>
 			<ID>Core_card_a0</ID>
-			<Description>test for fast ex</Description>
+			<Description>实验卡牌，造成六点伤害，迅速</Description>
 			<ImagePath>sasasas.png</ImagePath>
 			<Delay>0</Delay>
 			<Cost>1</Cost>
@@ -14,7 +14,7 @@
 			<Action>
 				<act>
 					<NameID>Attack</NameID>
-					<Value>5</Value>
+					<Value>6</Value>
 				</act>
 			</Action>
 		</Card>

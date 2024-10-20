@@ -31,6 +31,7 @@ namespace BackYard
                 if (target!.type == 1)
                 {
                     IBattle Target = (target as IBattle)!;
+                    battleManager = new BattleManager();
                     battleManager!.StartBattle(Target);
                 }
             }

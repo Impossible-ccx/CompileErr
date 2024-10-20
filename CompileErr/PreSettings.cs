@@ -91,9 +91,22 @@ namespace BackYard
         {
             Enemy result = new Enemy();
             result.NextDelay = NextDelay;
+            int nextDelay = 100000;
             foreach (EnemyLogic logic in Logic)
             {
                 result.Logic.Add(logic.Copy());
+                if (logic.delay < nextDelay)
+                {
+                    nextDelay = logic.delay;
+                }
+            }
+            result.Name = new string(Name);
+            result.ID = new string(ID);
+            result.NextDelay = nextDelay;
+            result.HP = HP;
+            foreach(IEffect aEffect in EffectBox)
+            {
+                result.EffectBox.Add(aEffect.Copy());
             }
             return result;
         }
@@ -127,6 +140,10 @@ namespace BackYard
             {
                 card.activeAcions.Add(new string(activeAcion));
             }
+            foreach(KeyValuePair<string,double> kv in actionValue)
+            {
+                card.actionValue[kv.Key] = kv.Value;
+            }
             return card;
         }
         //返回一个新的icard实例,从当前卡深拷贝!
@@ -145,7 +162,7 @@ namespace BackYard
                 }
                 if(newAction.Excute(sender, target, actionValue[aAction]))
                 {
-                    target.OnAction(newAction);
+                    return true;
                 }
                 else
                 {

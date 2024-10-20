@@ -2,7 +2,7 @@
 	<enemy>
 		<Name>testEnemy</Name>
 		<ID>Core_enemy_a0</ID>
-		<HP>10</HP>
+		<HP>1000</HP>
 		<Effects>
 			<effect>
 				<IDName>Bleeding</IDName>

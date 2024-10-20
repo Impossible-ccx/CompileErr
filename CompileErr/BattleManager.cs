@@ -62,15 +62,16 @@ namespace BackYard
         //出牌，输入为第几张卡，发动者，目标。
         //调用对应卡的执行方法即可
         public void Dull()
-        {
-            HandPile.CardList.Add(CardPile.CardList[CardPile.CardList.Count - 1]);
-            CardPile.CardList.RemoveAt(CardPile.CardList.Count - 1); 
+        {            
             if(CardPile.CardList.Count == 0)
             {
                 _cardPile = DiscardPile;
                 DiscardPile = new CardPile();
                 RandomizePile(ref _cardPile);
             }
+            HandPile.CardList.Add(CardPile.CardList[CardPile.CardList.Count - 1]);
+            CardPile.CardList.RemoveAt(CardPile.CardList.Count - 1); 
+
         }
         //抽卡
         public void StartBattle(IBattle thisStage)
