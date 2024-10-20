@@ -16,9 +16,7 @@
 			<Type>2</Type>
 			<Tag>Event</Tag>
 			<Description>
-				testEvent
-				test1:恢复血量
-				test2: 扣除血量
+				&#xA;testEvent&#xA;test1:恢复血量&#xA;test2: 扣除血量
 			</Description>
 			<Choices>
 				<choice>

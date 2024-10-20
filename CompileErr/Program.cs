@@ -11,6 +11,7 @@ namespace Program
             Console.WriteLine("Present HP" + GameManager.PresentPlayer.HP);
             Console.WriteLine(testEvent.Description);
             testEvent.Choose(testEvent.Choices[0]);
+            Console.WriteLine("Chose test 1");
             Console.WriteLine("Present HP" + GameManager.PresentPlayer.HP);
 
         }
