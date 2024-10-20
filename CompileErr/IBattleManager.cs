@@ -17,6 +17,8 @@ namespace BackYard
     }
     public interface IBattleManager
     {
+        Queue<IAction> WaitingActions { get; set; }
+        //这是敌人要进行的行动，我只管输入，取出来时直接弹出。iaction是有发起者的，就是sender。
         ICardPile HandPile { get; }
         ICardPile DiscardPile { get; }
         ICardPile ExiledPile {  get; }

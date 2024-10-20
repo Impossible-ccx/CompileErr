@@ -3,6 +3,7 @@ namespace BackYard
 {
     public class BattleManager : IBattleManager
     {
+        public Queue<IAction> WaitingActions { get; set; } = new Queue<IAction>();
         public ICardPile HandPile { get; set; } = new CardPile();
         public ICardPile DiscardPile { get; set; } = new CardPile();
         public ICardPile ExiledPile { get; set; } = new CardPile();
@@ -181,6 +182,7 @@ namespace BackYard
                     if (aLogic.delay == 0)
                     {
                         aLogic.action!.Excute(aEnemy, Player, aLogic.value);
+                        WaitingActions.Enqueue(aLogic.action!);
                         aLogic.delay = aLogic.IniDelay;
                         aEnemy.NextDelay = 100000;
                     }
