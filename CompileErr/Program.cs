@@ -7,8 +7,12 @@ namespace Program
         static void Main(string[] args)
         {
             GameManager.IniNewGame("BasicCardPack");
-            Console.WriteLine(FloorFactoy.Lay1Group[0][1].type);
-            Random random = new Random();
+            IEvent testEvent = (FloorFactoy.Lay1Group[0][1] as IEvent)!;
+            Console.WriteLine("Present HP" + GameManager.PresentPlayer.HP);
+            Console.WriteLine(testEvent.Description);
+            testEvent.Choose(testEvent.Choices[0]);
+            Console.WriteLine("Present HP" + GameManager.PresentPlayer.HP);
+
         }
     }
 }

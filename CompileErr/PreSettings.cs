@@ -221,7 +221,7 @@ namespace BackYard
                 List<string> acts = Actions[choice];
                 foreach(string aact in acts)
                 {
-                    AEEFactory.ActionDict[aact].Excute(GameManager.PresentPlayer, PreSetObj.EventEng, keyValuePairs[choice][aact]);
+                    AEEFactory.ActionDict[aact].Excute(PreSetObj.EventEng,GameManager.PresentPlayer!, keyValuePairs[choice][aact]);
                 }
             }
             catch(KeyNotFoundException)

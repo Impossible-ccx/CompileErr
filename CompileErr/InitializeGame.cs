@@ -87,6 +87,7 @@ namespace BackYard
         static internal void LoadAction()
         {
             AEEFactory.ActionDict["Attack"] = new Actions.Attack();
+            AEEFactory.ActionDict["AddHP"] = new Actions.AddHP();
         }
         static internal void LoadEffect()
         {
