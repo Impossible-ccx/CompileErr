@@ -26,6 +26,7 @@ namespace BackYard
         public virtual string Name { get; set; } = new string(string.Empty);
         public virtual string ID { get; set; } = new string(string.Empty);
         public int HP { get; set; }
+        public int MaxHP { get; set; }
         public List<IEffect> EffectBox { get; set; } = new List<IEffect>();
         public bool OnAction(IAction action)
         {
@@ -49,6 +50,7 @@ namespace BackYard
         public virtual string Name { get; set; } = new string(string.Empty);
         public virtual string ID { get; set; } = new string(string.Empty);
         public int HP { get; set; } = -1;
+        public int MaxHP { get; set; } = -1;
         public List<IEffect> EffectBox { get; set; } = new List<IEffect>();
         public bool OnAction(IAction action)
         {

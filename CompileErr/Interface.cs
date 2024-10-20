@@ -8,6 +8,7 @@ namespace BackYard
         string Name { get; }
         string ID {  get; }
         int HP { get; set; }
+        int MaxHP { get; set; }
         //在合适的时候执行对象具有的所有效果
         List<IEffect> EffectBox { get; }
         //接受action，此时也应该检测所有的effect是否应该执行。返回action是否有效，无效则放弃更新effect

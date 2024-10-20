@@ -62,6 +62,7 @@ namespace BackYard
                 }
             }
             PresentPlayer = new HumanPlayer(null, IniCardPile);
+            PresentPlayer.MaxHP = 100;
         }
         //开启新游戏并初始化玩家
         static public void SelectNewCardPack(ICardPack target)
@@ -163,6 +164,7 @@ namespace BackYard
                 enemy.Name = aEnemyXml["Name"]!.InnerText;
                 enemy.ID = aEnemyXml["ID"]!.InnerText;
                 enemy.HP = int.Parse(aEnemyXml["HP"]!.InnerText);
+                enemy.MaxHP = enemy.HP;
                 foreach (XmlNode aEffectXml in aEnemyXml["Effects"]!)
                 {
                     IEffect newEffect = AEEFactory.EffectDict[aEffectXml["IDName"]!.InnerText].Copy();
