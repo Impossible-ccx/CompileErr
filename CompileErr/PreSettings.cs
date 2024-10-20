@@ -87,7 +87,7 @@ namespace BackYard
     {
         public int NextDelay {  get; set; }
         public List<EnemyLogic> Logic { get; set; } = new List<EnemyLogic>();
-        public override IEnemy Copy()
+        public override IPlayer Copy()
         {
             Enemy result = new Enemy();
             result.NextDelay = NextDelay;
