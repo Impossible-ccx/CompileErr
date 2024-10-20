@@ -85,7 +85,7 @@ namespace BackYard
         //level为0效果结束，应销毁对象。持续时间也用level实现。负数为永续
         public int Level { get; set; }
         //effect的执行效果,与action相似管理
-        abstract public void Excute(IPlayer sender, IAction? triAction = null, IPlayer? trigger = null);
+        abstract public void Excute(IPlayer sender, IAction? triAction = null, IPlayer? trigger = null, ICard? trigCard = null);
         //在什么时候触发效果。约定 0 OnAction时触发。1 回合开始触发（敌人行动开始）。2 回合结束触发（敌人行动结束）
         //3 任意牌出牌时触发（检测特定出牌也使用这个）
         abstract public int EnableTime { get; }

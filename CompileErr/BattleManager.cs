@@ -20,6 +20,10 @@ namespace BackYard
         {
             ICard card = HandPile.CardList[index];
             HandPile.CardList.RemoveAt(index);
+            foreach(IEffect aEffect in Player.EffectBox)
+            {
+                aEffect.Excute(Player, null, null, card);
+            }
             if (card.Delay == 2)
             {
                 throw new Exception("waiting queue...");
@@ -44,6 +48,15 @@ namespace BackYard
             else
             {
                 throw new Exception("Delay err");
+            }
+            //这里判断一下敌人的消灭与否。。
+            for (int i = 0; i < Enemis.Count; i++)
+            {
+                if(Enemis[i].HP <= 0)
+                {
+                    Enemis.RemoveAt(i);
+                    i--;
+                }
             }
         }
         //出牌，输入为第几张卡，发动者，目标。
@@ -123,16 +136,24 @@ namespace BackYard
         {
             Pace += 1;
             cost += 2;
-            foreach(IEnemy aEnemy in Enemis)
+            foreach (IEnemy aEnemy in Enemis)
             {
-                foreach(IEffect aEffect in aEnemy.EffectBox)
+                foreach (IEffect aEffect in aEnemy.EffectBox)
                 {
                     aEffect.Excute(aEnemy, null, PreSetObj.ExcStart);
                 }
-                foreach(EnemyLogic aLogic in aEnemy.Logic)
+                for (int i = 0; i < Enemis.Count; i++)
+                {
+                    if (Enemis[i].HP <= 0)
+                    {
+                        Enemis.RemoveAt(i);
+                        i--;
+                    }
+                }
+                foreach (EnemyLogic aLogic in aEnemy.Logic)
                 {
                     aLogic.delay--;
-                    if(aLogic.delay == 0)
+                    if (aLogic.delay == 0)
                     {
                         aLogic.action!.Excute(aEnemy, Player, aLogic.value);
                     }

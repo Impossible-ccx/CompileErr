@@ -8,6 +8,7 @@ namespace Program
         {
             GameManager.IniNewGame("BasicCardPack");
             Console.WriteLine();
+            Random random = new Random();
         }
     }
 }
