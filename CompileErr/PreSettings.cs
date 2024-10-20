@@ -240,15 +240,23 @@ namespace BackYard
         }
         public List<string> Choices { get; set; } = new List<string>();
         public string Description { get; set; } = string.Empty;
-        public void Choose(string choice)
+        public bool Choose(string choice)
         {
             try
             {
                 List<string> acts = Actions[choice];
                 foreach(string aact in acts)
                 {
-                    AEEFactory.ActionDict[aact].Excute(PreSetObj.EventEng,GameManager.PresentPlayer!, keyValuePairs[choice][aact]);
+                    if(AEEFactory.ActionDict[aact].Excute(PreSetObj.EventEng,GameManager.PresentPlayer!, keyValuePairs[choice][aact]))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
+                return true;
             }
             catch(KeyNotFoundException)
             {

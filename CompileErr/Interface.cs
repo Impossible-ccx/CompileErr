@@ -132,6 +132,7 @@ namespace BackYard
     {
         List<string> Choices { get; }
         string Description { get; }
-        void Choose(string choice);
+        bool Choose(string choice);
+        //返回值为选择是否有效。无效的选择应该被拒绝（比如因为金钱不足）
     }
 }
