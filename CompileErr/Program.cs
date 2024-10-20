@@ -22,7 +22,7 @@ namespace Program
             PrintBattle();
             GameManager.battleManager.NextPace();
             PrintBattle();
-            GameManager.battleManager.NextPace();
+            GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
             PrintBattle();
             GameManager.battleManager.NextPace();
             PrintBattle();

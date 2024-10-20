@@ -19,6 +19,16 @@ namespace BackYard
         public void Discard(int index, IPlayer sender, IPlayer target)
         {
             ICard card = HandPile.CardList[index];
+            if(cost >= card.Cost)
+            {
+                cost -= card.Cost;
+            }
+            else
+            {
+                //cost不足，放弃出牌
+                Console.WriteLine("----cost不足-----");
+                return;
+            }
             HandPile.CardList.RemoveAt(index);
             if(card.WhereThis == 2)
             {
@@ -185,6 +195,8 @@ namespace BackYard
                     if (aLogic.delay == 0)
                     {
                         aLogic.action!.Excute(aEnemy, Player, aLogic.value);
+                        aLogic.delay = aLogic.IniDelay;
+                        aEnemy.NextDelay = 100000;
                     }
                     if (aLogic.IsSingle)
                     {

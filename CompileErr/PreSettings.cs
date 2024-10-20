@@ -76,7 +76,7 @@ namespace BackYard
             PresentCardPile = IniPackPile!;
         }
         public int Money { get; set; }
-        public int MaxCost { get; set; }
+        public int MaxCost { get; set; } = 3;
         public ICardPile PresentCardPile { get; set; }
         public override IPlayer Copy()
         {

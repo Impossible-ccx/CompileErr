@@ -17,6 +17,7 @@ namespace BackYard
     public class EnemyLogic
     {
         public int delay;
+        public int IniDelay;
         public bool IsSingle;
         public IAction? action;
         public double value;
@@ -24,8 +25,10 @@ namespace BackYard
         {
             EnemyLogic logic = new EnemyLogic();
             logic.delay = delay;
+            logic.IniDelay = IniDelay;
             logic.action = action;
             logic.IsSingle = IsSingle;
+            logic.value = value;
             return logic;
         }
     }
