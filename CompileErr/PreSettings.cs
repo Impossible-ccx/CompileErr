@@ -135,7 +135,7 @@ namespace BackYard
                 card.Tags.Add(new string(tag));
             }
             card.Delay = Delay;
-            card.Wherethis = Wherethis;
+            card.WhereThis = WhereThis;
             foreach(string activeAcion in activeAcions)
             {
                 card.activeAcions.Add(new string(activeAcion));
@@ -174,7 +174,7 @@ namespace BackYard
         //使用这张卡，输入为发起者与目标。返回值为操作是否合法
         //void AttachAction(IUpgrate target);
         //为这张卡添加升级
-        public int Wherethis { get; set; }
+        public int WhereThis { get; set; }
         //检测这个值指示牌应当放置于哪里。0抽牌堆，1手牌，2弃牌堆，3放逐，4销毁  在使用牌后进行检测
 
         public List<string> activeAcions { get; set; } = new List<string>();

@@ -20,7 +20,23 @@ namespace BackYard
         {
             ICard card = HandPile.CardList[index];
             HandPile.CardList.RemoveAt(index);
-            foreach(IEffect aEffect in Player.EffectBox)
+            if(card.WhereThis == 2)
+            {
+                DiscardPile.CardList.Add(card);
+            }
+            else if(card.WhereThis == 3) 
+            {
+                ExiledPile.CardList.Add(card);
+            }
+            else if(card.WhereThis == 4)
+            {
+                ;
+            }
+            else
+            {
+                throw new Exception("Where should the card be?");
+            }
+            foreach (IEffect aEffect in Player.EffectBox)
             {
                 aEffect.Excute(Player, null, null, card);
             }
@@ -69,9 +85,15 @@ namespace BackYard
                 DiscardPile = new CardPile();
                 RandomizePile(ref _cardPile);
             }
-            HandPile.CardList.Add(CardPile.CardList[CardPile.CardList.Count - 1]);
-            CardPile.CardList.RemoveAt(CardPile.CardList.Count - 1); 
-
+            if (CardPile.CardList.Count > 0)
+            {
+                HandPile.CardList.Add(CardPile.CardList[CardPile.CardList.Count - 1]);
+                CardPile.CardList.RemoveAt(CardPile.CardList.Count - 1);
+            }
+            else
+            {
+                ;//如果需要，提示牌库已空
+            }
         }
         //抽卡
         public void StartBattle(IBattle thisStage)

@@ -22,6 +22,10 @@ namespace Program
             PrintBattle();
             GameManager.battleManager.NextPace();
             PrintBattle();
+            GameManager.battleManager.NextPace();
+            PrintBattle();
+            GameManager.battleManager.NextPace();
+            PrintBattle();
         }
         static void PrintBattle()
         {

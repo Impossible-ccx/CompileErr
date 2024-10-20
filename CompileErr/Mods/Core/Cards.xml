@@ -17,6 +17,7 @@
 					<Value>6</Value>
 				</act>
 			</Action>
+			<WhereThis>2</WhereThis>
 		</Card>
 		<DefaultCard>Core_card_a0</DefaultCard>
 	</Basic>

@@ -1,6 +1,7 @@
 using Effects;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Xml;
 using System.Xml.Serialization;
 namespace BackYard
@@ -108,6 +109,7 @@ namespace BackYard
                 foreach (XmlElement aCard in CardsList)
                 {
                     Card newCard = new Card();
+                    newCard.WhereThis = int.Parse(aCard["WhereThis"]!.InnerText);
                     newCard.Name = aCard["Name"]!.InnerText;
                     newCard.Description = aCard["Description"]!.InnerText;
                     newCard.ImagePath = ModPath + "Images/" + aCard["ImagePath"]!.InnerText;
