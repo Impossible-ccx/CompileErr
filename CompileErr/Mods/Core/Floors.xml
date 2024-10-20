@@ -15,7 +15,11 @@
 		<Stage>
 			<Type>2</Type>
 			<Tag>Event</Tag>
-			<Description>testEvent</Description>
+			<Description>testEvent\ntest1:恢复少量血量\ntest2: 扣除少量血量</Description>
+			<Choices>
+				<choice>test1</choice>
+				<choice>test2</choice>
+			</Choices>
 		</Stage>
 	</floor>
 </root>

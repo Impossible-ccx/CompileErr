@@ -18,6 +18,7 @@ namespace BackYard
         //回合开始的调用者
         static public IPlayer? ExcStart = new AbsPlayer("ExcStart");
         static public IPlayer? DisCard = new AbsPlayer("DisCard");
+        static public IPlayer? EventEng = new AbsPlayer("EventEng");
     }
     public abstract class Player : IPlayer
     {
@@ -205,11 +206,26 @@ namespace BackYard
             newEvent.type = type;
             newEvent.Tag += Tag;
             newEvent.Description += Description;
+            foreach(string Choice in Choices)
+            {
+                newEvent.Choices.Add(new string(Choice));
+            }
+            return newEvent;
         }
         public List<string> Choices { get; set; } = new List<string>();
         public string Description { get; set; } = string.Empty;
-        public List<string> DescForChoice { get; set; } = new List<string>();
-        //按照顺序排列
-        public void Choose(string choice);
+        public void Choose(string choice)
+        {
+            try
+            {
+                Actions[choice].Excute(PreSetObj.EventEng, GameManager.PresentPlayer!, keyValuePairs[choice]);
+            }
+            catch(KeyNotFoundException)
+            {
+                throw new Exception("事件异常！");
+            }
+        }
+        public Dictionary<string, IAction> Actions { get; set; } = new Dictionary<string, IAction>();
+        public Dictionary<string, double> keyValuePairs { get; set; } = new Dictionary<string, double>();
     }
 }
