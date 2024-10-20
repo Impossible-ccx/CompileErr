@@ -192,7 +192,7 @@ namespace BackYard
                     IStage? newStage;
                     if (stage["Type"]!.InnerText == "1")
                     {
-                        IBattle newBattle = new BattleStage();
+                        BattleStage newBattle = new BattleStage();
                         newStage = newBattle;
                         newBattle.type = 1;
                         newBattle.Tag = stage["Tag"]!.InnerText;
@@ -206,10 +206,26 @@ namespace BackYard
                             newBattle.RewardCard.Add((CardPacksFactory.CardDict[card.InnerText].CopyCard())!);
                         }
                     }
-                    else if (stage["Typr"]!.InnerText == "2")
+                    else if (stage["Type"]!.InnerText == "2")
                     {
-                        newStage = null;
-                        throw new Exception("event stage!");
+                        Event newEvent = new Event();
+                        newStage = newEvent;
+                        newEvent.type = 2;
+                        newEvent.Tag = stage["Tag"]!.InnerText;
+                        newEvent.Description = stage["Description"]!.InnerText;
+                        foreach(XmlNode aChoice in stage["Choices"]!.ChildNodes)
+                        {
+                            string thisName = aChoice["Name"]!.InnerText;
+                            newEvent.Choices.Add(new string(thisName));
+                            newEvent.Actions[thisName] = new List<string>();
+                            Dictionary<string, double> actValDict = new Dictionary<string, double>();
+                            foreach (XmlNode actForChoice in aChoice.SelectNodes("./Action")!)
+                            {
+                                newEvent.Actions[thisName].Add(actForChoice["NameID"]!.InnerText);
+                                actValDict[actForChoice["NameID"]!.InnerText] = int.Parse(actForChoice["Value"]!.InnerText);
+                            }
+                            newEvent.keyValuePairs[thisName] = actValDict;
+                        }
                     }
                     else
                     {

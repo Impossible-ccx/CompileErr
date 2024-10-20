@@ -23,9 +23,9 @@ namespace Actions
             return new Attack();
         }
     }
-    public class AddHp : IAction
+    public class AddHP : IAction
     {
-        public override string IDName { get; } = "Attack";
+        public override string IDName { get; } = "AddHP";
         public override bool thisAction(IPlayer? sender, IPlayer? target)
         {
             if (sender == null || target == null)
@@ -38,7 +38,7 @@ namespace Actions
         }
         public override IAction Copy()
         {
-            return new AddHp();
+            return new AddHP();
         }
     }
 }

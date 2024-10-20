@@ -7,7 +7,7 @@ namespace Program
         static void Main(string[] args)
         {
             GameManager.IniNewGame("BasicCardPack");
-            Console.WriteLine();
+            Console.WriteLine(FloorFactoy.Lay1Group[0][1].type);
             Random random = new Random();
         }
     }

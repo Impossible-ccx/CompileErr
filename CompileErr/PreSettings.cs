@@ -16,9 +16,9 @@ namespace BackYard
         static public IPlayer? AllEnemy;
         static public IPlayer? Self;
         //回合开始的调用者
-        static public IPlayer? ExcStart = new AbsPlayer("ExcStart");
-        static public IPlayer? DisCard = new AbsPlayer("DisCard");
-        static public IPlayer? EventEng = new AbsPlayer("EventEng");
+        static public IPlayer ExcStart = new AbsPlayer("ExcStart");
+        static public IPlayer DisCard = new AbsPlayer("DisCard");
+        static public IPlayer EventEng = new AbsPlayer("EventEng");
     }
     public abstract class Player : IPlayer
     {
@@ -128,7 +128,7 @@ namespace BackYard
                 IAction newAction;
                 try
                 {
-                     newAction = AEEFactory.ActionDict[aAction].Copy();
+                     newAction = AEEFactory.ActionDict[aAction];
                 }
                 catch (KeyNotFoundException)
                 {
@@ -218,14 +218,18 @@ namespace BackYard
         {
             try
             {
-                Actions[choice].Excute(PreSetObj.EventEng, GameManager.PresentPlayer!, keyValuePairs[choice]);
+                List<string> acts = Actions[choice];
+                foreach(string aact in acts)
+                {
+                    AEEFactory.ActionDict[aact].Excute(GameManager.PresentPlayer, PreSetObj.EventEng, keyValuePairs[choice][aact]);
+                }
             }
             catch(KeyNotFoundException)
             {
                 throw new Exception("事件异常！");
             }
         }
-        public Dictionary<string, IAction> Actions { get; set; } = new Dictionary<string, IAction>();
-        public Dictionary<string, double> keyValuePairs { get; set; } = new Dictionary<string, double>();
+        public Dictionary<string, List<string>> Actions { get; set; } = new Dictionary<string, List<string>>();
+        public Dictionary<string, Dictionary<string, double>> keyValuePairs { get; set; } = new Dictionary<string, Dictionary<string, double>>();
     }
 }
