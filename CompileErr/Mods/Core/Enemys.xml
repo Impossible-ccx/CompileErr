@@ -5,7 +5,7 @@
 		<HP>1000</HP>
 		<Effects>
 			<effect>
-				<IDName>Defense</IDName>
+				<IDName>Poison</IDName>
 				<Level>15</Level>
 			</effect>
 		</Effects>

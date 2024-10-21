@@ -4,7 +4,7 @@
 		<Card>
 			<Name>迅速测试</Name>
 			<ID>Core_card_a0</ID>
-			<Description><![CDATA[<color = red>实验卡牌，造成六点伤害，迅速</color>]]></Description>
+			<Description><![CDATA[<color=red>实验卡牌，造成六点伤害，迅速</color>]]></Description>
 			<ImagePath>sasasas.png</ImagePath>
 			<Delay>0</Delay>
 			<Cost>0</Cost>
@@ -22,7 +22,7 @@
 		<Card>
 			<Name>弃牌测试</Name>
 			<ID>Core_card_a1</ID>
-			<Description><![CDATA[<color = red>实验卡牌，弃掉两张牌，迅速</color>]]></Description>
+			<Description><![CDATA[<color=red>实验卡牌，弃掉两张牌，迅速</color>]]></Description>
 			<ImagePath>sasasas.png</ImagePath>
 			<Delay>0</Delay>
 			<Cost>0</Cost>
@@ -37,10 +37,47 @@
 			</Action>
 			<WhereThis>2</WhereThis>
 		</Card>
-		<DefaultCard>Core_card_a0</DefaultCard>
-		<DefaultCard>Core_card_a0</DefaultCard>
-		<DefaultCard>Core_card_a0</DefaultCard>
-		<DefaultCard>Core_card_a0</DefaultCard>
-		<DefaultCard>Core_card_a0</DefaultCard>
+		<Card>
+			<Name>加防御测试</Name>
+			<ID>Core_card_a2</ID>
+			<Description><![CDATA[<color=red>实验卡牌，添加6防御，迅速</color>]]></Description>
+			<ImagePath>sasasas.png</ImagePath>
+			<Delay>0</Delay>
+			<Cost>0</Cost>
+			<Tags>
+				<tag>testCard</tag>
+			</Tags>
+			<Action>
+				<act>
+					<NameID>AddDefense</NameID>
+					<Value>6</Value>
+				</act>
+			</Action>
+			<WhereThis>2</WhereThis>
+		</Card>
+		<Card>
+			<Name>中毒测试</Name>
+			<ID>Core_card_a3</ID>
+			<Description><![CDATA[<color=red>实验卡牌，添加4点中毒，迅速</color>]]></Description>
+			<ImagePath>sasasas.png</ImagePath>
+			<Delay>0</Delay>
+			<Cost>0</Cost>
+			<Tags>
+				<tag>testCard</tag>
+			</Tags>
+			<Action>
+				<act>
+					<NameID>AddPoison</NameID>
+					<Value>4</Value>
+				</act>
+			</Action>
+			<WhereThis>2</WhereThis>
+		</Card>
+		<DefaultCard>Core_card_a3</DefaultCard>
+		<DefaultCard>Core_card_a3</DefaultCard>
+		<DefaultCard>Core_card_a3</DefaultCard>
+		<DefaultCard>Core_card_a3</DefaultCard>
+		<DefaultCard>Core_card_a3</DefaultCard>
+		<DefaultCard>Core_card_a3</DefaultCard>
 	</Basic>
 </root>

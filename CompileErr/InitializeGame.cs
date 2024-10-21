@@ -48,25 +48,40 @@ namespace BackYard
             //载入Mod
             ModManager.LoadMods();
             //生成玩家
+            PresentPlayer = new HumanPlayer(null, new CardPile());
+            PresentPlayer.MaxHP = 100;
             List<ICardPack> CardPackDictList = CardPacksFactory.CardPackList;
             ICardPile IniCardPile = new CardPile();
-            foreach (ICardPack CardPack in CardPackDictList)
+            //foreach (ICardPack CardPack in CardPackDictList)
+            //{
+            //    if (CardPack.NameID == IniCardPileName)
+            //    {
+            //        foreach (ICard IniCard in CardPack.DefaultCards)
+            //        {
+            //            IniCardPile.CardList.Add(IniCard.CopyCard());
+            //        }
+            //        break;
+            //    }
+            //}
+            SelectNewCardPack(IniCardPileName);
+
+        }
+        //开启新游戏并初始化玩家
+        static public void SelectNewCardPack(string targetName)
+        {
+            ICardPack? target = null;
+            foreach(ICardPack ttt in CardPacksFactory.CardPackList)
             {
-                if (CardPack.NameID == IniCardPileName)
+                if(ttt.NameID == targetName)
                 {
-                    foreach (ICard IniCard in CardPack.DefaultCards)
-                    {
-                        IniCardPile.CardList.Add(IniCard.CopyCard());
-                    }
+                    target = ttt; 
                     break;
                 }
             }
-            PresentPlayer = new HumanPlayer(null, IniCardPile);
-            PresentPlayer.MaxHP = 100;
-        }
-        //开启新游戏并初始化玩家
-        static public void SelectNewCardPack(ICardPack target)
-        {
+            if(target == null)
+            {
+                throw new Exception("No such a card pack");
+            }
             foreach(ICard card in target.DefaultCards)
             {
                 PresentPlayer!.PresentCardPile.CardList.Add(card.CopyCard());
@@ -104,6 +119,8 @@ namespace BackYard
             AEEFactory.ActionDict["Attack"] = new Actions.Attack();
             AEEFactory.ActionDict["AddHP"] = new Actions.AddHP();
             AEEFactory.ActionDict["FoldCard"] = new Actions.FoldCard();
+            AEEFactory.ActionDict["AddPoison"] = new Actions.AddPoison();
+            AEEFactory.ActionDict["AddDefense"] = new Actions.AddDefense();
         }
         static internal void LoadEffect()
         {

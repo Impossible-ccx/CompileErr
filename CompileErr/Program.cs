@@ -24,11 +24,11 @@ namespace Program
             PrintBattle();
             GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
             PrintBattle();
-            GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
+            GameManager.battleManager.NextPace();
             PrintBattle();
             GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
             PrintBattle();
-            GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
+            GameManager.battleManager.NextPace();
             PrintBattle();
         }
         static void PrintBattle()
@@ -42,6 +42,12 @@ namespace Program
                 Console.Write("Enemy" + enemy.Name);
                 Console.Write(" Hp: " + enemy.HP + "  ");
                 Console.Write("Next Action " + enemy.NextDelay + "  ");
+                Console.WriteLine();
+                Console.Write("Effects: ");
+                foreach(IEffect aEffect in enemy.EffectBox)
+                {
+                    Console.Write($"{aEffect.IDName} {aEffect.Level} ");
+                }
                 Console.WriteLine();
             }
             Console.WriteLine();
