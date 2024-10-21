@@ -4,7 +4,7 @@
 		<Card>
 			<Name>迅速测试</Name>
 			<ID>Core_card_a0</ID>
-			<Description>实验卡牌，造成六点伤害，迅速</Description>
+			<Description><![CDATA[<color = red>实验卡牌，造成六点伤害，迅速</color>]]></Description>
 			<ImagePath>sasasas.png</ImagePath>
 			<Delay>0</Delay>
 			<Cost>4</Cost>
@@ -19,6 +19,30 @@
 			</Action>
 			<WhereThis>2</WhereThis>
 		</Card>
+		<Card>
+			<Name>弃牌测试</Name>
+			<ID>Core_card_a1</ID>
+			<Description><![CDATA[<color = red>实验卡牌，弃掉两张牌，迅速</color>]]></Description>
+			<ImagePath>sasasas.png</ImagePath>
+			<Delay>0</Delay>
+			<Cost>0</Cost>
+			<Tags>
+				<tag>testCard</tag>
+			</Tags>
+			<Action>
+				<act>
+					<NameID>FoldCard</NameID>
+					<Value>2</Value>
+				</act>
+			</Action>
+			<WhereThis>2</WhereThis>
+		</Card>
 		<DefaultCard>Core_card_a0</DefaultCard>
+		<DefaultCard>Core_card_a1</DefaultCard>
+		<DefaultCard>Core_card_a1</DefaultCard>
+		<DefaultCard>Core_card_a1</DefaultCard>
+		<DefaultCard>Core_card_a1</DefaultCard>
+		<DefaultCard>Core_card_a1</DefaultCard>
+		<DefaultCard>Core_card_a1</DefaultCard>
 	</Basic>
 </root>

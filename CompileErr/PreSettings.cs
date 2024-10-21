@@ -162,7 +162,7 @@ namespace BackYard
                 {
                     throw new Exception("E003 不存在的action");
                 }
-                if(newAction.Excute(sender, target, actionValue[aAction]))
+                if(newAction.Excute(sender, target, actionValue[aAction], null))
                 {
                     return true;
                 }
@@ -249,7 +249,7 @@ namespace BackYard
                 List<string> acts = Actions[choice];
                 foreach(string aact in acts)
                 {
-                    if(AEEFactory.ActionDict[aact].Excute(PreSetObj.EventEng,GameManager.PresentPlayer!, keyValuePairs[choice][aact]))
+                    if(AEEFactory.ActionDict[aact].Excute(PreSetObj.EventEng,GameManager.PresentPlayer!, keyValuePairs[choice][aact], null))
                     {
                         return true;
                     }

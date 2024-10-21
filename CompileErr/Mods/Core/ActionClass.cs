@@ -41,4 +41,27 @@ namespace Actions
             return new AddHP();
         }
     }
+    public class FoldCard : IAction
+    {
+        public override string IDName { get; } = "FoldCard";
+        public override bool thisAction(IPlayer? sender, IPlayer? target)
+        {
+            if(GameManager.battleManager == null||GameManager.battleManager.Enemis.Count == 0)
+            {
+                throw new Exception("battle haven't started?");
+            }
+            else
+            {
+                for (int i = 0; i < Value; i++)
+                {
+                    GameManager.battleManager.FoldCard();
+                }
+            }
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new FoldCard();
+        }
+    }
 }

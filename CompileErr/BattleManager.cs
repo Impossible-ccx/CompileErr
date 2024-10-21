@@ -181,7 +181,7 @@ namespace BackYard
                     aLogic.delay--;
                     if (aLogic.delay == 0)
                     {
-                        aLogic.action!.Excute(aEnemy, Player, aLogic.value);
+                        aLogic.action!.Excute(aEnemy, Player, aLogic.value, null);
                         WaitingActions.Enqueue(aLogic.action!);
                         aLogic.delay = aLogic.IniDelay;
                         aEnemy.NextDelay = 100000;
@@ -229,6 +229,26 @@ namespace BackYard
             Pace--;
         }
         //用于“时间倒流”，主程的想法。具体处理可先搁置
+        public void FoldCard(int index = -1)//-1为随机选择
+        {
+            if(HandPile.CardList.Count == 0)
+            {
+                return;
+            }
+
+            if(index == -1)
+            {
+                Random random = new Random();
+                index = random.Next(10000) % HandPile.CardList.Count;
+            }
+            else
+            {
+                index = index % HandPile.CardList.Count;
+            }
+            ICard card = HandPile.CardList[index];
+            HandPile.CardList.RemoveAt(index);
+            DiscardPile.CardList.Add(card);
+        }
         public List<ICard> GetRewardCards()
         {
             Random rand = new Random();

@@ -18,14 +18,13 @@ namespace Program
             GameManager.EnterStage(testBattle);
             PrintBattle();
             GameManager.battleManager.Dull();
+            GameManager.battleManager.Dull();
+            GameManager.battleManager.Dull();
+            GameManager.battleManager.Dull();
             PrintBattle();
             GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
             PrintBattle();
-            GameManager.battleManager.NextPace();
-            PrintBattle();
             GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
-            PrintBattle();
-            GameManager.battleManager.NextPace();
             PrintBattle();
             GameManager.battleManager.NextPace();
             PrintBattle();

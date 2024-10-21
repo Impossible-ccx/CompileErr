@@ -8,6 +8,7 @@ namespace BackYard
 {
     //所有数据都放在静态类GameManager中，酌情使用。尽管理论上讲有访问权限限制，但可能写错，
     //所以无论如何不要试图更改从其中读来的数据（除非它属于你管理）
+
     public interface ICardPile
     {
         List<ICard> CardList { get; }
@@ -17,6 +18,7 @@ namespace BackYard
     }
     public interface IBattleManager
     {
+        void FoldCard(int index = -1);
         Queue<IAction> WaitingActions { get; set; }
         //这是敌人要进行的行动，我只管输入，取出来时直接弹出。iaction是有发起者的，就是sender。
         ICardPile HandPile { get; }

@@ -103,6 +103,7 @@ namespace BackYard
         {
             AEEFactory.ActionDict["Attack"] = new Actions.Attack();
             AEEFactory.ActionDict["AddHP"] = new Actions.AddHP();
+            AEEFactory.ActionDict["FoldCard"] = new Actions.FoldCard();
         }
         static internal void LoadEffect()
         {

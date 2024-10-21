@@ -102,7 +102,7 @@ namespace BackYard
         public IPlayer? Sender { get; protected set; }
         public IPlayer? Target { get; protected set; }
         public double Value { get; protected set; }
-        public bool Excute(IPlayer? sender, IPlayer target, double value)
+        public bool Excute(IPlayer? sender, IPlayer target, double value, string? Args)
         {
             Sender = sender;
             Target = target;
