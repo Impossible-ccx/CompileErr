@@ -26,9 +26,9 @@ namespace Program
             PrintBattle();
             GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
             PrintBattle();
-            GameManager.battleManager.NextPace();
+            GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
             PrintBattle();
-            GameManager.battleManager.NextPace();
+            GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
             PrintBattle();
         }
         static void PrintBattle()

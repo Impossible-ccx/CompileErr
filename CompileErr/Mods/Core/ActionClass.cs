@@ -5,17 +5,21 @@ namespace Actions
     public class Attack : IAction
     {
         public override string IDName { get; } = "Attack";
-        public override bool thisAction(IPlayer? sender, IPlayer? target)
+        public override void thisAction(IPlayer? sender, IPlayer? target)
         {
-            if(sender == null||target == null)
+
+            target!.HP -= Convert.ToInt32(Value);
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target)
+        {
+            if (sender == null || target == null)
             {
-                throw new ArgumentNullException(nameof(sender)+ nameof(target));
+                throw new ArgumentNullException(nameof(sender) + nameof(target));
             }
-            if(sender == target)
+            if (sender == target)
             {
                 return false;
             }
-            target.HP -= Convert.ToInt32(Value);
             return true;
         }
         public override IAction Copy()
@@ -26,14 +30,24 @@ namespace Actions
     public class AddHP : IAction
     {
         public override string IDName { get; } = "AddHP";
-        public override bool thisAction(IPlayer? sender, IPlayer? target)
+        public override void thisAction(IPlayer? sender, IPlayer? target)
+        {
+            if (target!.HP + Convert.ToInt32(Value) > target.MaxHP)
+            {
+                target.HP = target.MaxHP;
+            }
+            else
+            {
+                target.HP += Convert.ToInt32(Value);
+            }
+
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target)
         {
             if (sender == null || target == null)
             {
                 throw new ArgumentNullException(nameof(sender) + nameof(target));
             }
-
-            target.HP += Convert.ToInt32(Value);
             return true;
         }
         public override IAction Copy()
@@ -44,18 +58,18 @@ namespace Actions
     public class FoldCard : IAction
     {
         public override string IDName { get; } = "FoldCard";
-        public override bool thisAction(IPlayer? sender, IPlayer? target)
+        public override void thisAction(IPlayer? sender, IPlayer? target)
         {
-            if(GameManager.battleManager == null||GameManager.battleManager.Enemis.Count == 0)
+            for (int i = 0; i < Value; i++)
+            {
+                GameManager.battleManager!.FoldCard();
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target)
+        {
+            if (GameManager.battleManager == null||GameManager.battleManager.Enemis.Count == 0)
             {
                 throw new Exception("battle haven't started?");
-            }
-            else
-            {
-                for (int i = 0; i < Value; i++)
-                {
-                    GameManager.battleManager.FoldCard();
-                }
             }
             return true;
         }

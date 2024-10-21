@@ -30,12 +30,13 @@ namespace BackYard
         public List<IEffect> EffectBox { get; set; } = new List<IEffect>();
         public bool OnAction(IAction action)
         {
-            if (action.thisAction(action.Sender, action.Target))
+            if (action.checkAction(action.Sender, action.Target))
             {
                 foreach (IEffect effect in EffectBox)
                 {
                     effect.Excute(this, action);
                 }
+                action.thisAction(action.Sender, action.Target);
                 return true;
             }
             else

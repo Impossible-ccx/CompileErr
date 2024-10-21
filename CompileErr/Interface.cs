@@ -101,7 +101,7 @@ namespace BackYard
         //任何时候，action应该由card调用。我知道它应该包装一下，但没想到怎么做。无论如何，不要直接调用action
         public IPlayer? Sender { get; protected set; }
         public IPlayer? Target { get; protected set; }
-        public double Value { get; protected set; }
+        public double Value { get; set; }
         public bool Excute(IPlayer? sender, IPlayer target, double value, string? Args)
         {
             Sender = sender;
@@ -111,7 +111,8 @@ namespace BackYard
         }
         public abstract string IDName { get; }
         //action的逻辑。操作错误false
-        abstract public bool thisAction(IPlayer? sender, IPlayer? target);
+        abstract public void thisAction(IPlayer? sender, IPlayer? target);
+        abstract public bool checkAction(IPlayer? sender, IPlayer? target);
         public abstract IAction Copy();
     }
     public interface IStage

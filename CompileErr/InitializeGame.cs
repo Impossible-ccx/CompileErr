@@ -108,6 +108,7 @@ namespace BackYard
         static internal void LoadEffect()
         {
             AEEFactory.EffectDict["Poison"] = new Effects.Poison();
+            AEEFactory.EffectDict["Defense"] = new Effects.Defense();
         }
         static private void LoadCards()
         {
