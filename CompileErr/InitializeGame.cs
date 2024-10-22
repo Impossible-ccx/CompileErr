@@ -193,6 +193,7 @@ namespace BackYard
             AEEFactory.ActionDict["ExileFirst"] = new Actions.ExileFirst();
             AEEFactory.ActionDict["ExtraCost"] = new Actions.ExtraCost();
             AEEFactory.ActionDict["ShallowMinded"] = new Actions.ShallowMinded();
+            AEEFactory.ActionDict["RollBack"] = new Actions.RollBack();
         }
         static internal void LoadEffect()
         {

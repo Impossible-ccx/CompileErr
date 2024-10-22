@@ -1,5 +1,5 @@
 ﻿<root>
-	<Basic>
+	<basic>
 		<Name>BasicCardPack</Name>
 		<Card>
 			<Name>攻击</Name>
@@ -205,6 +205,98 @@
 			</Action>
 			<WhereThis>2</WhereThis>
 		</Card>
+		<DefaultCard>Core_Card_Attack</DefaultCard>
+		<DefaultCard>Core_Card_Defense</DefaultCard>
+		<DefaultCard>Core_Card_Dull</DefaultCard>
+		<DefaultCard>Core_Card_Turn</DefaultCard>
+		<DefaultCard>Core_Card_Restart</DefaultCard>
+	</basic>
+	<TurnTime>
+		<Name>TracingBack</Name>
+		<Card>
+			<Name>回溯</Name>
+			<ID>Core_Card_TraceBack</ID>
+			<Description><![CDATA[回溯一回合，获得4防御]]></Description>
+			<ImagePath>TraceBack.png</ImagePath>
+			<Delay>0</Delay>
+			<Cost>3</Cost>
+			<Tags>
+				<tag>Card</tag>
+			</Tags>
+			<Action>
+				<act>
+					<NameID>AddDefense</NameID>
+					<Value>4</Value>
+				</act>
+				<act>
+					<NameID>RollBack</NameID>
+					<Value>1</Value>
+				</act>
+			</Action>
+			<WhereThis>2</WhereThis>
+		</Card>
+		<Card>
+			<Name>逆流攻击</Name>
+			<ID>Core_Card_CounterCurrent</ID>
+			<Description><![CDATA[回溯一回合，造成12点伤害，抽一张牌]]></Description>
+			<ImagePath>CounterCurrent.png</ImagePath>
+			<Delay>0</Delay>
+			<Cost>7</Cost>
+			<Tags>
+				<tag>Card</tag>
+			</Tags>
+			<Action>
+				<act>
+					<NameID>Attack</NameID>
+					<Value>12</Value>
+				</act>
+				<act>
+					<NameID>RollBack</NameID>
+					<Value>1</Value>
+				</act>
+				<act>
+					<NameID>ExtraDull</NameID>
+					<Value>1</Value>
+				</act>
+			</Action>
+			<WhereThis>2</WhereThis>
+		</Card>
+		<Card>
+			<Name>计划</Name>
+			<ID>Core_Card_Plot</ID>
+			<Description><![CDATA[回复6cost]]></Description>
+			<ImagePath>Plot.png</ImagePath>
+			<Delay>1</Delay>
+			<Cost>3</Cost>
+			<Tags>
+				<tag>Card</tag>
+			</Tags>
+			<Action>
+				<act>
+					<NameID>ExtraCost</NameID>
+					<Value>6</Value>
+				</act>
+			</Action>
+			<WhereThis>2</WhereThis>
+		</Card>
+		<Card>
+			<Name>轻率浅谋</Name>
+			<ID>Core_Card_ShallowMinded</ID>
+			<Description><![CDATA[放逐。回复2cost。放逐全部手牌，每放逐一张回复2cost]]></Description>
+			<ImagePath>Plot.png</ImagePath>
+			<Delay>1</Delay>
+			<Cost>2</Cost>
+			<Tags>
+				<tag>Card</tag>
+			</Tags>
+			<Action>
+				<act>
+					<NameID>ShallowMinded</NameID>
+					<Value>-1</Value>
+				</act>
+			</Action>
+			<WhereThis>3</WhereThis>
+		</Card>
 		<Card>
 			<Name>燃烧</Name>
 			<ID>Core_Card_Burn</ID>
@@ -227,11 +319,6 @@
 			</Action>
 			<WhereThis>2</WhereThis>
 		</Card>
-		<DefaultCard>Core_Card_Attack</DefaultCard>
-		<DefaultCard>Core_Card_Defense</DefaultCard>
-		<DefaultCard>Core_Card_Dull</DefaultCard>
-		<DefaultCard>Core_Card_Turn</DefaultCard>
-		<DefaultCard>Core_Card_Restart</DefaultCard>
 		<DefaultCard>Core_Card_Burn</DefaultCard>
-	</Basic>
+	</TurnTime>
 </root>

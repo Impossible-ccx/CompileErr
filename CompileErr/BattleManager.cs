@@ -18,7 +18,7 @@ namespace BackYard
         public int cost { get; set; } = Player.MaxCost;
         //也许应该从哪里定义初始值？
         public int Pace { get; set; } = 1;
-        public void Discard(int index, IPlayer sender, IPlayer target)
+        public bool Discard(int index, IPlayer sender, IPlayer target)
         {
             ICard card = HandPile.CardList[index];
             if(cost >= card.Cost)
@@ -29,7 +29,7 @@ namespace BackYard
             {
                 //cost不足，放弃出牌
                 Console.WriteLine("----cost不足-----");
-                return;
+                return false;
             }
             HandPile.CardList.RemoveAt(index);
             if(card.WhereThis == 2)
@@ -58,7 +58,10 @@ namespace BackYard
             }
             else if(card.Delay == 0)
             {
-                card.Excute(sender, target);
+                if(!card.Excute(sender, target))
+                {
+                    return false;
+                }
                 foreach(IEffect aEffect in Player.EffectBox)
                 {
                     aEffect.Excute(sender, null, PreSetObj.DisCard);
@@ -66,7 +69,10 @@ namespace BackYard
             }
             else if (card.Delay == 1)
             {
-                card.Excute(sender, target);
+                if (!card.Excute(sender, target))
+                {
+                    return false;
+                }
                 foreach (IEffect aEffect in Player.EffectBox)
                 {
                     aEffect.Excute(sender, null, PreSetObj.DisCard);
@@ -87,6 +93,7 @@ namespace BackYard
                     i--;
                 }
             }
+            return true;
         }
         //出牌，输入为第几张卡，发动者，目标。
         //调用对应卡的执行方法即可

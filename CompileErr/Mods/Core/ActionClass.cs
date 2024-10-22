@@ -387,15 +387,30 @@ namespace Actions
         }
         public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
-            if (GameManager.battleManager!.HandPile.CardList.Count == 0)
+                return true;
+        }
+        public override IAction Copy()
+        {
+            return new ShallowMinded();
+        }
+    }
+    public class RollBack : IAction
+    {
+        public override string IDName { get; } = "RollBack";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (GameManager.battleManager != null)
             {
-                return false;
+                GameManager.battleManager.RollBack();
             }
             else
             {
-                return true;
+                throw new Exception();
             }
-
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            return true;
         }
         public override IAction Copy()
         {
