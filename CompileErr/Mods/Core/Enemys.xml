@@ -11,6 +11,7 @@
 		</Effects>
 		<Logic>
 			<logic>
+				<Ini>2</Ini>
 				<Delay>2</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>Attack</Action>
