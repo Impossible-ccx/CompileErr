@@ -100,17 +100,33 @@ namespace BackYard
             PresentPlayer.MaxHP = 100;
             List<ICardPack> CardPackDictList = CardPacksFactory.CardPackList;
             ICardPile IniCardPile = new CardPile();
-            //foreach (ICardPack CardPack in CardPackDictList)
-            //{
-            //    if (CardPack.NameID == IniCardPileName)
-            //    {
-            //        foreach (ICard IniCard in CardPack.DefaultCards)
-            //        {
-            //            IniCardPile.CardList.Add(IniCard.CopyCard());
-            //        }
-            //        break;
-            //    }
-            //}
+            //随机化地图
+            Random rand = new Random();
+            if (FloorFactoy.Lay1Group.Count != 0)
+            {
+                int I = rand.Next(1000) % FloorFactoy.Lay1Group.Count;
+                foreach (IStage aStage in FloorFactoy.Lay1Group[I])
+                {
+                    FloorFactoy.Map.Add(aStage);
+                }
+            }
+            if (FloorFactoy.Lay2Group.Count != 0)
+            {
+                int I = rand.Next(1000) % FloorFactoy.Lay2Group.Count;
+                foreach (IStage aStage in FloorFactoy.Lay2Group[I])
+                {
+                    FloorFactoy.Map.Add(aStage);
+                }
+            }
+            if (FloorFactoy.Lay3Group.Count != 0)
+            {
+                int I = rand.Next(1000) % FloorFactoy.Lay3Group.Count;
+                foreach (IStage aStage in FloorFactoy.Lay3Group[I])
+                {
+                    FloorFactoy.Map.Add(aStage);
+                }
+            }
+            //随机结束
             SelectNewCardPack(IniCardPileName);
 
         }
