@@ -156,49 +156,50 @@ namespace BackYard
         {
             Pace += 1;
             cost += 2;
-            foreach (IEnemy aEnemy in Enemis)
+            for (int j = 0; j < Enemis.Count; j++)
             {
-                for(int i = 0; i < aEnemy.EffectBox.Count; i++)
                 {
-                    IEffect aEffect = aEnemy.EffectBox[i];
-                    aEffect.Excute(aEnemy, null, PreSetObj.ExcStart);
-                    if (aEffect.Level <= 0)
+                    IEnemy aEnemy = Enemis[j];
+                    for (int i = 0; i < aEnemy.EffectBox.Count; i++)
                     {
-                        aEnemy.EffectBox.Remove(aEffect);
-                        i--;
+                        IEffect aEffect = aEnemy.EffectBox[i];
+                        aEffect.Excute(aEnemy, null, PreSetObj.ExcStart);
+                        if (aEffect.Level <= 0)
+                        {
+                            aEnemy.EffectBox.Remove(aEffect);
+                            i--;
+                        }
                     }
+                    if (aEnemy.HP <= 0)
+                    {
+                        Enemis.Remove(aEnemy);
+                        j--;
+                        continue;
+                    }
+                    foreach (EnemyLogic aLogic in aEnemy.Logic)
+                    {
+                        aLogic.delay--;
+                        if (aLogic.delay == 0)
+                        {
+                            aLogic.action!.Excute(aEnemy, Player, aLogic.value, null);
+                            WaitingActions.Enqueue(aLogic.action!);
+                            aLogic.delay = aLogic.IniDelay;
+                            aEnemy.NextDelay = 100000;
+                        }
+                        if (aLogic.IsSingle)
+                        {
+                            aLogic.delay = 1000000;
+                        }
+                    }
+                    foreach (EnemyLogic aLogic in aEnemy.Logic)
+                    {
+                        if (aEnemy.NextDelay > aLogic.delay)
+                        {
+                            aEnemy.NextDelay = aLogic.delay;
+                        }
+                    }
+
                 }
-                for (int i = 0; i < Enemis.Count; i++)
-                {
-                    if (Enemis[i].HP <= 0)
-                    {
-                        Enemis.RemoveAt(i);
-                        i--;
-                    }
-                }
-                foreach (EnemyLogic aLogic in aEnemy.Logic)
-                {
-                    aLogic.delay--;
-                    if (aLogic.delay == 0)
-                    {
-                        aLogic.action!.Excute(aEnemy, Player, aLogic.value, null);
-                        WaitingActions.Enqueue(aLogic.action!);
-                        aLogic.delay = aLogic.IniDelay;
-                        aEnemy.NextDelay = 100000;
-                    }
-                    if (aLogic.IsSingle)
-                    {
-                        aLogic.delay = 1000000;
-                    }
-                }
-                foreach(EnemyLogic aLogic in aEnemy.Logic)
-                {
-                    if (aEnemy.NextDelay > aLogic.delay)
-                    {
-                        aEnemy.NextDelay = aLogic.delay;
-                    }
-                }
-                
             }
             foreach(IEffect aEffect in Player.EffectBox)
             {

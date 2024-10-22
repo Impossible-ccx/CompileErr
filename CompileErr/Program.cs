@@ -17,19 +17,25 @@ namespace Program
             //Console.WriteLine("Present HP" + GameManager.PresentPlayer.HP);
             GameManager.EnterStage(testBattle);
             PrintBattle();
-            GameManager.battleManager.Dull();
-            GameManager.battleManager.Dull();
-            GameManager.battleManager.Dull();
-            GameManager.battleManager.Dull();
+            //GameManager.battleManager.Dull();
+            //GameManager.battleManager.Dull();
+            //GameManager.battleManager.Dull();
+            //GameManager.battleManager.Dull();
             PrintBattle();
-            GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
+            //GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
+            GameManager.battleManager.NextPace();
             PrintBattle();
             GameManager.battleManager.NextPace();
             PrintBattle();
-            GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
+            //GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
+            GameManager.battleManager.NextPace();
             PrintBattle();
             GameManager.battleManager.NextPace();
             PrintBattle();
+            //List<ICard> cards = new List<ICard>();  
+            //cards = GameManager.battleManager.GetRewardCards();
+            //GameManager.battleManager.EndBattle();
+            //PrintBattle();
         }
         static void PrintBattle()
         {

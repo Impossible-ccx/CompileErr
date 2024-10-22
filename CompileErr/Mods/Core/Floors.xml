@@ -10,6 +10,7 @@
 			<Reward>1</Reward>
 			<EnemyList>
 				<enemy>Core_enemy_a0</enemy>
+				<enemy>Core_enemy_a0</enemy>
 			</EnemyList>
 		</Stage>
 		<Stage>
