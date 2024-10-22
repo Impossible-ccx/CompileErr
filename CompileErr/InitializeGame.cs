@@ -194,6 +194,9 @@ namespace BackYard
             AEEFactory.ActionDict["ExtraCost"] = new Actions.ExtraCost();
             AEEFactory.ActionDict["ShallowMinded"] = new Actions.ShallowMinded();
             AEEFactory.ActionDict["RollBack"] = new Actions.RollBack();
+            AEEFactory.ActionDict["SelfAttack"] = new Actions.SelfAttack();
+            AEEFactory.ActionDict["MutiPoison"] = new Actions.MutiPoison();
+            AEEFactory.ActionDict["EnpoisonAll"] = new Actions.EnpoisonAll();
         }
         static internal void LoadEffect()
         {

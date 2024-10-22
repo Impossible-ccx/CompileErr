@@ -1,4 +1,5 @@
 ﻿using BackYard;
+using System;
 using System.Runtime.CompilerServices;
 
 namespace Actions
@@ -84,10 +85,6 @@ namespace Actions
             if (sender == null || target == null)
             {
                 throw new ArgumentNullException(nameof(sender) + nameof(target));
-            }
-            if (sender == target)
-            {
-                return false;
             }
             return true;
         }
@@ -415,6 +412,89 @@ namespace Actions
         public override IAction Copy()
         {
             return new ShallowMinded();
+        }
+    }
+    public class SelfAttack : IAction
+    {
+        public override string IDName { get; } = "SelfAttack";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            IAction aAttack = AEEFactory.ActionDict["Attack"].Copy();
+            aAttack.Excute(sender, sender!, Value, null);
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (sender == null || target == null)
+            {
+                throw new ArgumentNullException(nameof(sender) + nameof(target));
+            }
+            if (sender == target)
+            {
+                return false;
+            }
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new SelfAttack();
+        }
+    }
+    public class MutiPoison : IAction
+    {
+        public override string IDName { get; } = "MutiPoison";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            foreach (IEffect Aeffect in target!.EffectBox)
+            {
+                if (Aeffect.IDName == "Poison")
+                {
+                    Aeffect.Level *= (int)Value;
+                    return;
+                }
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (sender == null || target == null)
+            {
+                throw new ArgumentNullException(nameof(sender) + nameof(target));
+            }
+            if (sender == target)
+            {
+                return false;
+            }
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new MutiPoison();
+        }
+    }
+    public class EnpoisonAll : IAction
+    {
+        public override string IDName { get; } = "EnpoisonAll";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (GameManager.battleManager != null)
+            {
+                foreach (IEnemy enemy in GameManager.battleManager.Enemis)
+                {
+                    IAction aEnpoison = AEEFactory.ActionDict["AddPoison"].Copy();
+                    aEnpoison.Excute(PreSetObj.AllEnemyAttacktor, enemy, Value, null);
+                }
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new EnpoisonAll();
         }
     }
 }
