@@ -36,7 +36,7 @@ namespace BackYard
                 {
                     effect.Excute(this, action);
                 }
-                action.thisAction(action.Sender, action.Target);
+                action.thisAction(action.Sender, action.Target, action.Args);
                 return true;
             }
             else
@@ -228,7 +228,7 @@ namespace BackYard
         public int type { get; set; } = 2;
         //假定战斗为1，事件为2。准备好生成方法就行，具体逻辑还要策划决定
         public string Tag { get; set; } = string.Empty;
-        //现在暂时考虑两种tag，normal和final，后者一定放在最后
+        //事件三种tag，普通事件，弃牌商店，商店
         public IStage Copy()
         {
             Event newEvent = new Event();
@@ -243,14 +243,14 @@ namespace BackYard
         }
         public List<string> Choices { get; set; } = new List<string>();
         public string Description { get; set; } = string.Empty;
-        public bool Choose(string choice)
+        public bool Choose(int choice)
         {
             try
             {
-                List<string> acts = Actions[choice];
+                List<string> acts = Actions[choice.ToString()];
                 foreach(string aact in acts)
                 {
-                    if(AEEFactory.ActionDict[aact].Excute(PreSetObj.EventEng,GameManager.PresentPlayer!, keyValuePairs[choice][aact], null))
+                    if(AEEFactory.ActionDict[aact].Excute(PreSetObj.EventEng,GameManager.PresentPlayer!, keyValuePairs[choice.ToString()][aact], keyArgsPairs[choice.ToString()][aact]))
                     {
                         return true;
                     }
@@ -263,10 +263,11 @@ namespace BackYard
             }
             catch(KeyNotFoundException)
             {
-                throw new Exception("事件异常！");
+                return false ;
             }
         }
         public Dictionary<string, List<string>> Actions { get; set; } = new Dictionary<string, List<string>>();
         public Dictionary<string, Dictionary<string, double>> keyValuePairs { get; set; } = new Dictionary<string, Dictionary<string, double>>();
+        public Dictionary<string, Dictionary<string, string?>> keyArgsPairs { get; set; } = new Dictionary<string, Dictionary<string, string?>>();
     }
 }

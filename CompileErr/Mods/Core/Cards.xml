@@ -73,11 +73,9 @@
 			</Action>
 			<WhereThis>2</WhereThis>
 		</Card>
-		<DefaultCard>Core_card_a3</DefaultCard>
-		<DefaultCard>Core_card_a3</DefaultCard>
-		<DefaultCard>Core_card_a3</DefaultCard>
-		<DefaultCard>Core_card_a3</DefaultCard>
-		<DefaultCard>Core_card_a3</DefaultCard>
+		<DefaultCard>Core_card_a0</DefaultCard>
+		<DefaultCard>Core_card_a1</DefaultCard>
+		<DefaultCard>Core_card_a2</DefaultCard>
 		<DefaultCard>Core_card_a3</DefaultCard>
 	</Basic>
 </root>

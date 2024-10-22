@@ -102,17 +102,19 @@ namespace BackYard
         public IPlayer? Sender { get; protected set; }
         public IPlayer? Target { get; protected set; }
         public double Value { get; set; }
-        public bool Excute(IPlayer? sender, IPlayer target, double value, string? Args)
+        public string? Args { get; set; }
+        public bool Excute(IPlayer? sender, IPlayer target, double value, string? args)
         {
             Sender = sender;
             Target = target;
             Value = value;
+            Args = args;
             return target.OnAction(this);
         }
         public abstract string IDName { get; }
         //action的逻辑。操作错误false
-        abstract public void thisAction(IPlayer? sender, IPlayer? target);
-        abstract public bool checkAction(IPlayer? sender, IPlayer? target);
+        abstract public void thisAction(IPlayer? sender, IPlayer? target, string? Args = null);
+        abstract public bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null);
         public abstract IAction Copy();
     }
     public interface IStage
@@ -134,7 +136,7 @@ namespace BackYard
     {
         List<string> Choices { get; }
         string Description { get; }
-        bool Choose(string choice);
+        bool Choose(int choice);
         //返回值为选择是否有效。无效的选择应该被拒绝（比如因为金钱不足）
     }
 }

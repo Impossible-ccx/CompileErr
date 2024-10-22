@@ -2,15 +2,83 @@
 
 namespace Actions
 {
+    public class DestoryCard : IAction
+    {
+        public override string IDName { get; } = "DestoryCard";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            ICard? targetCard = null;
+            foreach(ICard card in GameManager.PresentPlayer!.PresentCardPile.CardList)
+            {
+                if(card.ID == Args)
+                {
+                    targetCard = card;
+                }
+            }
+            if (targetCard != null)
+            {
+                GameManager.PresentPlayer.PresentCardPile.CardList.Remove(targetCard);
+            }
+            else
+            {
+                throw new Exception("Event failed");
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if(sender != PreSetObj.EventEng || target != GameManager.PresentPlayer)
+            {
+                throw new Exception("this method is for event!");
+            }
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new DestoryCard();
+        }
+    }
+    public class BuyCard : IAction
+    {
+        public override string IDName { get; } = "BuyCard";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            ICard? targetCard = CardPacksFactory.CardDict[Args];
+            if(targetCard != null)
+            {
+                targetCard = targetCard.CopyCard();
+                GameManager.PresentPlayer!.PresentCardPile.CardList.Add(targetCard);
+            }
+            else
+            {
+                throw new Exception("Event failed");
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (sender != PreSetObj.EventEng || target != GameManager.PresentPlayer)
+            {
+                throw new Exception("this method is for event!");
+            }
+            if(GameManager.PresentPlayer!.Money < Value)
+            {
+                return false;
+            }
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new BuyCard();
+        }
+    }
     public class Attack : IAction
     {
         public override string IDName { get; } = "Attack";
-        public override void thisAction(IPlayer? sender, IPlayer? target)
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
 
             target!.HP -= Convert.ToInt32(Value);
         }
-        public override bool checkAction(IPlayer? sender, IPlayer? target)
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
             if (sender == null || target == null)
             {
@@ -30,7 +98,7 @@ namespace Actions
     public class AddHP : IAction
     {
         public override string IDName { get; } = "AddHP";
-        public override void thisAction(IPlayer? sender, IPlayer? target)
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
             if (target!.HP + Convert.ToInt32(Value) > target.MaxHP)
             {
@@ -42,7 +110,7 @@ namespace Actions
             }
 
         }
-        public override bool checkAction(IPlayer? sender, IPlayer? target)
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
             if (sender == null || target == null)
             {
@@ -58,14 +126,14 @@ namespace Actions
     public class FoldCard : IAction
     {
         public override string IDName { get; } = "FoldCard";
-        public override void thisAction(IPlayer? sender, IPlayer? target)
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
             for (int i = 0; i < Value; i++)
             {
                 GameManager.battleManager!.FoldCard();
             }
         }
-        public override bool checkAction(IPlayer? sender, IPlayer? target)
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
             if (GameManager.battleManager == null||GameManager.battleManager.Enemis.Count == 0)
             {
@@ -81,7 +149,7 @@ namespace Actions
     public class AddPoison : IAction
     {
         public override string IDName { get; } = "AddPoison";
-        public override void thisAction(IPlayer? sender, IPlayer? target)
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
             foreach(IEffect Aeffect in target!.EffectBox)
             {
@@ -95,7 +163,7 @@ namespace Actions
             effect.Level = (int)Value;
             target.EffectBox.Add(effect);
         }
-        public override bool checkAction(IPlayer? sender, IPlayer? target)
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
             if (sender == null || target == null)
             {
@@ -115,7 +183,7 @@ namespace Actions
     public class AddDefense : IAction
     {
         public override string IDName { get; } = "AddDefense";
-        public override void thisAction(IPlayer? sender, IPlayer? target)
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
             foreach (IEffect Aeffect in target!.EffectBox)
             {
@@ -129,7 +197,7 @@ namespace Actions
             effect.Level = (int)Value;
             target.EffectBox.Add(effect);
         }
-        public override bool checkAction(IPlayer? sender, IPlayer? target)
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
             if (sender == null || target == null)
             {

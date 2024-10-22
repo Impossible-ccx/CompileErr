@@ -35,6 +35,54 @@ namespace BackYard
                     battleManager = new BattleManager();
                     battleManager!.StartBattle(Target);
                 }
+                else if(target!.type == 2)
+                {
+                    Event theEvent = (target as Event)!;
+                    if (target!.Tag == "Event")
+                    {
+                        ;
+                    }
+                    else if(target!.Tag == "DestoryCard")
+                    {
+                        foreach(ICard aCard in PresentPlayer!.PresentCardPile.CardList)
+                        {
+                            string ActionNumStr = (theEvent.Choices.Count + 1).ToString();
+                            theEvent.Choices.Add(ActionNumStr);
+                            theEvent.Description += Environment.NewLine;
+                            theEvent.Description += ActionNumStr;
+                            theEvent.Description += aCard.Name;
+                            theEvent.Actions[ActionNumStr] = ["DestoryCard"];
+                            theEvent.keyValuePairs[ActionNumStr] = new Dictionary<string, double>();
+                            theEvent.keyValuePairs[ActionNumStr]["DestoryCard"] = 0;
+                            theEvent.keyArgsPairs[ActionNumStr] = new Dictionary<string, string?>();
+                            theEvent.keyArgsPairs[ActionNumStr]["DestoryCard"] = aCard.ID;
+                        }
+                    }
+                    else if(target!.Tag == "Shop")
+                    {
+                        List<ICard> shopList = new List<ICard>();
+                        Random rand = new Random();
+                        for(int i = 0; i< rand.Next(5, 8);i++)
+                        {
+                            int targetIndex = rand.Next(1000) % EnableCards.Count;
+                            shopList.Add(EnableCards[targetIndex]);
+                        }
+                        foreach (ICard aCard in shopList)
+                        {
+                            string ActionNumStr = (theEvent.Choices.Count + 1).ToString();
+                            theEvent.Choices.Add(ActionNumStr);
+                            theEvent.Description += Environment.NewLine;
+                            theEvent.Description += ActionNumStr;
+                            theEvent.Description += aCard.Name;
+                            theEvent.Actions[ActionNumStr] = ["BuyCard"];
+                            theEvent.keyValuePairs[ActionNumStr] = new Dictionary<string, double>();
+                            theEvent.keyValuePairs[ActionNumStr]["BuyCard"] = rand.Next(20, 50);
+                            theEvent.Description += "  ¼Û¸ñ: " + theEvent.keyValuePairs[ActionNumStr]["BuyCard"].ToString();
+                            theEvent.keyArgsPairs[ActionNumStr] = new Dictionary<string, string?>();
+                            theEvent.keyArgsPairs[ActionNumStr]["BuyCard"] = aCard.ID;
+                        }
+                    }
+                }
             }
             catch
             {
@@ -121,6 +169,8 @@ namespace BackYard
             AEEFactory.ActionDict["FoldCard"] = new Actions.FoldCard();
             AEEFactory.ActionDict["AddPoison"] = new Actions.AddPoison();
             AEEFactory.ActionDict["AddDefense"] = new Actions.AddDefense();
+            AEEFactory.ActionDict["DestoryCard"] = new Actions.DestoryCard();
+            AEEFactory.ActionDict["BuyCard"] = new Actions.BuyCard();
         }
         static internal void LoadEffect()
         {
@@ -219,6 +269,10 @@ namespace BackYard
                 else if (aFloorXml["LayLevel"]!.InnerText == "2"){
                     targetGroup = FloorFactoy.Lay2Group;
                 }
+                else if (aFloorXml["LayLevel"]!.InnerText == "3")
+                {
+                    targetGroup = FloorFactoy.Lay3Group;
+                }
                 else
                 {
                     targetGroup = null;
@@ -257,12 +311,15 @@ namespace BackYard
                             newEvent.Choices.Add(new string(thisName));
                             newEvent.Actions[thisName] = new List<string>();
                             Dictionary<string, double> actValDict = new Dictionary<string, double>();
+                            Dictionary<string, string?> actArgsDict = new Dictionary<string, string?>();
                             foreach (XmlNode actForChoice in aChoice.SelectNodes("./Action")!)
                             {
                                 newEvent.Actions[thisName].Add(actForChoice["NameID"]!.InnerText);
                                 actValDict[actForChoice["NameID"]!.InnerText] = int.Parse(actForChoice["Value"]!.InnerText);
+                                actArgsDict[actForChoice["NameID"]!.InnerText] = null;
                             }
                             newEvent.keyValuePairs[thisName] = actValDict;
+                            newEvent.keyArgsPairs[thisName] = actArgsDict;
                         }
                     }
                     else
@@ -279,9 +336,10 @@ namespace BackYard
     }
     static public class FloorFactoy
     {
+        public static List<IStage> Map = new List<IStage>();
         public static List<List<IStage>> Lay1Group = new List<List<IStage>>();
         public static List<List<IStage>> Lay2Group = new List<List<IStage>>();
-        //public static List<List<IStage>> Lay3Group = new List<List<IStage>>();
+        public static List<List<IStage>> Lay3Group = new List<List<IStage>>();
     }
     static public class CardPacksFactory
     {
