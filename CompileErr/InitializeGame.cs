@@ -51,7 +51,7 @@ namespace BackYard
                             theEvent.Description += Environment.NewLine;
                             theEvent.Description += ActionNumStr;
                             theEvent.Description += aCard.Name;
-                            theEvent.Actions[ActionNumStr] = ["DestoryCard"];
+                            theEvent.Actions[ActionNumStr] = new List<string> { "DestoryCard" };
                             theEvent.keyValuePairs[ActionNumStr] = new Dictionary<string, double>();
                             theEvent.keyValuePairs[ActionNumStr]["DestoryCard"] = 0;
                             theEvent.keyArgsPairs[ActionNumStr] = new Dictionary<string, string?>();
@@ -74,7 +74,7 @@ namespace BackYard
                             theEvent.Description += Environment.NewLine;
                             theEvent.Description += ActionNumStr;
                             theEvent.Description += aCard.Name;
-                            theEvent.Actions[ActionNumStr] = ["BuyCard"];
+                            theEvent.Actions[ActionNumStr] = new List<string> { "BuyCard" };
                             theEvent.keyValuePairs[ActionNumStr] = new Dictionary<string, double>();
                             theEvent.keyValuePairs[ActionNumStr]["BuyCard"] = rand.Next(20, 50);
                             theEvent.Description += "  ¼Û¸ñ: " + theEvent.keyValuePairs[ActionNumStr]["BuyCard"].ToString();
