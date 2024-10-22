@@ -157,6 +157,7 @@ namespace BackYard
             WatingPile.CardList.Clear();
             Player.Money += thisBattle.Reward;
             Player.PresentCardPile = newCardPile;
+            Player.EffectBox.Clear();
         }
         //结束战斗，将所有牌堆叠到一起并saveCardPile。计算奖励。
 
