@@ -13,7 +13,7 @@ namespace BackYard
     {
         //未实现不要使用
         static public IPlayer? RandomEnemy;
-        static public IPlayer? AllEnemy;
+        static public IPlayer? AllEnemyAttacktor = new AbsPlayer("AllEnemyAttacktor");
         static public IPlayer? Self;
         //回合开始的调用者
         static public IPlayer ExcStart = new AbsPlayer("ExcStart");

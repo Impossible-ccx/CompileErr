@@ -2,11 +2,11 @@
 	<enemy>
 		<Name>testEnemy</Name>
 		<ID>Core_enemy_a0</ID>
-		<HP>100</HP>
+		<HP>1000</HP>
 		<Effects>
 			<effect>
 				<IDName>Poison</IDName>
-				<Level>50</Level>
+				<Level>0</Level>
 			</effect>
 		</Effects>
 		<Logic>

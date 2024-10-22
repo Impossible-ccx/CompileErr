@@ -187,6 +187,12 @@ namespace BackYard
             AEEFactory.ActionDict["AddDefense"] = new Actions.AddDefense();
             AEEFactory.ActionDict["DestoryCard"] = new Actions.DestoryCard();
             AEEFactory.ActionDict["BuyCard"] = new Actions.BuyCard();
+            AEEFactory.ActionDict["ExtraDull"] = new Actions.ExtraDull();
+            AEEFactory.ActionDict["Restart"] = new Actions.Restart();
+            AEEFactory.ActionDict["AttackAll"] = new Actions.AttackAll();
+            AEEFactory.ActionDict["ExileFirst"] = new Actions.ExileFirst();
+            AEEFactory.ActionDict["ExtraCost"] = new Actions.ExtraCost();
+            AEEFactory.ActionDict["ShallowMinded"] = new Actions.ShallowMinded();
         }
         static internal void LoadEffect()
         {

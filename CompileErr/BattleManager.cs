@@ -3,6 +3,7 @@ namespace BackYard
 {
     public class BattleManager : IBattleManager
     {
+        public Queue<int> HandOutCardIndex { get; set; } = new Queue<int>();
         public Queue<IAction> WaitingActions { get; set; } = new Queue<IAction>();
         public ICardPile HandPile { get; set; } = new CardPile();
         public ICardPile DiscardPile { get; set; } = new CardPile();
@@ -76,6 +77,7 @@ namespace BackYard
             {
                 throw new Exception("Delay err");
             }
+            HandOutCardIndex.Enqueue(index);
             //这里判断一下敌人的消灭与否。。
             for (int i = 0; i < Enemis.Count; i++)
             {
@@ -249,6 +251,7 @@ namespace BackYard
             ICard card = HandPile.CardList[index];
             HandPile.CardList.RemoveAt(index);
             DiscardPile.CardList.Add(card);
+            HandOutCardIndex.Enqueue(index);
         }
         public List<ICard> GetRewardCards()
         {

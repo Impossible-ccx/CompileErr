@@ -2,80 +2,236 @@
 	<Basic>
 		<Name>BasicCardPack</Name>
 		<Card>
-			<Name>迅速测试</Name>
-			<ID>Core_card_a0</ID>
-			<Description><![CDATA[<color=red>实验卡牌，造成六点伤害，迅速</color>]]></Description>
-			<ImagePath>sasasas.png</ImagePath>
-			<Delay>0</Delay>
-			<Cost>0</Cost>
+			<Name>攻击</Name>
+			<ID>Core_Card_Attack</ID>
+			<Description><![CDATA[造成12点单体伤害]]></Description>
+			<ImagePath>Attack.png</ImagePath>
+			<Delay>1</Delay>
+			<Cost>2</Cost>
 			<Tags>
-				<tag>testCard</tag>
+				<tag>Card</tag>
 			</Tags>
 			<Action>
 				<act>
 					<NameID>Attack</NameID>
-					<Value>6</Value>
+					<Value>12</Value>
 				</act>
 			</Action>
 			<WhereThis>2</WhereThis>
 		</Card>
 		<Card>
-			<Name>弃牌测试</Name>
-			<ID>Core_card_a1</ID>
-			<Description><![CDATA[<color=red>实验卡牌，弃掉两张牌，迅速</color>]]></Description>
-			<ImagePath>sasasas.png</ImagePath>
+			<Name>防御</Name>
+			<ID>Core_Card_Defense</ID>
+			<Description><![CDATA[迅速，获得11点防御]]></Description>
+			<ImagePath>Defense.png</ImagePath>
 			<Delay>0</Delay>
-			<Cost>0</Cost>
+			<Cost>1</Cost>
 			<Tags>
-				<tag>testCard</tag>
+				<tag>Card</tag>
 			</Tags>
 			<Action>
 				<act>
-					<NameID>FoldCard</NameID>
+					<NameID>AddDefense</NameID>
+					<Value>11</Value>
+				</act>
+			</Action>
+			<WhereThis>2</WhereThis>
+		</Card>
+		<Card>
+			<Name>抽牌</Name>
+			<ID>Core_Card_Dull</ID>
+			<Description><![CDATA[迅速，抽两张牌]]></Description>
+			<ImagePath>Dull.png</ImagePath>
+			<Delay>0</Delay>
+			<Cost>2</Cost>
+			<Tags>
+				<tag>Card</tag>
+			</Tags>
+			<Action>
+				<act>
+					<NameID>ExtraDull</NameID>
 					<Value>2</Value>
 				</act>
 			</Action>
 			<WhereThis>2</WhereThis>
 		</Card>
 		<Card>
-			<Name>加防御测试</Name>
-			<ID>Core_card_a2</ID>
-			<Description><![CDATA[<color=red>实验卡牌，添加6防御，迅速</color>]]></Description>
-			<ImagePath>sasasas.png</ImagePath>
-			<Delay>0</Delay>
-			<Cost>0</Cost>
+			<Name>准备</Name>
+			<ID>Core_Card_Prepare</ID>
+			<Description><![CDATA[回复3cost，抽一张牌]]></Description>
+			<ImagePath>Prepare.png</ImagePath>
+			<Delay>1</Delay>
+			<Cost>2</Cost>
 			<Tags>
-				<tag>testCard</tag>
+				<tag>Card</tag>
 			</Tags>
 			<Action>
 				<act>
-					<NameID>AddDefense</NameID>
-					<Value>6</Value>
+					<NameID>ExtraDull</NameID>
+					<Value>1</Value>
+				</act>
+				<act>
+					<NameID>ExtraCost</NameID>
+					<Value>3</Value>
 				</act>
 			</Action>
 			<WhereThis>2</WhereThis>
 		</Card>
 		<Card>
-			<Name>中毒测试</Name>
-			<ID>Core_card_a3</ID>
-			<Description><![CDATA[<color=red>实验卡牌，添加4点中毒，迅速</color>]]></Description>
-			<ImagePath>sasasas.png</ImagePath>
-			<Delay>0</Delay>
-			<Cost>0</Cost>
+			<Name>重整</Name>
+			<ID>Core_Card_Restart</ID>
+			<Description><![CDATA[回4费，弃掉所有手牌，抽等量牌]]></Description>
+			<ImagePath>Restart.png</ImagePath>
+			<Delay>1</Delay>
+			<Cost>2</Cost>
 			<Tags>
-				<tag>testCard</tag>
+				<tag>Card</tag>
 			</Tags>
 			<Action>
 				<act>
-					<NameID>AddPoison</NameID>
+					<NameID>ExtraCost</NameID>
+					<Value>4</Value>
+				</act>
+				<act>
+					<NameID>Restart</NameID>
+					<Value>-1</Value>
+				</act>
+			</Action>
+			<WhereThis>2</WhereThis>
+		</Card>
+		<Card>
+			<Name>迅捷攻击</Name>
+			<ID>Core_Card_SmartAttack</ID>
+			<Description><![CDATA[迅速，造成12点伤害]]></Description>
+			<ImagePath>SmartAttack.png</ImagePath>
+			<Delay>0</Delay>
+			<Cost>1</Cost>
+			<Tags>
+				<tag>Card</tag>
+			</Tags>
+			<Action>
+				<act>
+					<NameID>Attack</NameID>
+					<Value>12</Value>
+				</act>
+			</Action>
+			<WhereThis>2</WhereThis>
+		</Card>
+		<Card>
+			<Name>流星剑</Name>
+			<ID>Core_Card_MeteorSword</ID>
+			<Description><![CDATA[迅速，抽一张牌，造成18点伤害]]></Description>
+			<ImagePath>MeteorSword.png</ImagePath>
+			<Delay>0</Delay>
+			<Cost>4</Cost>
+			<Tags>
+				<tag>Card</tag>
+			</Tags>
+			<Action>
+				<act>
+					<NameID>Attack</NameID>
+					<Value>18</Value>
+				</act>
+				<act>
+					<NameID>ExtraDull</NameID>
+					<Value>1</Value>
+				</act>
+			</Action>
+			<WhereThis>2</WhereThis>
+		</Card>
+		<Card>
+			<Name>新月斩</Name>
+			<ID>Core_Card_MoonCut</ID>
+			<Description><![CDATA[抽一张牌，造成18伤害，获得9防御]]></Description>
+			<ImagePath>MopnCut.png</ImagePath>
+			<Delay>1</Delay>
+			<Cost>6</Cost>
+			<Tags>
+				<tag>Card</tag>
+			</Tags>
+			<Action>
+				<act>
+					<NameID>Attack</NameID>
+					<Value>18</Value>
+				</act>
+				<act>
+					<NameID>ExtraDull</NameID>
+					<Value>1</Value>
+				</act>
+				<act>
+					<NameID>Defense</NameID>
+					<Value>9</Value>
+				</act>
+			</Action>
+			<WhereThis>2</WhereThis>
+		</Card>
+		<Card>
+			<Name>旋风斩</Name>
+			<ID>Core_Card_WhirlCut</ID>
+			<Description><![CDATA[对全体敌人造成14伤害]]></Description>
+			<ImagePath>WhirlCut.png</ImagePath>
+			<Delay>1</Delay>
+			<Cost>4</Cost>
+			<Tags>
+				<tag>Card</tag>
+			</Tags>
+			<Action>
+				<act>
+					<NameID>AttackAll</NameID>
+					<Value>14</Value>
+				</act>
+			</Action>
+			<WhereThis>2</WhereThis>
+		</Card>
+		<Card>
+			<Name>转身</Name>
+			<ID>Core_Card_Turn</ID>
+			<Description><![CDATA[迅速，随机弃一张牌，抽两张牌]]></Description>
+			<ImagePath>Turn.png</ImagePath>
+			<Delay>0</Delay>
+			<Cost>0</Cost>
+			<Tags>
+				<tag>Card</tag>
+			</Tags>
+			<Action>
+				<act>
+					<NameID>FoldCard</NameID>
+					<Value>1</Value>
+				</act>
+				<act>
+					<NameID>ExtraDull</NameID>
+					<Value>2</Value>
+				</act>
+			</Action>
+			<WhereThis>2</WhereThis>
+		</Card>
+		<Card>
+			<Name>燃烧</Name>
+			<ID>Core_Card_Burn</ID>
+			<Description><![CDATA[迅速，放逐手上第一张牌，回4费]]></Description>
+			<ImagePath>Burn.png</ImagePath>
+			<Delay>0</Delay>
+			<Cost>0</Cost>
+			<Tags>
+				<tag>Card</tag>
+			</Tags>
+			<Action>
+				<act>
+					<NameID>ExileFirst</NameID>
+					<Value>-1</Value>
+				</act>
+				<act>
+					<NameID>ExtraCost</NameID>
 					<Value>4</Value>
 				</act>
 			</Action>
 			<WhereThis>2</WhereThis>
 		</Card>
-		<DefaultCard>Core_card_a0</DefaultCard>
-		<DefaultCard>Core_card_a1</DefaultCard>
-		<DefaultCard>Core_card_a2</DefaultCard>
-		<DefaultCard>Core_card_a3</DefaultCard>
+		<DefaultCard>Core_Card_Attack</DefaultCard>
+		<DefaultCard>Core_Card_Defense</DefaultCard>
+		<DefaultCard>Core_Card_Dull</DefaultCard>
+		<DefaultCard>Core_Card_Turn</DefaultCard>
+		<DefaultCard>Core_Card_Restart</DefaultCard>
+		<DefaultCard>Core_Card_Burn</DefaultCard>
 	</Basic>
 </root>

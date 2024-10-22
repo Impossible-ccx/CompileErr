@@ -10,9 +10,30 @@ namespace Program
         {
             GameManager.IniNewGame("BasicCardPack");
             IEvent testEvent = (FloorFactoy.Map[2] as IEvent)!;
+            IBattle testBattle = (FloorFactoy.Map[0] as IBattle)!;
             GameManager.PresentPlayer!.Money = 30;
-            GameManager.EnterStage(testEvent);
-            PrintEvent(testEvent);
+            GameManager.PresentPlayer!.MaxCost = 1000;
+            GameManager.EnterStage(testBattle);
+            PrintBattle();
+            GameManager.battleManager.Dull();
+            GameManager.battleManager.Dull();
+            GameManager.battleManager.Dull();
+            GameManager.battleManager.Dull();
+            GameManager.battleManager.Dull();
+            GameManager.battleManager.Dull();
+            PrintBattle();
+            GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
+            PrintBattle();
+            GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
+            PrintBattle();
+            GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
+            PrintBattle();
+            GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
+            PrintBattle();
+            GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
+            PrintBattle();
+            GameManager.battleManager.Discard(0, GameManager.PresentPlayer, GameManager.battleManager.Enemis[0]);
+            PrintBattle();
         }
         static void PrintBattle()
         {

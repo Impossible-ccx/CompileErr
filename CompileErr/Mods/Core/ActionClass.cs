@@ -1,4 +1,5 @@
 ﻿using BackYard;
+using System.Runtime.CompilerServices;
 
 namespace Actions
 {
@@ -128,7 +129,7 @@ namespace Actions
         public override string IDName { get; } = "FoldCard";
         public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
-            for (int i = 0; i < Value; i++)
+            for (int i = 0; i < Convert.ToInt32(Value); i++)
             {
                 GameManager.battleManager!.FoldCard();
             }
@@ -185,7 +186,7 @@ namespace Actions
         public override string IDName { get; } = "AddDefense";
         public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
-            foreach (IEffect Aeffect in target!.EffectBox)
+            foreach (IEffect Aeffect in sender!.EffectBox)
             {
                 if (Aeffect.IDName == "Defense")
                 {
@@ -195,7 +196,7 @@ namespace Actions
             }
             IEffect effect = AEEFactory.EffectDict["Defense"].Copy();
             effect.Level = (int)Value;
-            target.EffectBox.Add(effect);
+            sender.EffectBox.Add(effect);
         }
         public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
@@ -212,6 +213,193 @@ namespace Actions
         public override IAction Copy()
         {
             return new AddDefense();
+        }
+    }
+    public class ExtraDull : IAction
+    {
+        public override string IDName { get; } = "ExtraDull";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (GameManager.battleManager != null)
+            {
+                for(int i = 0; i < Convert.ToInt32(Value); i++)
+                {
+                    GameManager.battleManager.Dull();
+                }
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new ExtraDull();
+        }
+    }
+    public class ExtraCost : IAction
+    {
+        public override string IDName { get; } = "ExtraCost";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (GameManager.battleManager != null)
+            {
+                GameManager.battleManager.cost += Convert.ToInt32(Value);
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new ExtraCost();
+        }
+    }
+    public class Restart : IAction
+    {
+        public override string IDName { get; } = "Restart";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (GameManager.battleManager != null)
+            {
+                int num = GameManager.battleManager.HandPile.CardList.Count;
+                for (int i = 0; i < num; i++)
+                {
+                    GameManager.battleManager.FoldCard(0);
+                }
+                for (int i = 0; i < num; i++)
+                {
+                    GameManager.battleManager.Dull();
+                }
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new Restart();
+        }
+    }
+    public class AttackAll : IAction
+    {
+        public override string IDName { get; } = "AttackAll";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (GameManager.battleManager != null)
+            {
+                foreach(IEnemy enemy in GameManager.battleManager.Enemis)
+                {
+                    IAction aAttack = AEEFactory.ActionDict["Attack"].Copy();
+                    aAttack.Excute(PreSetObj.AllEnemyAttacktor, enemy, Value, null);
+                }
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new AttackAll();
+        }
+    }
+    public class ExileFirst : IAction
+    {
+        public override string IDName { get; } = "ExileFirst";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (GameManager.battleManager != null)
+            {
+                if(GameManager.battleManager.HandPile.CardList.Count > 0)
+                {
+                    ICard track =  GameManager.battleManager.HandPile.CardList[0];
+                    GameManager.battleManager.HandPile.CardList.RemoveAt(0);
+                    GameManager.battleManager.ExiledPile.CardList.Add(track);
+                    GameManager.battleManager.HandOutCardIndex.Enqueue(0);
+                }
+                else
+                {
+                    throw new Exception("Logic err.");
+                }
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if(GameManager.battleManager!.HandPile.CardList.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+        public override IAction Copy()
+        {
+            return new ExileFirst();
+        }
+    }
+    public class ShallowMinded : IAction
+    {
+        public override string IDName { get; } = "ShallowMinded";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (GameManager.battleManager != null)
+            {
+                int num = GameManager.battleManager.HandPile.CardList.Count;
+                for(int i = 0; i < num; i++)
+                {
+                    ICard track = GameManager.battleManager.HandPile.CardList[0];
+                    GameManager.battleManager.HandPile.CardList.RemoveAt(0);
+                    GameManager.battleManager.HandOutCardIndex.Enqueue(0);
+                    GameManager.battleManager.ExiledPile.CardList.Add(track);
+                }
+                GameManager.battleManager.cost += num * 2;
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (GameManager.battleManager!.HandPile.CardList.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+        public override IAction Copy()
+        {
+            return new ShallowMinded();
         }
     }
 }

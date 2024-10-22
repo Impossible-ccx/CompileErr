@@ -19,6 +19,7 @@ namespace BackYard
     public interface IBattleManager
     {
         void FoldCard(int index = -1);
+        Queue<int> HandOutCardIndex { get; set; }
         Queue<IAction> WaitingActions { get; set; }
         //这是敌人要进行的行动，我只管输入，取出来时直接弹出。iaction是有发起者的，就是sender。
         ICardPile HandPile { get; }
@@ -30,7 +31,7 @@ namespace BackYard
         //等待牌堆，暂时留空即可
         List<IEnemy> Enemis { get; }
         //在线的敌人
-        int cost {  get; }
+        int cost { get; set; }
         //也许应该从哪里定义初始值？
         int Pace {  get; }
         //目前的回合数
