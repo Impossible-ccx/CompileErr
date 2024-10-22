@@ -107,7 +107,8 @@ namespace BackYard
             result.ID = new string(ID);
             result.NextDelay = nextDelay;
             result.HP = HP;
-            foreach(IEffect aEffect in EffectBox)
+            result.MaxHP = MaxHP;
+            foreach (IEffect aEffect in EffectBox)
             {
                 result.EffectBox.Add(aEffect.Copy());
             }
