@@ -227,7 +227,7 @@
 			</Tags>
 			<Action>
 				<act>
-					<NameID>AddDefense</NameID>
+					<NameID>Defense</NameID>
 					<Value>4</Value>
 				</act>
 				<act>

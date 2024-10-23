@@ -84,6 +84,7 @@ namespace BackYard
     }
     public abstract class IEffect
     {
+        public virtual string ImagePath { get; set; } = new string(string.Empty); 
         abstract public string IDName { get; }
         abstract public string Description { get; }
         //level为0效果结束，应销毁对象。持续时间也用level实现。负数为永续

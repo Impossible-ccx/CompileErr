@@ -1,1 +1,12 @@
-﻿<root></root>
+﻿<root>
+	<Test>
+		<Name>TestPack</Name>
+		<DefaultCard>Core_Card_TraceBack</DefaultCard>
+		<DefaultCard>Core_Card_TraceBack</DefaultCard>
+		<DefaultCard>Core_Card_TraceBack</DefaultCard>
+		<DefaultCard>Core_Card_TraceBack</DefaultCard>
+		<DefaultCard>Core_Card_ShallowMinded</DefaultCard>
+		<DefaultCard>Core_Card_Burn</DefaultCard>
+		<DefaultCard>Core_Card_ShallowMinded</DefaultCard>
+	</Test>
+</root>

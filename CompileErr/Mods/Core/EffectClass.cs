@@ -7,6 +7,7 @@ namespace Effects
 {
     public class Poison : IEffect
     {
+        public override string ImagePath { get; set; } = ModManager.ModFolderPath + "Core/Images/PoisonEffect.png";
         public override string IDName { get; } = "Poison";
         public override string Description { get; } = "每回合失去等于层数的HP";
         public override int EnableTime { get; } = 2;
@@ -27,6 +28,7 @@ namespace Effects
     }
     public class Defense : IEffect
     {
+        public override string ImagePath { get; set; } = ModManager.ModFolderPath + "Core/Images/DefenseEffect.png";
         public override string IDName { get; } = "Defense";
         public override string Description { get; } = "抵御等于层数的攻击伤害，抵御一点降低一层";
         public override int EnableTime { get; } = 2;

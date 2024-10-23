@@ -9,7 +9,7 @@ namespace Program
     {
         static void Main(string[] args)
         {
-            GameManager.IniNewGame("BasicCardPack");
+            GameManager.IniNewGame("TestPack");
             //IEvent testEvent = (FloorFactoy.Map[2] as IEvent)!;
             IBattle testBattle = (FloorFactoy.Map[0] as IBattle)!;
             GameManager.PresentPlayer!.Money = 30;

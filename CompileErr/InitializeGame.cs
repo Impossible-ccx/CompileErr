@@ -175,6 +175,10 @@ namespace BackYard
             AEEFactory.ActionDict["EnpoisonAll"] = new Actions.EnpoisonAll();
             AEEFactory.ActionDict["DefendAll"] = new Actions.DefendAll();
             AEEFactory.ActionDict["RestEvent"] = new Actions.RestEvent();
+            AEEFactory.ActionDict["GetCardEvent"] = new Actions.MutiPoison();
+            AEEFactory.ActionDict["AddMoney"] = new Actions.EnpoisonAll();
+            AEEFactory.ActionDict["BuyHP"] = new Actions.DefendAll();
+            AEEFactory.ActionDict["GetCardPack"] = new Actions.RestEvent();
         }
         static internal void LoadEffect()
         {
