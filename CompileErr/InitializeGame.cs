@@ -98,6 +98,7 @@ namespace BackYard
             //生成玩家
             PresentPlayer = new HumanPlayer(null, new CardPile());
             PresentPlayer.MaxHP = 100;
+            PresentPlayer.HP = 100;
             List<ICardPack> CardPackDictList = CardPacksFactory.CardPackList;
             ICardPile IniCardPile = new CardPile();
             //随机化地图

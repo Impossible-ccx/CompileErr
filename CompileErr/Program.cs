@@ -10,11 +10,18 @@ namespace Program
         static void Main(string[] args)
         {
             GameManager.IniNewGame("TestPack");
-            //IEvent testEvent = (FloorFactoy.Map[2] as IEvent)!;
+            IEvent testEvent = (FloorFactoy.testLevel[3][0] as IEvent)!;
             IBattle testBattle = (FloorFactoy.Map[0] as IBattle)!;
             GameManager.PresentPlayer!.Money = 30;
             GameManager.PresentPlayer!.MaxCost = 1000;
             GameManager.EnterStage(testBattle);
+            //PrintEvent(testEvent);
+            for(int i = 0; i < 1000; i++)
+            {
+                GameManager.battleManager!.NextPace();
+            }
+
+
             PrintBattle();
             GameManager.battleManager.Dull();
             GameManager.battleManager.Dull();
