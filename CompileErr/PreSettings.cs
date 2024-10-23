@@ -88,6 +88,7 @@ namespace BackYard
     }
     public class Enemy : Player, IEnemy
     {
+        public string ImagePath {  get; set; } = new string(string.Empty);
         public int NextDelay {  get; set; }
         public List<EnemyLogic> Logic { get; set; } = new List<EnemyLogic>();
         public override IPlayer Copy()

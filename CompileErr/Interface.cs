@@ -35,6 +35,7 @@ namespace BackYard
     }
     public interface IEnemy : IPlayer
     {
+        string ImagePath { get; }
         int NextDelay { get; set; }
         //下一次行动的时间
         List<EnemyLogic> Logic { get; }

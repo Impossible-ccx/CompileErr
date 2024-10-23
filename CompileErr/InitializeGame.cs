@@ -243,6 +243,7 @@ namespace BackYard
                 enemy.ID = aEnemyXml["ID"]!.InnerText;
                 enemy.HP = int.Parse(aEnemyXml["HP"]!.InnerText);
                 enemy.MaxHP = enemy.HP;
+                enemy.ImagePath = ModPath + "Images/" + aEnemyXml["ImagePath"]!.InnerText;
                 foreach (XmlNode aEffectXml in aEnemyXml["Effects"]!)
                 {
                     IEffect newEffect = AEEFactory.EffectDict[aEffectXml["IDName"]!.InnerText].Copy();

@@ -2,6 +2,7 @@
 	<enemy>
 		<Name>testEnemy</Name>
 		<ID>Core_enemy_a0</ID>
+		<ImagePath>Core_enemy_a0.png</ImagePath>
 		<HP>1000</HP>
 		<Effects>
 			<effect>
@@ -22,6 +23,7 @@
 	<enemy>
 		<Name>血月鸟妖</Name>
 		<ID>Core_enemy_N1</ID>
+		<ImagePath>Core_enemy_N1.png</ImagePath>
 		<HP>25</HP>
 		<Effects></Effects>
 		<Logic>
@@ -44,6 +46,7 @@
 	<enemy>
 		<Name>巨力枭熊</Name>
 		<ID>Core_enemy_N2</ID>
+		<ImagePath>Core_enemy_N2.png</ImagePath>
 		<HP>30</HP>
 		<Effects></Effects>
 		<Logic>
@@ -66,6 +69,7 @@
 	<enemy>
 		<Name>狂战狼人</Name>
 		<ID>Core_enemy_D</ID>
+		<ImagePath>Core_enemy_D.png</ImagePath>
 		<HP>80</HP>
 		<Effects></Effects>
 		<Logic>
@@ -88,6 +92,7 @@
 	<enemy>
 		<Name>幽冥尸妖</Name>
 		<ID>Core_enemy_A</ID>
+		<ImagePath>Core_enemy_A.png</ImagePath>
 		<HP>40</HP>
 		<Effects>
 			<effect>
@@ -115,6 +120,7 @@
 	<enemy>
 		<Name>恶咒蛇人</Name>
 		<ID>Core_enemy_N5</ID>
+		<ImagePath>Core_enemy_N5.png</ImagePath>
 		<HP>30</HP>
 		<Effects></Effects>
 		<Logic>
@@ -130,6 +136,7 @@
 	<enemy>
 		<Name>冲撞箭猪</Name>
 		<ID>Core_enemy_N6</ID>
+		<ImagePath>Core_enemy_N6.png</ImagePath>
 		<HP>45</HP>
 		<Effects></Effects>
 		<Logic>
@@ -159,6 +166,7 @@
 	<enemy>
 		<Name>亡命焰犬</Name>
 		<ID>Core_enemy_B</ID>
+		<ImagePath>Core_enemy_B.png</ImagePath>
 		<HP>20</HP>
 		<Effects>
 			<effect>
@@ -193,6 +201,7 @@
 	<enemy>
 		<Name>山丘巨人</Name>
 		<ID>Core_enemy_N8</ID>
+		<ImagePath>Core_enemy_N8.png</ImagePath>
 		<HP>45</HP>
 		<Effects></Effects>
 		<Logic>
@@ -208,6 +217,7 @@
 	<enemy>
 		<Name>烈焰炎魔</Name>
 		<ID>Core_enemy_C</ID>
+		<ImagePath>Core_enemy_C.png</ImagePath>
 		<HP>80</HP>
 		<Effects></Effects>
 		<Logic>
@@ -237,6 +247,7 @@
 	<enemy>
 		<Name>暗影岩蜥</Name>
 		<ID>Core_enemy_N10</ID>
+		<ImagePath>Core_enemy_N10.png</ImagePath>
 		<HP>60</HP>
 		<Effects></Effects>
 		<Logic>
@@ -259,6 +270,7 @@
 	<enemy>
 		<Name>烈焰蝙蝠</Name>
 		<ID>Core_enemy_N11</ID>
+		<ImagePath>Core_enemy_N11.png</ImagePath>
 		<HP>30</HP>
 		<Effects></Effects>
 		<Logic>
@@ -281,6 +293,7 @@
 	<enemy>
 		<Name>冲锋龙龟</Name>
 		<ID>Core_enemy_E</ID>
+		<ImagePath>Core_enemy_E.png</ImagePath>
 		<HP>150</HP>
 		<Effects></Effects>
 		<Logic>
