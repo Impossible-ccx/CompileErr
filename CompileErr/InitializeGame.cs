@@ -167,16 +167,16 @@ namespace BackYard
         {
             //‘ÿ»Îcard£¨enemy£¨floor
             ModManagerXml.Load(ModFolderPath + "ModManager.xml");
+            LoadAction();
+            LoadEffect();
             XmlNode ModManagerXmlRoot = ModManagerXml.LastChild!;
             foreach(XmlNode aMod in ModManagerXmlRoot.ChildNodes)
             {
-                ModPath = ModFolderPath + aMod.InnerText;
+                ModPath = ModFolderPath + aMod.InnerText;            
+                LoadCards();
+                LoadEnemys();
+                LoadFloors();
             }
-            LoadCards();
-            LoadAction();
-            LoadEffect();
-            LoadEnemys();
-            LoadFloors();
         }
         static internal void LoadAction()
         {
@@ -184,7 +184,7 @@ namespace BackYard
             AEEFactory.ActionDict["AddHP"] = new Actions.AddHP();
             AEEFactory.ActionDict["FoldCard"] = new Actions.FoldCard();
             AEEFactory.ActionDict["AddPoison"] = new Actions.AddPoison();
-            AEEFactory.ActionDict["AddDefense"] = new Actions.AddDefense();
+            AEEFactory.ActionDict["Defense"] = new Actions.Defense();
             AEEFactory.ActionDict["DestoryCard"] = new Actions.DestoryCard();
             AEEFactory.ActionDict["BuyCard"] = new Actions.BuyCard();
             AEEFactory.ActionDict["ExtraDull"] = new Actions.ExtraDull();
@@ -198,6 +198,7 @@ namespace BackYard
             AEEFactory.ActionDict["MutiPoison"] = new Actions.MutiPoison();
             AEEFactory.ActionDict["EnpoisonAll"] = new Actions.EnpoisonAll();
             AEEFactory.ActionDict["DefendAll"] = new Actions.DefendAll();
+            AEEFactory.ActionDict["RestEvent"] = new Actions.RestEvent();
         }
         static internal void LoadEffect()
         {
@@ -348,7 +349,14 @@ namespace BackYard
                             {
                                 newEvent.Actions[thisName].Add(actForChoice["NameID"]!.InnerText);
                                 actValDict[actForChoice["NameID"]!.InnerText] = int.Parse(actForChoice["Value"]!.InnerText);
-                                actArgsDict[actForChoice["NameID"]!.InnerText] = null;
+                                if (actForChoice["Args"] != null)
+                                {
+                                    actArgsDict[actForChoice["NameID"]!.InnerText] = actForChoice["Args"]!.InnerText;
+                                }
+                                else
+                                {
+                                    actArgsDict[actForChoice["NameID"]!.InnerText] = null;
+                                }
                             }
                             newEvent.keyValuePairs[thisName] = actValDict;
                             newEvent.keyArgsPairs[thisName] = actArgsDict;

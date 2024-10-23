@@ -9,15 +9,12 @@ namespace Program
         static void Main(string[] args)
         {
             GameManager.IniNewGame("BasicCardPack");
-            IEvent testEvent = (FloorFactoy.Map[2] as IEvent)!;
+            //IEvent testEvent = (FloorFactoy.Map[2] as IEvent)!;
             IBattle testBattle = (FloorFactoy.Map[0] as IBattle)!;
             GameManager.PresentPlayer!.Money = 30;
             GameManager.PresentPlayer!.MaxCost = 1000;
             GameManager.EnterStage(testBattle);
             PrintBattle();
-            GameManager.battleManager.Dull();
-            GameManager.battleManager.Dull();
-            GameManager.battleManager.Dull();
             GameManager.battleManager.Dull();
             GameManager.battleManager.Dull();
             GameManager.battleManager.Dull();

@@ -166,7 +166,7 @@ namespace BackYard
                 }
                 if(newAction.Excute(sender, target, actionValue[aAction], null))
                 {
-                    return true;
+                    continue;
                 }
                 else
                 {

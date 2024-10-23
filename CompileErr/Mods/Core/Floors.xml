@@ -1,5 +1,64 @@
 ﻿<root>
 	<floor>
 		<LayLevel>1</LayLevel>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_a0</enemy>
+				<enemy>Core_enemy_a0</enemy>
+			</EnemyList>
+		</Stage>
+		<Stage>
+			<Type>2</Type>
+			<Tag>Event</Tag>
+			<Description>&#xA;testEvent&#xA;1:恢复血量&#xA;2: 扣除血量&#xA;</Description>
+			<Choices>
+				<choice>
+					<Name>1</Name>
+					<Action>
+						<NameID>AddHP</NameID>
+						<Value>10</Value>
+					</Action>
+				</choice>
+				<choice>
+					<Name>2</Name>
+					<Action>
+						<NameID>AddHP</NameID>
+						<Value>-10</Value>
+					</Action>
+				</choice>
+			</Choices>
+		</Stage>
+		<Stage>
+			<Type>2</Type>
+			<Tag>DestoryCard</Tag>
+			<Description>选择弃牌测试&#xA;1:恢复十点血量</Description>
+			<Choices>
+				<choice>
+					<Name>1</Name>
+					<Action>
+						<NameID>AddHP</NameID>
+						<Value>10</Value>
+					</Action>
+				</choice>
+			</Choices>
+		</Stage>
+		<Stage>
+			<Type>2</Type>
+			<Tag>Shop</Tag>
+			<Description>商店测试&#xA;1:恢复10点血量</Description>
+			<Choices>
+				<choice>
+					<Name>1</Name>
+					<Action>
+						<NameID>AddHP</NameID>
+						<Value>10</Value>
+					</Action>
+				</choice>
+			</Choices>
+		</Stage>
 	</floor>
 </root>

@@ -49,6 +49,7 @@ namespace Actions
             {
                 targetCard = targetCard.CopyCard();
                 GameManager.PresentPlayer!.PresentCardPile.CardList.Add(targetCard);
+                GameManager.PresentPlayer.Money -= Convert.ToInt32(Value);
             }
             else
             {
@@ -178,9 +179,9 @@ namespace Actions
             return new AddPoison();
         }
     }
-    public class AddDefense : IAction
+    public class Defense : IAction
     {
-        public override string IDName { get; } = "AddDefense";
+        public override string IDName { get; } = "Defense";
         public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
             foreach (IEffect Aeffect in sender!.EffectBox)
@@ -209,7 +210,7 @@ namespace Actions
         }
         public override IAction Copy()
         {
-            return new AddDefense();
+            return new Defense();
         }
     }
     public class ExtraDull : IAction
@@ -522,6 +523,130 @@ namespace Actions
         public override IAction Copy()
         {
             return new DefendAll();
+        }
+    }
+    public class RestEvent : IAction
+    {
+        public override string IDName { get; } = "RestEvent";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            int Hp = GameManager.PresentPlayer!.HP;
+            int MaxHp = GameManager.PresentPlayer!.MaxHP;
+            if (Hp >= MaxHp / 2)
+            {
+                GameManager.PresentPlayer!.HP = MaxHp;
+            }
+            else
+            {
+                GameManager.PresentPlayer!.HP += MaxHp / 2;
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (sender == null || target == null)
+            {
+                throw new ArgumentNullException(nameof(sender) + nameof(target));
+            }
+            if (sender != PreSetObj.EventEng)
+            {
+                throw new Exception("this action is for event");
+            }
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new RestEvent();
+        }
+    }
+    //未登记
+    public class GetCardEvent : IAction
+    {
+        public override string IDName { get; } = "GetCardEvent";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            try
+            {
+                GameManager.PresentPlayer!.PresentCardPile.CardList.Add(CardPacksFactory.CardDict[Args!].CopyCard());
+            }
+            catch
+            {
+                throw new Exception("Err  GetCardEvent");
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (sender == null || target == null)
+            {
+                throw new ArgumentNullException(nameof(sender) + nameof(target));
+            }
+            if (sender != PreSetObj.EventEng)
+            {
+                throw new Exception("this action is for event");
+            }
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new GetCardEvent();
+        }
+    }
+    public class AddMoney : IAction
+    {
+        public override string IDName { get; } = "GetCardEvent";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            try
+            {
+                GameManager.PresentPlayer!.Money += Convert.ToInt32(Value);
+            }
+            catch
+            {
+                throw new Exception("Err  AddMoney");
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (sender == null || target == null)
+            {
+                throw new ArgumentNullException(nameof(sender) + nameof(target));
+            }
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new AddMoney();
+        }
+    }
+    public class BuyHP : IAction
+    {
+        public override string IDName { get; } = "BuyHP";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            int Hp;
+            if(int.TryParse(Args, out Hp))
+            {
+                GameManager.PresentPlayer!.HP += Convert.ToInt32(Hp);
+            }
+            else
+            {
+                throw new Exception("Err Buy HP");
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (sender != PreSetObj.EventEng || target != GameManager.PresentPlayer)
+            {
+                throw new Exception("this method is for event!");
+            }
+            if (GameManager.PresentPlayer!.Money < Value)
+            {
+                return false;
+            }
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new BuyHP();
         }
     }
 }
