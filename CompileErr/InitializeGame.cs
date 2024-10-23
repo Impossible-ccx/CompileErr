@@ -197,6 +197,7 @@ namespace BackYard
             AEEFactory.ActionDict["SelfAttack"] = new Actions.SelfAttack();
             AEEFactory.ActionDict["MutiPoison"] = new Actions.MutiPoison();
             AEEFactory.ActionDict["EnpoisonAll"] = new Actions.EnpoisonAll();
+            AEEFactory.ActionDict["DefendAll"] = new Actions.DefendAll();
         }
         static internal void LoadEffect()
         {
@@ -315,6 +316,11 @@ namespace BackYard
                         newBattle.type = 1;
                         newBattle.Tag = stage["Tag"]!.InnerText;
                         newBattle.Reward = int.Parse(stage["Reward"]!.InnerText);
+                        if(newBattle.Reward <= 0)
+                        {
+                            Random random = new Random();
+                            newBattle.Reward = random.Next(20, 35);
+                        }
                         foreach(XmlNode enemy in stage["EnemyList"]!.ChildNodes)
                         {
                             newBattle.EnemyList.Add((AEEFactory.EnemyDict[enemy.InnerText].Copy() as IEnemy)!);

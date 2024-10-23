@@ -497,4 +497,31 @@ namespace Actions
             return new EnpoisonAll();
         }
     }
+    public class DefendAll : IAction
+    {
+        public override string IDName { get; } = "DefendAll";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (GameManager.battleManager != null)
+            {
+                foreach (IEnemy enemy in GameManager.battleManager.Enemis)
+                {
+                    IAction aDefense = AEEFactory.ActionDict["Defense"].Copy();
+                    aDefense.Excute(enemy, enemy, Value, null);
+                }
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new DefendAll();
+        }
+    }
 }
