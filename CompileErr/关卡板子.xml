@@ -1,4 +1,8 @@
 ﻿<root>
+	<name>占位关卡</name>
+	<Stage>
+		<Type>-1</Type>
+	</Stage>
 	<name>L1S1</name>
 	<Stage>
 		<Type>1</Type>
@@ -90,17 +94,6 @@
 			<enemy>Core_enemy_N2</enemy>
 		</EnemyList>
 	</Stage>
-	<name>L3S2</name>
-	<Stage>
-		<Type>1</Type>
-		<Tag>normal</Tag>
-		<RewardCard></RewardCard>
-		<Reward>-1</Reward>
-		<EnemyList>
-			<enemy>Core_enemy_E</enemy>
-			<enemy>Core_enemy_N2</enemy>
-		</EnemyList>
-	</Stage>
 	<name>L3S3</name>
 	<Stage>
 		<Type>1</Type>
@@ -116,8 +109,17 @@
 	<Stage>
 		<Type>2</Type>
 		<Tag>Shop</Tag>
-		<Description>商店。可以选购卡牌</Description>
-		<Choices></Choices>
+		<Description>商店。可以选购卡牌&#xA;1:治疗药水，20金币，恢复25HP。</Description>
+		<Choices>
+			<choice>
+				<Name>1</Name>
+				<Action>
+					<NameID>BuyHP</NameID>
+					<Value>20</Value>
+					<Args>25</Args>
+				</Action>
+			</choice>
+		</Choices>
 	</Stage>
 	<name>des</name>
 	<Stage>
@@ -187,6 +189,22 @@
 				<Action>
 					<NameID>AddMoney</NameID>
 					<Value>20</Value>
+				</Action>
+			</choice>
+		</Choices>
+	</Stage>
+	<name>获取卡包</name>
+	<Stage>
+		<Type>2</Type>
+		<Tag>Event</Tag>
+		<Description>战斗需要有方向……你想要&#xA;1.时间掌控的力量。获得回溯卡包。&#xA;（只有一个卡包可用捏）</Description>
+		<Choices>
+			<choice>
+				<Name>1</Name>
+				<Action>
+					<NameID>GetCardPack</NameID>
+					<Value>-1</Value>
+					<Args>TracingBack</Args>
 				</Action>
 			</choice>
 		</Choices>

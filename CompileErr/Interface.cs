@@ -120,7 +120,7 @@ namespace BackYard
     public interface IStage
     {
         int type { get; set; }
-        //假定战斗为1，事件为2。准备好生成方法就行，具体逻辑还要策划决定
+        //假定战斗为1，事件为2。占位关卡为-1，载入时忽略
         string Tag { get; set; }
         //现在暂时考虑两种tag，normal和final，后者一定放在最后
         IStage Copy();

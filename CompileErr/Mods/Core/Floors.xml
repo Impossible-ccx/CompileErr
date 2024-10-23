@@ -5,60 +5,377 @@
 			<Type>1</Type>
 			<Tag>normal</Tag>
 			<RewardCard></RewardCard>
-			<Reward>1</Reward>
+			<Reward>-1</Reward>
 			<EnemyList>
-				<enemy>Core_enemy_a0</enemy>
-				<enemy>Core_enemy_a0</enemy>
+				<enemy>Core_enemy_N2</enemy>
+				<enemy>Core_enemy_N1</enemy>
+				<enemy>Core_enemy_N8</enemy>
+			</EnemyList>
+		</Stage>
+		<Stage>
+			<Type>2</Type>
+			<Tag>DestoryCard</Tag>
+			<Description>一处庇护所。可以休息并恢复一半HP，或者加班打磨技术。&#xA;1:休息一会</Description>
+			<Choices>
+				<choice>
+					<Name>1</Name>
+					<Action>
+						<NameID>RestEvent</NameID>
+						<Value>-1</Value>
+					</Action>
+				</choice>
+			</Choices>
+		</Stage>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_N2</enemy>
+				<enemy>Core_enemy_N1</enemy>
+				<enemy>Core_enemy_N8</enemy>
 			</EnemyList>
 		</Stage>
 		<Stage>
 			<Type>2</Type>
 			<Tag>Event</Tag>
-			<Description>&#xA;testEvent&#xA;1:恢复血量&#xA;2: 扣除血量&#xA;</Description>
+			<Description>战斗需要有方向……你想要&#xA;1.时间掌控的力量。获得回溯卡包。&#xA;（只有一个卡包可用捏）</Description>
+			<Choices>
+				<choice>
+					<Name>1</Name>
+					<Action>
+						<NameID>GetCardPack</NameID>
+						<Value>-1</Value>
+						<Args>TracingBack</Args>
+					</Action>
+				</choice>
+			</Choices>
+		</Stage>
+	</floor>
+	<floor>
+		<LayLevel>1</LayLevel>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_N1</enemy>
+				<enemy>Core_enemy_N2</enemy>
+				<enemy>Core_enemy_N6</enemy>
+			</EnemyList>
+		</Stage>
+		<Stage>
+			<Type>2</Type>
+			<Tag>DestoryCard</Tag>
+			<Description>铁匠铺。可以选择销毁一张卡牌</Description>
+			<Choices></Choices>
+		</Stage>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_N1</enemy>
+				<enemy>Core_enemy_N2</enemy>
+				<enemy>Core_enemy_N6</enemy>
+			</EnemyList>
+		</Stage>
+		<Stage>
+			<Type>-1</Type>
+		</Stage>
+	</floor>
+	<floor>
+		<LayLevel>1</LayLevel>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_N1</enemy>
+				<enemy>Core_enemy_N10</enemy>
+			</EnemyList>
+		</Stage>
+		<Stage>
+			<Type>2</Type>
+			<Tag>Event</Tag>
+			<Description>陷阱！但被你发现了。以身犯险学习经验，还是巧妙拿走诱饵？。&#xA;1:失去20HP，获得“转身”。&#xA;2:获得20金币</Description>
 			<Choices>
 				<choice>
 					<Name>1</Name>
 					<Action>
 						<NameID>AddHP</NameID>
-						<Value>10</Value>
+						<Value>-20</Value>
+					</Action>
+					<Action>
+						<NameID>GetCardEvent</NameID>
+						<Value>1</Value>
+						<Args>Core_Card_Turn</Args>
 					</Action>
 				</choice>
 				<choice>
 					<Name>2</Name>
 					<Action>
-						<NameID>AddHP</NameID>
-						<Value>-10</Value>
+						<NameID>AddMoney</NameID>
+						<Value>20</Value>
 					</Action>
 				</choice>
 			</Choices>
+		</Stage>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_N1</enemy>
+				<enemy>Core_enemy_N10</enemy>
+			</EnemyList>
+		</Stage>
+		<Stage>
+			<Type>-1</Type>
+		</Stage>
+	</floor>
+	<floor>
+		<LayLevel>2</LayLevel>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_N1</enemy>
+				<enemy>Core_enemy_A</enemy>
+			</EnemyList>
 		</Stage>
 		<Stage>
 			<Type>2</Type>
 			<Tag>DestoryCard</Tag>
-			<Description>选择弃牌测试&#xA;1:恢复十点血量</Description>
+			<Description>一处庇护所。可以休息并恢复一半HP，或者加班打磨技术。&#xA;1:休息一会</Description>
 			<Choices>
 				<choice>
 					<Name>1</Name>
 					<Action>
-						<NameID>AddHP</NameID>
-						<Value>10</Value>
+						<NameID>RestEvent</NameID>
+						<Value>-1</Value>
 					</Action>
 				</choice>
 			</Choices>
 		</Stage>
 		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_N1</enemy>
+				<enemy>Core_enemy_A</enemy>
+			</EnemyList>
+		</Stage>
+		<Stage>
 			<Type>2</Type>
 			<Tag>Shop</Tag>
-			<Description>商店测试&#xA;1:恢复10点血量</Description>
+			<Description>商店。可以选购卡牌&#xA;1:治疗药水，20金币，恢复25HP。</Description>
 			<Choices>
 				<choice>
 					<Name>1</Name>
 					<Action>
-						<NameID>AddHP</NameID>
-						<Value>10</Value>
+						<NameID>BuyHP</NameID>
+						<Value>20</Value>
+						<Args>25</Args>
 					</Action>
 				</choice>
 			</Choices>
+		</Stage>
+	</floor>
+	<floor>
+		<LayLevel>2</LayLevel>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_N5</enemy>
+				<enemy>Core_enemy_B</enemy>
+			</EnemyList>
+		</Stage>
+		<Stage>
+			<Type>2</Type>
+			<Tag>DestoryCard</Tag>
+			<Description>铁匠铺。可以选择销毁一张卡牌</Description>
+			<Choices></Choices>
+		</Stage>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_N5</enemy>
+				<enemy>Core_enemy_B</enemy>
+			</EnemyList>
+		</Stage>
+		<Stage>
+			<Type>2</Type>
+			<Tag>DestoryCard</Tag>
+			<Description>一处庇护所。可以休息并恢复一半HP，或者加班打磨技术。&#xA;1:休息一会</Description>
+			<Choices>
+				<choice>
+					<Name>1</Name>
+					<Action>
+						<NameID>RestEvent</NameID>
+						<Value>-1</Value>
+					</Action>
+				</choice>
+			</Choices>
+		</Stage>
+	</floor>
+	<floor>
+		<LayLevel>2</LayLevel>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_N6</enemy>
+				<enemy>Core_enemy_N6</enemy>
+				<enemy>Core_enemy_N8</enemy>
+			</EnemyList>
+		</Stage>
+		<Stage>
+			<Type>2</Type>
+			<Tag>Shop</Tag>
+			<Description>商店。可以选购卡牌&#xA;1:治疗药水，20金币，恢复25HP。</Description>
+			<Choices>
+				<choice>
+					<Name>1</Name>
+					<Action>
+						<NameID>BuyHP</NameID>
+						<Value>20</Value>
+						<Args>25</Args>
+					</Action>
+				</choice>
+			</Choices>
+		</Stage>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_N6</enemy>
+				<enemy>Core_enemy_N6</enemy>
+				<enemy>Core_enemy_N8</enemy>
+			</EnemyList>
+		</Stage>
+		<Stage>
+			<Type>2</Type>
+			<Tag>Shop</Tag>
+			<Description>商店。可以选购卡牌&#xA;1:治疗药水，20金币，恢复25HP。</Description>
+			<Choices>
+				<choice>
+					<Name>1</Name>
+					<Action>
+						<NameID>BuyHP</NameID>
+						<Value>20</Value>
+						<Args>25</Args>
+					</Action>
+				</choice>
+			</Choices>
+		</Stage>
+	</floor>
+	<floor>
+		<LayLevel>3</LayLevel>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_C</enemy>
+				<enemy>Core_enemy_N11</enemy>
+			</EnemyList>
+		</Stage>
+		<Stage>
+			<Type>2</Type>
+			<Tag>DestoryCard</Tag>
+			<Description>一处庇护所。可以休息并恢复一半HP，或者加班打磨技术。&#xA;1:休息一会</Description>
+			<Choices>
+				<choice>
+					<Name>1</Name>
+					<Action>
+						<NameID>RestEvent</NameID>
+						<Value>-1</Value>
+					</Action>
+				</choice>
+			</Choices>
+		</Stage>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_C</enemy>
+				<enemy>Core_enemy_N11</enemy>
+			</EnemyList>
+		</Stage>
+	</floor>
+	<floor>
+		<LayLevel>3</LayLevel>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_E</enemy>
+				<enemy>Core_enemy_N2</enemy>
+			</EnemyList>
+		</Stage>
+		<Stage>
+			<Type>-1</Type>
+		</Stage>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_E</enemy>
+				<enemy>Core_enemy_N2</enemy>
+			</EnemyList>
+		</Stage>
+	</floor>
+	<floor>
+		<LayLevel>3</LayLevel>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_D</enemy>
+				<enemy>Core_enemy_N10</enemy>
+			</EnemyList>
+		</Stage>
+		<Stage>
+			<Type>-1</Type>
+		</Stage>
+		<Stage>
+			<Type>1</Type>
+			<Tag>normal</Tag>
+			<RewardCard></RewardCard>
+			<Reward>-1</Reward>
+			<EnemyList>
+				<enemy>Core_enemy_D</enemy>
+				<enemy>Core_enemy_N10</enemy>
+			</EnemyList>
 		</Stage>
 	</floor>
 </root>

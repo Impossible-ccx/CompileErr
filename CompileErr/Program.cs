@@ -1,5 +1,6 @@
 ﻿//main，用于测试
 using BackYard;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 namespace Program
@@ -50,6 +51,12 @@ namespace Program
                     Console.Write($"{aEffect.IDName} {aEffect.Level} ");
                 }
                 Console.WriteLine();
+            }
+            Console.WriteLine();
+            Console.Write("Player Effects: ");
+            foreach (IEffect aEffect in GameManager.PresentPlayer!.EffectBox)
+            {
+                Console.Write($"{aEffect.IDName} {aEffect.Level} ");
             }
             Console.WriteLine();
             Console.WriteLine("Player HP: " + GameManager.PresentPlayer.HP);

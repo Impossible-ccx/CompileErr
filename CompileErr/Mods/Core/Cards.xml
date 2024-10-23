@@ -31,7 +31,7 @@
 			</Tags>
 			<Action>
 				<act>
-					<NameID>AddDefense</NameID>
+					<NameID>Defense</NameID>
 					<Value>11</Value>
 				</act>
 			</Action>
@@ -206,10 +206,12 @@
 			<WhereThis>2</WhereThis>
 		</Card>
 		<DefaultCard>Core_Card_Attack</DefaultCard>
+		<DefaultCard>Core_Card_Attack</DefaultCard>
 		<DefaultCard>Core_Card_Defense</DefaultCard>
+		<DefaultCard>Core_Card_Defense</DefaultCard>
+		<DefaultCard>Core_Card_Defense</DefaultCard>
+		<DefaultCard>Core_Card_Prepare</DefaultCard>
 		<DefaultCard>Core_Card_Dull</DefaultCard>
-		<DefaultCard>Core_Card_Turn</DefaultCard>
-		<DefaultCard>Core_Card_Restart</DefaultCard>
 	</basic>
 	<TurnTime>
 		<Name>TracingBack</Name>
@@ -399,6 +401,7 @@
 			</Action>
 			<WhereThis>2</WhereThis>
 		</Card>
-		<DefaultCard>Core_Card_Burn</DefaultCard>
+		<DefaultCard>Core_Card_Turn</DefaultCard>
+		<DefaultCard>Core_Card_TraceBack</DefaultCard>
 	</TurnTime>
 </root>

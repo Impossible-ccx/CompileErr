@@ -258,7 +258,7 @@
 	</enemy>
 	<enemy>
 		<Name>烈焰蝙蝠</Name>
-		<ID>Core_enemy_N12</ID>
+		<ID>Core_enemy_N11</ID>
 		<HP>30</HP>
 		<Effects></Effects>
 		<Logic>

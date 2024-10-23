@@ -44,7 +44,7 @@ namespace Actions
         public override string IDName { get; } = "BuyCard";
         public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
         {
-            ICard? targetCard = CardPacksFactory.CardDict[Args];
+            ICard? targetCard = CardPacksFactory.CardDict[Args!];
             if(targetCard != null)
             {
                 targetCard = targetCard.CopyCard();
@@ -647,6 +647,26 @@ namespace Actions
         public override IAction Copy()
         {
             return new BuyHP();
+        }
+    }
+    public class GetCardPack : IAction
+    {
+        public override string IDName { get; } = "GetCardPack";
+        public override void thisAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            GameManager.SelectNewCardPack("Args");
+        }
+        public override bool checkAction(IPlayer? sender, IPlayer? target, string? Args = null)
+        {
+            if (sender != PreSetObj.EventEng || target != GameManager.PresentPlayer)
+            {
+                throw new Exception("this method is for event!");
+            }
+            return true;
+        }
+        public override IAction Copy()
+        {
+            return new GetCardPack();
         }
     }
 }

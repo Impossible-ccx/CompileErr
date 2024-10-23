@@ -17,8 +17,8 @@ namespace BackYard
         static public int FloorDepth { get; private set; }
         //检测这个值，不同层或许有不同背景
         static public int init = 0;
-        static public IBattleManager? battleManager {  get; private set; }
-        static public IHumanPlayer? PresentPlayer {  get; private set; }
+        static public IBattleManager? battleManager { get; private set; }
+        static public IHumanPlayer? PresentPlayer { get; private set; }
         //玩家信息存在这里
         static public List<ICardPack> DisableCardPacks { get; set; } = new List<ICardPack>();
         //未启用的卡包（存启用的卡包没用，除非我们想做被动效果
@@ -35,16 +35,16 @@ namespace BackYard
                     battleManager = new BattleManager();
                     battleManager!.StartBattle(Target);
                 }
-                else if(target!.type == 2)
+                else if (target!.type == 2)
                 {
                     Event theEvent = (target as Event)!;
                     if (target!.Tag == "Event")
                     {
                         ;
                     }
-                    else if(target!.Tag == "DestoryCard")
+                    else if (target!.Tag == "DestoryCard")
                     {
-                        foreach(ICard aCard in PresentPlayer!.PresentCardPile.CardList)
+                        foreach (ICard aCard in PresentPlayer!.PresentCardPile.CardList)
                         {
                             string ActionNumStr = (theEvent.Choices.Count + 1).ToString();
                             theEvent.Choices.Add(ActionNumStr);
@@ -58,11 +58,11 @@ namespace BackYard
                             theEvent.keyArgsPairs[ActionNumStr]["DestoryCard"] = aCard.ID;
                         }
                     }
-                    else if(target!.Tag == "Shop")
+                    else if (target!.Tag == "Shop")
                     {
                         List<ICard> shopList = new List<ICard>();
                         Random rand = new Random();
-                        for(int i = 0; i< rand.Next(5, 8);i++)
+                        for (int i = 0; i < rand.Next(5, 8); i++)
                         {
                             int targetIndex = rand.Next(1000) % EnableCards.Count;
                             shopList.Add(EnableCards[targetIndex]);
@@ -101,31 +101,7 @@ namespace BackYard
             List<ICardPack> CardPackDictList = CardPacksFactory.CardPackList;
             ICardPile IniCardPile = new CardPile();
             //随机化地图
-            Random rand = new Random();
-            if (FloorFactoy.Lay1Group.Count != 0)
-            {
-                int I = rand.Next(1000) % FloorFactoy.Lay1Group.Count;
-                foreach (IStage aStage in FloorFactoy.Lay1Group[I])
-                {
-                    FloorFactoy.Map.Add(aStage);
-                }
-            }
-            if (FloorFactoy.Lay2Group.Count != 0)
-            {
-                int I = rand.Next(1000) % FloorFactoy.Lay2Group.Count;
-                foreach (IStage aStage in FloorFactoy.Lay2Group[I])
-                {
-                    FloorFactoy.Map.Add(aStage);
-                }
-            }
-            if (FloorFactoy.Lay3Group.Count != 0)
-            {
-                int I = rand.Next(1000) % FloorFactoy.Lay3Group.Count;
-                foreach (IStage aStage in FloorFactoy.Lay3Group[I])
-                {
-                    FloorFactoy.Map.Add(aStage);
-                }
-            }
+            FloorFactoy.IniFloors();
             //随机结束
             SelectNewCardPack(IniCardPileName);
 
@@ -134,24 +110,24 @@ namespace BackYard
         static public void SelectNewCardPack(string targetName)
         {
             ICardPack? target = null;
-            foreach(ICardPack ttt in CardPacksFactory.CardPackList)
+            foreach (ICardPack ttt in CardPacksFactory.CardPackList)
             {
-                if(ttt.NameID == targetName)
+                if (ttt.NameID == targetName)
                 {
-                    target = ttt; 
+                    target = ttt;
                     break;
                 }
             }
-            if(target == null)
+            if (target == null)
             {
                 throw new Exception("No such a card pack");
             }
-            foreach(ICard card in target.DefaultCards)
+            foreach (ICard card in target.DefaultCards)
             {
                 PresentPlayer!.PresentCardPile.CardList.Add(card.CopyCard());
             }
             DisableCardPacks.Remove(target);
-            foreach(ICard card in target.Cards)
+            foreach (ICard card in target.Cards)
             {
                 EnableCards.Add(card.CopyCard());
             }
@@ -170,9 +146,9 @@ namespace BackYard
             LoadAction();
             LoadEffect();
             XmlNode ModManagerXmlRoot = ModManagerXml.LastChild!;
-            foreach(XmlNode aMod in ModManagerXmlRoot.ChildNodes)
+            foreach (XmlNode aMod in ModManagerXmlRoot.ChildNodes)
             {
-                ModPath = ModFolderPath + aMod.InnerText;            
+                ModPath = ModFolderPath + aMod.InnerText;
                 LoadCards();
                 LoadEnemys();
                 LoadFloors();
@@ -268,7 +244,7 @@ namespace BackYard
                     newEffect.Level = int.Parse(aEffectXml["Level"]!.InnerText);
                     enemy.EffectBox.Add(newEffect);
                 }
-                foreach(XmlNode aLogicXml in aEnemyXml["Logic"]!.ChildNodes)
+                foreach (XmlNode aLogicXml in aEnemyXml["Logic"]!.ChildNodes)
                 {
                     EnemyLogic aLogic = new EnemyLogic();
                     aLogic.value = int.Parse(aLogicXml["Value"]!.InnerText);
@@ -289,17 +265,26 @@ namespace BackYard
             foreach (XmlNode aFloorXml in root.ChildNodes)
             {
                 List<List<IStage>>? targetGroup;
-                List<IStage> newFloor = new List<IStage>();
+                int targetGroupLenth;
                 if (aFloorXml["LayLevel"]!.InnerText == "1")
                 {
                     targetGroup = FloorFactoy.Lay1Group;
+                    targetGroupLenth = 4;
                 }
-                else if (aFloorXml["LayLevel"]!.InnerText == "2"){
+                else if (aFloorXml["LayLevel"]!.InnerText == "2")
+                {
                     targetGroup = FloorFactoy.Lay2Group;
+                    targetGroupLenth = 4;
                 }
                 else if (aFloorXml["LayLevel"]!.InnerText == "3")
                 {
                     targetGroup = FloorFactoy.Lay3Group;
+                    targetGroupLenth = 3;
+                }
+                else if (aFloorXml["LayLevel"]!.InnerText == "testLevel")
+                {
+                    targetGroup = FloorFactoy.testLevel;
+                    targetGroupLenth = 4;
                 }
                 else
                 {
@@ -307,8 +292,13 @@ namespace BackYard
                     throw new Exception("???stageGroup");
                 }
                 XmlNodeList stages = aFloorXml.SelectNodes("./Stage")!;
-                foreach(XmlNode stage in stages)
+                if(stages.Count != targetGroupLenth)
                 {
+                    throw new Exception("floor定义错误");
+                }
+                for(int i = 0; i < targetGroupLenth; i++) 
+                {
+                    XmlNode stage = stages[i]!;
                     IStage? newStage;
                     if (stage["Type"]!.InnerText == "1")
                     {
@@ -317,16 +307,16 @@ namespace BackYard
                         newBattle.type = 1;
                         newBattle.Tag = stage["Tag"]!.InnerText;
                         newBattle.Reward = int.Parse(stage["Reward"]!.InnerText);
-                        if(newBattle.Reward <= 0)
+                        if (newBattle.Reward <= 0)
                         {
                             Random random = new Random();
                             newBattle.Reward = random.Next(20, 35);
                         }
-                        foreach(XmlNode enemy in stage["EnemyList"]!.ChildNodes)
+                        foreach (XmlNode enemy in stage["EnemyList"]!.ChildNodes)
                         {
                             newBattle.EnemyList.Add((AEEFactory.EnemyDict[enemy.InnerText].Copy() as IEnemy)!);
                         }
-                        foreach(XmlNode card in stage["RewardCard"]!.ChildNodes)
+                        foreach (XmlNode card in stage["RewardCard"]!.ChildNodes)
                         {
                             newBattle.RewardCard.Add((CardPacksFactory.CardDict[card.InnerText].CopyCard())!);
                         }
@@ -338,7 +328,7 @@ namespace BackYard
                         newEvent.type = 2;
                         newEvent.Tag = stage["Tag"]!.InnerText;
                         newEvent.Description = stage["Description"]!.InnerText;
-                        foreach(XmlNode aChoice in stage["Choices"]!.ChildNodes)
+                        foreach (XmlNode aChoice in stage["Choices"]!.ChildNodes)
                         {
                             string thisName = aChoice["Name"]!.InnerText;
                             newEvent.Choices.Add(new string(thisName));
@@ -362,14 +352,17 @@ namespace BackYard
                             newEvent.keyArgsPairs[thisName] = actArgsDict;
                         }
                     }
+                    else if(stage["Type"]!.InnerText == "-1")
+                    {
+                        continue;
+                    }
                     else
                     {
                         newStage = null;
                         throw new Exception("???stage");
                     }
-                    newFloor.Add(newStage);
+                    targetGroup[i].Add(newStage);
                 }
-                targetGroup.Add(newFloor);
             }
         }
 
@@ -377,9 +370,59 @@ namespace BackYard
     static public class FloorFactoy
     {
         public static List<IStage> Map = new List<IStage>();
+        //前两组4关，最后一组3关
         public static List<List<IStage>> Lay1Group = new List<List<IStage>>();
         public static List<List<IStage>> Lay2Group = new List<List<IStage>>();
         public static List<List<IStage>> Lay3Group = new List<List<IStage>>();
+        public static List<List<IStage>> testLevel = new List<List<IStage>>();
+        internal static void IniFloors()
+        {
+            Random rand = new Random();
+            try
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    int randomIndex = rand.Next();
+                    int index = randomIndex % Lay1Group[i].Count;
+                    Map.Add(Lay1Group[i][index]);
+                }
+                for (int i = 0; i < 4; i++)
+                {
+                    int randomIndex = rand.Next();
+                    int index = randomIndex % Lay2Group[i].Count;
+                    Map.Add(Lay2Group[i][index]);
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    int randomIndex = rand.Next();
+                    int index = randomIndex % Lay3Group[i].Count;
+                    Map.Add(Lay3Group[i][index]);
+                }
+            }
+            catch
+            {
+                throw new Exception("地图载入错误");
+            }
+        }
+        static FloorFactoy()
+        {
+            for(int i = 0;i < 4; i++)
+            {
+                Lay1Group.Add(new List<IStage>());
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                Lay2Group.Add(new List<IStage>());
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                Lay3Group.Add(new List<IStage>());
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                testLevel.Add(new List<IStage>());
+            }
+        }
     }
     static public class CardPacksFactory
     {
@@ -390,7 +433,7 @@ namespace BackYard
     {
         static public Dictionary<string, IAction> ActionDict { get; internal set; } = new Dictionary<string, IAction>();
         static public Dictionary<string, IEffect> EffectDict { get; internal set; } = new Dictionary<string, IEffect>();
-        static public Dictionary<string, IEnemy> EnemyDict { get; internal set;} = new Dictionary<string, IEnemy>();
+        static public Dictionary<string, IEnemy> EnemyDict { get; internal set; } = new Dictionary<string, IEnemy>();
     }
 
 }
