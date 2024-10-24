@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Folder Include="Mods\Core\Images\" />
+    <Folder Include="Mods\BackGrounds\" />
   </ItemGroup>
 
 </Project>

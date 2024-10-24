@@ -558,7 +558,6 @@ namespace Actions
             return new RestEvent();
         }
     }
-    //未登记
     public class GetCardEvent : IAction
     {
         public override string IDName { get; } = "GetCardEvent";

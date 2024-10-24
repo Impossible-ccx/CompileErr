@@ -3,6 +3,7 @@ namespace BackYard
 {
     public class BattleManager : IBattleManager
     {
+        public string PresentBackGround { get; set; }
         public Queue<int> HandOutCardIndex { get; set; } = new Queue<int>();
         public Queue<IAction> WaitingActions { get; set; } = new Queue<IAction>();
         public ICardPile HandPile { get; set; } = new CardPile();
@@ -118,6 +119,10 @@ namespace BackYard
         //抽卡
         public void StartBattle(IBattle thisStage)
         {
+            string[] BackGroundImages = Directory.GetFiles(ModManager.ModFolderPath + "BackGrounds");
+            Random rand = new Random();
+            int randint = rand.Next(0, BackGroundImages.Length);
+            PresentBackGround = new string(ModManager.ModFolderPath + "BackGrounds/" + BackGroundImages[randint]);
             CardPile = Player.PresentCardPile.Copy();
 
             foreach(IEnemy enemy in thisStage.EnemyList)
@@ -129,6 +134,7 @@ namespace BackYard
         //初始化，这是入口。调用humanplayer取得对战开始时的牌堆
         public void EndBattle()
         {
+            
             ICardPile newCardPile = new CardPile();
             foreach(ICard p in HandPile.CardList)
             {

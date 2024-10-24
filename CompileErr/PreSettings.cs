@@ -135,6 +135,7 @@ namespace BackYard
             card.Name += Name;
             card.Description += Description;
             card.ID += ID;
+            card.ImagePath += ImagePath;
             card.Cost += Cost;
             foreach(string tag in Tags)
             {

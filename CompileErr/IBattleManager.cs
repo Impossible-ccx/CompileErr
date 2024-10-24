@@ -18,6 +18,7 @@ namespace BackYard
     }
     public interface IBattleManager
     {
+        public string PresentBackGround { get; }
         void FoldCard(int index = -1);
         Queue<int> HandOutCardIndex { get; set; }
         Queue<IAction> WaitingActions { get; set; }
