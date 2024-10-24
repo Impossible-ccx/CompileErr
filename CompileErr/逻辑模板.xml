@@ -5,7 +5,7 @@
 		<Delay>4</Delay>
 		<IsSingle>0</IsSingle>
 		<Action>Attack</Action>
-		<Value>6</Value>
+		<Value>10</Value>
 	</logic>
 	<name>防御</name>
 	<logic>
@@ -13,7 +13,7 @@
 		<Delay>4</Delay>
 		<IsSingle>0</IsSingle>
 		<Action>Defense</Action>
-		<Value>6</Value>
+		<Value>9</Value>
 	</logic>
 	<name>偷袭</name>
 	<logic>
@@ -21,7 +21,7 @@
 		<Delay>5</Delay>
 		<IsSingle>0</IsSingle>
 		<Action>Attack</Action>
-		<Value>5</Value>
+		<Value>9</Value>
 	</logic>
 	<name>强力打击</name>
 	<logic>
@@ -29,7 +29,7 @@
 		<Delay>6</Delay>
 		<IsSingle>0</IsSingle>
 		<Action>Attack</Action>
-		<Value>18</Value>
+		<Value>25</Value>
 	</logic>
 	<name>举盾</name>
 	<logic>
@@ -37,7 +37,7 @@
 		<Delay>3</Delay>
 		<IsSingle>0</IsSingle>
 		<Action>Defense</Action>
-		<Value>18</Value>
+		<Value>25</Value>
 	</logic>
 	<name>投毒</name>
 	<logic>
@@ -53,7 +53,7 @@
 		<Delay>3</Delay>
 		<IsSingle>0</IsSingle>
 		<Action>Attack</Action>
-		<Value>15</Value>
+		<Value>27</Value>
 	</logic>
 	<name>冲击part2</name>
 	<logic>
@@ -61,7 +61,7 @@
 		<Delay>3</Delay>
 		<IsSingle>0</IsSingle>
 		<Action>SelfAttack</Action>
-		<Value>6</Value>
+		<Value>9</Value>
 	</logic>
 	<name>强力冲击part1</name>
 	<logic>
@@ -93,7 +93,7 @@
 		<Delay>4</Delay>
 		<IsSingle>0</IsSingle>
 		<Action>DefendAll</Action>
-		<Value>9</Value>
+		<Value>15</Value>
 	</logic>
 	<name>自爆p1</name>
 	<logic>

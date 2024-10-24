@@ -28,18 +28,18 @@
 		<Effects></Effects>
 		<Logic>
 			<logic>
-				<Ini>4</Ini>
+				<Ini>3</Ini>
 				<Delay>4</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>Attack</Action>
-				<Value>6</Value>
+				<Value>10</Value>
 			</logic>
 			<logic>
-				<Ini>-1</Ini>
+				<Ini>1</Ini>
 				<Delay>5</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>Attack</Action>
-				<Value>5</Value>
+				<Value>9</Value>
 			</logic>
 		</Logic>
 	</enemy>
@@ -55,14 +55,14 @@
 				<Delay>4</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>Attack</Action>
-				<Value>6</Value>
+				<Value>10</Value>
 			</logic>
 			<logic>
-				<Ini>4</Ini>
+				<Ini>1</Ini>
 				<Delay>4</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>Defense</Action>
-				<Value>6</Value>
+				<Value>9</Value>
 			</logic>
 		</Logic>
 	</enemy>
@@ -74,18 +74,18 @@
 		<Effects></Effects>
 		<Logic>
 			<logic>
-				<Ini>5</Ini>
+				<Ini>4</Ini>
 				<Delay>6</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>Attack</Action>
-				<Value>18</Value>
+				<Value>25</Value>
 			</logic>
 			<logic>
 				<Ini>3</Ini>
 				<Delay>3</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>Defense</Action>
-				<Value>18</Value>
+				<Value>25</Value>
 			</logic>
 		</Logic>
 	</enemy>
@@ -145,21 +145,21 @@
 				<Delay>3</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>Attack</Action>
-				<Value>15</Value>
+				<Value>27</Value>
 			</logic>
 			<logic>
 				<Ini>3</Ini>
 				<Delay>3</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>SelfAttack</Action>
-				<Value>6</Value>
+				<Value>9</Value>
 			</logic>
 			<logic>
 				<Ini>3</Ini>
 				<Delay>4</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>Defense</Action>
-				<Value>6</Value>
+				<Value>10</Value>
 			</logic>
 		</Logic>
 	</enemy>
@@ -210,7 +210,7 @@
 				<Delay>4</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>DefendAll</Action>
-				<Value>9</Value>
+				<Value>15</Value>
 			</logic>
 		</Logic>
 	</enemy>
@@ -252,18 +252,18 @@
 		<Effects></Effects>
 		<Logic>
 			<logic>
-				<Ini>5</Ini>
+				<Ini>1</Ini>
 				<Delay>5</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>Attack</Action>
-				<Value>5</Value>
+				<Value>9</Value>
 			</logic>
 			<logic>
-				<Ini>3</Ini>
+				<Ini>2</Ini>
 				<Delay>3</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>Defense</Action>
-				<Value>18</Value>
+				<Value>25</Value>
 			</logic>
 		</Logic>
 	</enemy>
@@ -275,14 +275,14 @@
 		<Effects></Effects>
 		<Logic>
 			<logic>
-				<Ini>5</Ini>
-				<Delay>5</Delay>
+				<Ini>3</Ini>
+				<Delay>6</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>Attack</Action>
-				<Value>5</Value>
+				<Value>25</Value>
 			</logic>
 			<logic>
-				<Ini>2</Ini>
+				<Ini>1</Ini>
 				<Delay>3</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>FoldCard</Action>
@@ -316,7 +316,7 @@
 				<Delay>3</Delay>
 				<IsSingle>0</IsSingle>
 				<Action>Defense</Action>
-				<Value>18</Value>
+				<Value>30</Value>
 			</logic>
 		</Logic>
 	</enemy>
